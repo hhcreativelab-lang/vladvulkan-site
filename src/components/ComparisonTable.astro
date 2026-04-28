@@ -36,50 +36,54 @@ const { caption, headers, rows } = Astro.props;
 <style>
   .cmp-table-wrap {
     overflow-x: auto;
-    margin: 22px 0;
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    margin: 28px 0;
+    border: 1px solid rgba(157, 127, 255, 0.12);
+    border-radius: 4px;
+    background: linear-gradient(180deg, rgba(22, 20, 26, 0.5) 0%, rgba(16, 14, 20, 0.7) 100%);
+    backdrop-filter: blur(8px);
   }
-
   table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
   }
-
   caption {
     text-align: left;
-    padding: 14px 18px;
-    font-size: 13px;
-    color: var(--text-tertiary);
+    padding: 16px 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--gold-champagne);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.3em;
+    border-bottom: 1px solid rgba(157, 127, 255, 0.12);
   }
-
   th, td {
-    padding: 12px 16px;
+    padding: 14px 18px;
     text-align: left;
     vertical-align: top;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(157, 127, 255, 0.08);
   }
-
   thead th {
-    background: var(--bg-surface);
-    font-weight: 500;
-    color: var(--text-primary);
-    font-size: 13px;
+    background: rgba(16, 8, 34, 0.5);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    color: var(--gold-champagne);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
   }
-
   tbody th {
-    font-weight: 500;
-    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--text-light);
     width: 28%;
-    background: var(--bg-elevated);
+    font-size: 15px;
   }
-
+  tbody td {
+    color: var(--text-dim);
+    font-weight: 300;
+    line-height: 1.6;
+  }
   tbody tr:last-child th,
-  tbody tr:last-child td {
-    border-bottom: none;
-  }
+  tbody tr:last-child td { border-bottom: none; }
 </style>

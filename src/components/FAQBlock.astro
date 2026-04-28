@@ -9,111 +9,120 @@ interface FAQ {
 interface Props {
   faqs: FAQ[];
   title?: string;
-  /**
-   * Если true — JSON-LD FAQPage НЕ рендерится здесь
-   * (используйте, когда схема уже включена в SEO-блок страницы).
-   */
   skipSchema?: boolean;
 }
 
-const { faqs, title = 'Часто задаваемые вопросы', skipSchema = false } = Astro.props;
+const { faqs, title = 'Частые вопросы', skipSchema = false } = Astro.props;
 const schema = skipSchema ? null : faqPageSchema(faqs);
 ---
 
 {faqs.length > 0 && (
-  <section class="faq-block" aria-labelledby="faq-heading">
-    <h2 id="faq-heading">{title}</h2>
-    <div class="faq-list">
+  <section class="faq-block reveal" aria-labelledby="faq-heading">
+    <div class="faq-head">
+      <span class="eyebrow gold">FAQ</span>
+      <h2 id="faq-heading">{title}</h2>
+    </div>
+    <div class="faq-list reveal-stagger">
       {faqs.map((faq, i) => (
         <details class="faq-item" open={i === 0}>
           <summary>
-            <h3>{faq.question}</h3>
-            <span class="faq-toggle" aria-hidden="true">+</span>
+            <span class="faq-q">{faq.question}</span>
+            <span class="faq-toggle" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </span>
           </summary>
-          <div class="faq-answer">
-            <p>{faq.answer}</p>
-          </div>
+          <div class="faq-answer"><p>{faq.answer}</p></div>
         </details>
       ))}
     </div>
-    {schema && (
-      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-    )}
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   </section>
 )}
 
 <style>
   .faq-block {
-    margin: 48px 0;
+    margin: clamp(60px, 8vw, 100px) 0;
+  }
+
+  .faq-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .faq-head .eyebrow { display: block; margin-bottom: 12px; }
+  .faq-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 60px);
+    margin: 0;
+    color: var(--text-light);
+    letter-spacing: -0.025em;
   }
 
   .faq-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 22px;
+    gap: 12px;
   }
 
   .faq-item {
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    transition: border-color 0.15s ease;
+    background: linear-gradient(180deg, rgba(22, 20, 26, 0.6) 0%, rgba(16, 14, 20, 0.75) 100%);
+    border: 1px solid rgba(157, 127, 255, 0.08);
+    border-radius: 4px;
+    transition: border-color 0.4s var(--ease-premium);
+    backdrop-filter: blur(8px);
   }
-
-  .faq-item[open] {
-    border-color: var(--accent-mid);
-  }
+  .faq-item:hover { border-color: rgba(157, 127, 255, 0.2); }
+  .faq-item[open] { border-color: rgba(157, 127, 255, 0.25); }
 
   .faq-item summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 14px;
-    padding: 16px 20px;
+    gap: 16px;
+    padding: 20px 26px;
     cursor: pointer;
     list-style: none;
+    user-select: none;
   }
+  .faq-item summary::-webkit-details-marker { display: none; }
 
-  .faq-item summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq-item h3 {
-    font-size: 16px;
-    font-weight: 500;
-    margin: 0;
-    color: var(--text-primary);
+  .faq-q {
+    font-family: var(--font-display);
+    font-size: clamp(16px, 1.6vw, 19px);
+    font-weight: 400;
+    color: var(--text-light);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
   }
 
   .faq-toggle {
-    width: 24px;
-    height: 24px;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: var(--bg-surface);
-    color: var(--text-secondary);
+    background: rgba(229, 198, 120, 0.08);
+    color: var(--gold-champagne);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-    transition: all 0.15s ease;
+    transition: all 0.4s var(--ease-premium);
+    border: 1px solid rgba(229, 198, 120, 0.2);
   }
-
+  .faq-toggle svg { width: 14px; height: 14px; }
   .faq-item[open] .faq-toggle {
-    background: var(--accent-light);
-    color: var(--accent-deep);
     transform: rotate(45deg);
+    background: rgba(157, 127, 255, 0.15);
+    color: var(--violet-bright);
+    border-color: rgba(157, 127, 255, 0.4);
   }
 
   .faq-answer {
-    padding: 0 20px 18px;
-    color: var(--text-secondary);
+    padding: 0 26px 22px;
+    color: var(--text-dim);
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.7;
+    font-weight: 300;
   }
-
-  .faq-answer p {
-    margin: 0;
-  }
+  .faq-answer p { margin: 0; }
 </style>

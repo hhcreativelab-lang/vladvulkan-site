@@ -8,66 +8,62 @@ import { SITE } from '@lib/constants';
 <BaseLayout
   title="Связаться со мной"
   description="Контакты Влада Вулкана — независимого консультанта по недвижимости в Эквадоре. Telegram, рабочие часы, форматы и география работы."
+  hideFloatingTg
 >
   <div class="container-narrow">
     <Breadcrumbs items={[{ name: 'Контакты', href: '/kontakty' }]} />
 
-    <article class="page">
-      <h1>Связаться со мной</h1>
-      <p class="lead">
-        Главный канал — Telegram. Отвечаю в&nbsp;течение 24&nbsp;часов в&nbsp;рабочие дни.
-      </p>
+    <article class="page reveal">
+      <span class="eyebrow gold">Контакты</span>
+      <h1>Связаться<br><em>со мной</em></h1>
+      <p class="lead">Главный канал — Telegram. Отвечаю в&nbsp;течение 24&nbsp;часов в&nbsp;рабочие дни.</p>
 
-      <div class="contact-card">
-        <div>
-          <div class="ch-label">Telegram</div>
+      <div class="contacts reveal-stagger">
+        <div class="contact-card pillar">
+          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
+          <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
+          <div class="ch-eyebrow">Главный канал</div>
+          <div class="ch-name">Telegram</div>
           <div class="ch-value">{SITE.telegramHandle}</div>
-          <div class="ch-help">Главный канал. Кратко опишите ситуацию — отвечу в&nbsp;течение 24&nbsp;часов.</div>
+          <div class="ch-help">Кратко опишите ситуацию&nbsp;— отвечу в&nbsp;течение 24&nbsp;часов.</div>
+          <a href={SITE.telegramUrl} class="btn btn-violet" rel="noopener" style="margin-top: 16px">Написать</a>
         </div>
-        <a href={SITE.telegramUrl} class="btn btn-primary" rel="noopener">Написать в Telegram</a>
-      </div>
 
-      <div class="contact-card">
-        <div>
-          <div class="ch-label">Email</div>
+        <div class="contact-card pillar">
+          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
+          <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
+          <div class="ch-eyebrow">Документы</div>
+          <div class="ch-name">Email</div>
           <div class="ch-value">{SITE.email}</div>
           <div class="ch-help">Для документов и&nbsp;официальной переписки.</div>
+          <a href={`mailto:${SITE.email}`} class="btn btn-gold" style="margin-top: 16px">На email</a>
         </div>
-        <a href={`mailto:${SITE.email}`} class="btn btn-secondary">Написать на email</a>
+
+        <div class="contact-card pillar">
+          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
+          <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
+          <div class="ch-eyebrow">Контент</div>
+          <div class="ch-name">YouTube</div>
+          <div class="ch-value">@vladvulkan</div>
+          <div class="ch-help">Обзоры объектов, аналитика рынков ЛатАм.</div>
+          <a href={SITE.youtubeUrl} class="btn btn-ghost" rel="noopener" style="margin-top: 16px">Открыть канал</a>
+        </div>
       </div>
 
-      <div class="contact-card">
-        <div>
-          <div class="ch-label">YouTube</div>
-          <div class="ch-value">@vladvulkan (TBA)</div>
-          <div class="ch-help">Обзоры объектов, аналитика рынков ЛатАм. Скоро запуск.</div>
-        </div>
-        <a href={SITE.youtubeUrl} class="btn btn-secondary" rel="noopener">Открыть канал</a>
-      </div>
-
-      <section class="section">
+      <div class="prose info-prose">
         <h2>Форматы работы</h2>
-        <ul class="bullet-list">
-          <li><strong>Стратегическая консультация</strong> — 60 минут в Zoom, $150. Засчитывается в пакет, если идём дальше.</li>
-          <li><strong>Сопровождение сделки</strong> — фикс-пакет от $3000 (бюджет до $120K) или гибридная модель.</li>
-          <li><strong>Проверка объекта</strong> — $1500 фикс. Вы нашли объект сами — я проверяю и веду торг.</li>
+        <ul>
+          <li><strong>Стратегическая консультация</strong> — 60 минут в Zoom, $150. Засчитывается в пакет.</li>
+          <li><strong>Сопровождение сделки</strong> — фикс-пакет от $3000 (бюджет до $120K) или гибрид от $120K.</li>
+          <li><strong>Проверка объекта</strong> — $1500 фикс. Вы нашли объект — я проверяю и веду торг.</li>
         </ul>
-      </section>
 
-      <section class="section">
-        <h2>География работы</h2>
-        <p class="text">
-          Куэнка, Кито, Гуаякиль, Салинас, Манта — основная зона. Другие города — обсуждаем индивидуально,
-          если объект и бюджет того стоят.
-        </p>
-      </section>
+        <h2>География</h2>
+        <p>Куэнка, Кито, Гуаякиль, Салинас, Манта&nbsp;— основная зона. Другие города&nbsp;— индивидуально.</p>
 
-      <section class="section">
         <h2>Рабочие часы</h2>
-        <p class="text">
-          Будние дни, 09:00–18:00 по&nbsp;Куэнке (UTC−5). Это 17:00–02:00 МСК. Звонки и&nbsp;консультации — по&nbsp;записи через Telegram.
-        </p>
-      </section>
+        <p>Будние дни, 09:00–18:00 по&nbsp;Куэнке (UTC−5). Это 17:00–02:00 МСК. Звонки и&nbsp;консультации — по&nbsp;записи через Telegram.</p>
+      </div>
 
       <DisclaimerBlock />
     </article>
@@ -75,66 +71,67 @@ import { SITE } from '@lib/constants';
 </BaseLayout>
 
 <style>
-  .page { padding: 8px 0 40px; }
-  .page h1 { font-size: 34px; line-height: 1.2; margin: 18px 0 16px; }
-  @media (max-width: 640px) { .page h1 { font-size: 26px; } }
-  .lead { font-size: 18px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 28px; }
-
+  .page { padding: 12px 0 40px; }
+  .page > .eyebrow { display: block; margin: 16px 0 18px; }
+  .page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1;
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
+  }
+  .page h1 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lead {
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0 0 36px;
+    font-weight: 300;
+  }
+  .contacts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
   .contact-card {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 18px 22px;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    background: var(--bg-elevated);
-    margin-bottom: 12px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 6px;
+    padding: clamp(28px, 3vw, 36px);
   }
-
-  .ch-label {
-    font-size: 11px;
+  .ch-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text-tertiary);
-    margin-bottom: 4px;
+    color: var(--gold-champagne);
+    margin-bottom: 6px;
   }
-
+  .ch-name {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--text-light);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
   .ch-value {
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--text-primary);
-  }
-
-  .ch-help {
+    font-family: var(--font-mono);
     font-size: 13px;
-    color: var(--text-secondary);
+    color: var(--violet-bright);
     margin-top: 4px;
   }
-
-  .section { margin-top: 32px; }
-  .section h2 { font-size: 22px; margin: 0 0 12px; }
-  .text { color: var(--text-secondary); font-size: 16px; line-height: 1.6; margin: 0; }
-
-  .bullet-list { list-style: none; padding: 0; margin: 8px 0 0; }
-  .bullet-list li {
-    padding-left: 22px;
-    position: relative;
-    margin-bottom: 10px;
-    color: var(--text-secondary);
-    font-size: 16px;
+  .ch-help {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 8px;
     line-height: 1.55;
+    flex: 1;
   }
-  .bullet-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-  .bullet-list strong { color: var(--text-primary); font-weight: 500; }
+  .info-prose { margin-top: 48px; }
 </style>

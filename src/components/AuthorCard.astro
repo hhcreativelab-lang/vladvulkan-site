@@ -9,70 +9,82 @@ const { variant = 'default' } = Astro.props;
 ---
 
 <aside class:list={["author-card", variant]} aria-label="Об авторе">
-  <div class="author-photo" aria-hidden="true">В</div>
+  <div class="author-mark" aria-hidden="true">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="16" cy="11" r="5"/>
+      <path d="M5 28c0-6 5-10 11-10s11 4 11 10"/>
+    </svg>
+  </div>
   <div class="author-meta">
-    <div class="author-name">{SITE.founder.nameRu}</div>
+    <div class="author-eyebrow">Автор</div>
+    <div class="author-name">{SITE.founder.nameRu} <span class="italic-serif violet">— consultor inmobiliario</span></div>
     <div class="author-role">
-      Consultor inmobiliario · Эквадор · 13 лет в&nbsp;ЛатАм, 8+&nbsp;лет в&nbsp;недвижимости
+      13&nbsp;лет в&nbsp;Латинской Америке · 8+&nbsp;лет в&nbsp;недвижимости · Куэнка
     </div>
-    <a href="/kto-ya" class="author-link">Подробнее об авторе →</a>
+    <a href="/kto-ya" class="author-link">Подробнее об&nbsp;авторе →</a>
   </div>
 </aside>
 
 <style>
   .author-card {
     display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 16px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    margin: 18px 0 28px;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 22px 24px;
+    background: linear-gradient(180deg, rgba(22, 20, 26, 0.6) 0%, rgba(16, 14, 20, 0.75) 100%);
+    border: 1px solid rgba(229, 198, 120, 0.15);
+    border-radius: 4px;
+    margin: 22px 0 36px;
+    backdrop-filter: blur(8px);
   }
-
-  .author-photo {
+  .author-mark {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: var(--accent-dark);
-    color: #fff;
+    background: rgba(229, 198, 120, 0.08);
+    color: var(--gold-champagne);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
-    font-weight: 600;
     flex-shrink: 0;
+    border: 1px solid rgba(229, 198, 120, 0.3);
   }
-
-  .author-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  .author-mark svg { width: 28px; height: 28px; }
+  .author-meta { display: flex; flex-direction: column; gap: 4px; }
+  .author-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    margin-bottom: 2px;
   }
-
   .author-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--text-light);
+    line-height: 1.2;
   }
-
   .author-role {
     font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.45;
-  }
-
-  .author-link {
+    color: var(--text-dim);
+    line-height: 1.55;
     margin-top: 4px;
-    font-size: 13px;
-    color: var(--accent-dark);
+  }
+  .author-link {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--gold-champagne);
+    text-decoration: none;
     width: max-content;
+    font-family: var(--font-mono);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
   }
+  .author-link:hover { color: var(--text-light); }
 
-  .compact .author-photo {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
+  .compact .author-mark { width: 40px; height: 40px; }
+  .compact .author-mark svg { width: 20px; height: 20px; }
 </style>

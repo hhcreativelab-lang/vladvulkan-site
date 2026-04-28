@@ -16,52 +16,75 @@ const dateLabel = pubDate
   : null;
 ---
 
-<a href={href} class="article-card card">
+<a href={href} class="article-card pillar">
+  <span class="pillar-corner pc-tl"></span>
+  <span class="pillar-corner pc-tr"></span>
+  <span class="pillar-corner pc-bl"></span>
+  <span class="pillar-corner pc-br"></span>
+
   <span class="cat-tag">{cat.short}</span>
   <h3 class="card-title">{title}</h3>
   <p class="card-desc">{description}</p>
-  {dateLabel && <time class="card-date">{dateLabel}</time>}
+  <div class="card-meta">
+    {dateLabel && <time>{dateLabel}</time>}
+    <span class="arrow">→</span>
+  </div>
 </a>
 
 <style>
   .article-card {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     height: 100%;
+    padding: clamp(28px, 3vw, 36px);
+    text-decoration: none;
   }
 
   .cat-tag {
     display: inline-block;
-    font-size: 11px;
+    font-family: var(--font-mono);
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--accent-dark);
-    background: var(--accent-light);
-    padding: 4px 10px;
-    border-radius: 999px;
+    letter-spacing: 0.3em;
+    color: var(--gold-champagne);
     width: max-content;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .card-title {
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 400;
+    color: var(--text-light);
     margin: 6px 0 0;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
   }
 
   .card-desc {
     font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.5;
+    color: var(--text-dim);
+    line-height: 1.6;
     margin: 0;
     flex: 1;
+    font-weight: 300;
   }
 
-  .card-date {
-    font-size: 12px;
-    color: var(--text-tertiary);
-    margin-top: 6px;
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-mute);
   }
+  .arrow {
+    color: var(--violet-bright);
+    font-size: 18px;
+    transition: transform 0.4s var(--ease-premium);
+  }
+  .article-card:hover .arrow { transform: translateX(4px); }
 </style>

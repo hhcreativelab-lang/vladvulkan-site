@@ -21,7 +21,7 @@ interface Props {
   shortAnswer?: string;
   keyNumbers?: string[];
   faq?: Array<{ question: string; answer: string }>;
-  related?: string[]; // массив slug-ов: "category/slug"
+  related?: string[];
 }
 
 const {
@@ -46,7 +46,6 @@ const schemas: Array<Record<string, unknown>> = [
 const faqSchema = faqPageSchema(faq ?? []);
 if (faqSchema) schemas.push(faqSchema);
 
-// Связанные статьи
 let relatedArticles: Array<{ id: string; data: { title: string; description: string; category: CategorySlug } }> = [];
 if (related && related.length > 0) {
   const allArticles = await getCollection('articles', ({ data }) => !data.draft);
@@ -67,7 +66,8 @@ const fmtDate = (d: Date) => new Intl.DateTimeFormat('ru-RU', { day: 'numeric', 
         { name: title, href: Astro.url.pathname },
       ]} />
 
-      <header class="article-header">
+      <header class="article-header reveal">
+        <span class="eyebrow gold">{cat.name}</span>
         <h1>{title}</h1>
         <p class="lead">{description}</p>
       </header>
@@ -82,20 +82,17 @@ const fmtDate = (d: Date) => new Intl.DateTimeFormat('ru-RU', { day: 'numeric', 
       </div>
 
       {shortAnswer && (
-        <div class="short-answer" role="note">
-          <span class="emoji" aria-hidden="true">📌</span>
-          <div>
-            <strong>Краткий ответ:</strong> {shortAnswer}
-          </div>
+        <div class="short-answer pillar reveal" role="note">
+          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
+          <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
+          <span class="sa-eyebrow">Краткий ответ</span>
+          <p>{shortAnswer}</p>
         </div>
       )}
 
       {keyNumbers && keyNumbers.length > 0 && (
-        <div class="key-numbers">
-          <div class="kn-title">
-            <span class="emoji" aria-hidden="true">📊</span>
-            <strong>Главные цифры</strong>
-          </div>
+        <div class="key-numbers reveal">
+          <span class="kn-eyebrow">Главные цифры</span>
           <ul>
             {keyNumbers.map((n) => <li set:html={n} />)}
           </ul>
@@ -110,6 +107,7 @@ const fmtDate = (d: Date) => new Intl.DateTimeFormat('ru-RU', { day: 'numeric', 
 
       {relatedArticles.length > 0 && (
         <section class="related" aria-labelledby="related-h">
+          <span class="eyebrow gold">Дальше</span>
           <h2 id="related-h">Связанные статьи</h2>
           <div class="related-grid">
             {relatedArticles.map((a) => (
@@ -125,111 +123,108 @@ const fmtDate = (d: Date) => new Intl.DateTimeFormat('ru-RU', { day: 'numeric', 
       )}
 
       <CTABlock variant="info" />
-
       <DisclaimerBlock variant="box" />
     </div>
   </article>
 </BaseLayout>
 
 <style>
-  .article-page {
-    padding: 8px 0 40px;
-  }
+  .article-page { padding: 12px 0 40px; }
 
   .article-header {
-    margin: 18px 0 12px;
+    margin: 18px 0 16px;
   }
-
+  .article-header .eyebrow { display: block; margin-bottom: 14px; }
   .article-header h1 {
-    font-size: 38px;
-    line-height: 1.2;
-    margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5.5vw, 70px);
+    line-height: 1.05;
+    margin: 0 0 20px;
+    letter-spacing: -0.025em;
   }
-
-  @media (max-width: 640px) {
-    .article-header h1 {
-      font-size: 28px;
-    }
-  }
-
   .lead {
-    font-size: 19px;
-    line-height: 1.55;
-    color: var(--text-secondary);
-    margin: 0;
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0 0 12px;
+    font-weight: 300;
   }
 
   .meta-row {
     display: flex;
     flex-wrap: wrap;
     gap: 18px;
-    font-size: 13px;
-    color: var(--text-tertiary);
-    margin-bottom: 24px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-mute);
+    margin-bottom: 28px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
   .short-answer {
-    display: flex;
-    gap: 12px;
-    background: var(--accent-light);
-    border-left: 3px solid var(--accent);
-    border-radius: 12px;
-    padding: 16px 18px;
+    padding: 24px 28px;
     margin: 24px 0;
-    color: var(--accent-deep);
-    font-size: 15px;
-    line-height: 1.6;
   }
-
-  .short-answer .emoji {
-    font-size: 18px;
-    flex-shrink: 0;
+  .sa-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-champagne);
+    margin-bottom: 8px;
+  }
+  .short-answer p {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 17px;
+    line-height: 1.65;
+    font-family: var(--font-display);
+    font-weight: 400;
   }
 
   .key-numbers {
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin: 24px 0 32px;
+    background: linear-gradient(180deg, rgba(22, 20, 26, 0.6) 0%, rgba(16, 14, 20, 0.75) 100%);
+    border: 1px solid rgba(229, 198, 120, 0.12);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin: 24px 0 36px;
+    backdrop-filter: blur(8px);
   }
-
-  .kn-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-    font-size: 15px;
-    color: var(--text-primary);
+  .kn-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-champagne);
+    margin-bottom: 10px;
   }
-
   .key-numbers ul {
     margin: 0;
     padding-left: 22px;
-    color: var(--text-secondary);
+    color: var(--text-dim);
     font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
   }
+  .key-numbers li { margin-bottom: 4px; }
+  .key-numbers strong { color: var(--ivory); font-weight: 500; }
 
-  .key-numbers li {
-    margin-bottom: 4px;
-  }
+  .article-content { margin-top: 8px; }
 
-  .article-content {
-    margin-top: 8px;
-  }
-
-  .related {
-    margin: 56px 0 16px;
-  }
-
+  .related { margin: 60px 0 16px; }
+  .related .eyebrow { display: block; margin-bottom: 12px; }
   .related h2 {
-    font-size: 22px;
-    margin-bottom: 18px;
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 40px);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
   }
-
   .related-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
   }
 </style>

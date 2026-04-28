@@ -7,26 +7,26 @@ import DisclaimerBlock from '@components/DisclaimerBlock.astro';
 const services = [
   {
     href: '/uslugi/soprovozhdenie-sdelki',
+    eyebrow: 'Полный пакет',
     badge: 'От $3000 / гибрид',
     title: 'Сопровождение сделки',
-    description:
-      'Полное ведение покупки: подбор объекта по всему рынку, due diligence, переговоры, сопровождение у нотариуса. Юридическое оформление — лицензированный партнёр-корредор.',
+    description: 'Полное ведение покупки: подбор объекта по всему рынку, due diligence, переговоры, сопровождение у нотариуса.',
     forWhom: 'Для тех, кто хочет переложить процесс целиком — от первой консультации до получения ключей.',
   },
   {
     href: '/uslugi/konsultatsiya',
-    badge: '$150 / 60 мин',
+    eyebrow: 'Первый шаг',
+    badge: '$150 · 60 мин',
     title: 'Стратегическая консультация',
-    description:
-      '60 минут разбираем вашу ситуацию: бюджет, цели, какие города и форматы недвижимости подходят. Засчитывается в стоимость пакета, если идём дальше.',
+    description: '60 минут разбираем вашу ситуацию: бюджет, цели, какие города и форматы недвижимости подходят.',
     forWhom: 'Для тех, кто на стадии «понять рынок и принять решение». Удобный первый шаг.',
   },
   {
     href: '/uslugi/proverka-objekta',
+    eyebrow: 'Только проверка',
     badge: '$1500 фикс',
     title: 'Проверка объекта',
-    description:
-      'Вы нашли объект сами. Я проверяю документы, историю, технику, вычитываю договор и веду торг. Юридическое оформление — также через партнёра-корредора.',
+    description: 'Вы нашли объект сами. Я проверяю документы, историю, технику, вычитываю договор и веду торг.',
     forWhom: 'Для тех, у кого уже есть конкретный объект и нужен независимый второй взгляд + торг.',
   },
 ];
@@ -39,21 +39,28 @@ const services = [
   <div class="container-narrow">
     <Breadcrumbs items={[{ name: 'Услуги', href: '/uslugi' }]} />
 
-    <article class="page">
-      <h1>Услуги</h1>
+    <article class="page reveal">
+      <span class="eyebrow gold">Услуги</span>
+      <h1>Три формата —<br><em>от консультации до сделки</em></h1>
       <p class="lead">
-        Три формата под разные стадии — от&nbsp;первой консультации до&nbsp;полного сопровождения сделки.
         Все услуги работают по&nbsp;модели consultor inmobiliario&nbsp;+ лицензированный партнёр-корредор.
+        Выберите тот, что соответствует вашей стадии.
       </p>
 
-      <div class="services">
+      <div class="services reveal-stagger">
         {services.map((s) => (
-          <a href={s.href} class="service-card card">
-            <span class="badge">{s.badge}</span>
+          <a href={s.href} class="srv-card pillar">
+            <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
+            <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
+
+            <div class="srv-top">
+              <div class="srv-eyebrow">{s.eyebrow}</div>
+              <span class="srv-badge">{s.badge}</span>
+            </div>
             <h2>{s.title}</h2>
             <p>{s.description}</p>
             <div class="for-whom"><strong>Для кого:</strong> {s.forWhom}</div>
-            <span class="arrow">Подробнее →</span>
+            <span class="srv-arrow">Подробнее →</span>
           </a>
         ))}
       </div>
@@ -65,63 +72,94 @@ const services = [
 </BaseLayout>
 
 <style>
-  .page { padding: 8px 0 40px; }
-  .page h1 { font-size: 36px; line-height: 1.2; margin: 18px 0 16px; }
-  @media (max-width: 640px) { .page h1 { font-size: 28px; } }
-  .lead { font-size: 18px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 28px; }
-
+  .page { padding: 12px 0 40px; }
+  .page > .eyebrow { display: block; margin: 16px 0 18px; }
+  .page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5.5vw, 72px);
+    line-height: 1;
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
+  }
+  .page h1 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lead {
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0 0 36px;
+    font-weight: 300;
+  }
   .services {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-bottom: 32px;
+    gap: 16px;
+    margin-bottom: 40px;
   }
-
-  .service-card {
+  .srv-card {
     display: block;
     text-decoration: none;
-    color: var(--text-primary);
+    padding: clamp(28px, 3.5vw, 40px);
   }
-
-  .badge {
-    display: inline-block;
-    font-size: 12px;
-    padding: 4px 10px;
+  .srv-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .srv-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-champagne);
+  }
+  .srv-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 5px 14px;
     border-radius: 999px;
-    background: var(--accent-light);
-    color: var(--accent-deep);
-    font-weight: 500;
-    margin-bottom: 10px;
+    background: rgba(157, 127, 255, 0.08);
+    border: 1px solid rgba(157, 127, 255, 0.25);
+    color: var(--violet-bright);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
-
-  .service-card h2 {
-    font-size: 22px;
-    margin: 0 0 10px;
-  }
-
-  .service-card p {
-    color: var(--text-secondary);
-    font-size: 15px;
-    line-height: 1.55;
+  .srv-card h2 {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3vw, 34px);
     margin: 0 0 12px;
+    color: var(--text-light);
+    letter-spacing: -0.02em;
   }
-
+  .srv-card p {
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 16px;
+    font-weight: 300;
+  }
   .for-whom {
-    color: var(--text-secondary);
-    font-size: 14px;
-    line-height: 1.5;
-    padding-top: 12px;
-    border-top: 1px solid var(--border);
-    margin-bottom: 12px;
+    color: var(--text-dim);
+    font-size: 13.5px;
+    line-height: 1.55;
+    padding-top: 14px;
+    border-top: 1px solid rgba(157, 127, 255, 0.1);
+    margin-bottom: 14px;
+    font-weight: 300;
   }
-
-  .for-whom strong {
-    color: var(--text-primary);
-    font-weight: 500;
-  }
-
-  .arrow {
-    color: var(--accent-dark);
-    font-size: 14px;
+  .for-whom strong { color: var(--gold-champagne); font-weight: 500; }
+  .srv-arrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--violet-bright);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
   }
 </style>

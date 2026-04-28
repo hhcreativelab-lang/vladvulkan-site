@@ -42,11 +42,11 @@ const faqs = [
   <div class="container-narrow">
     <Breadcrumbs items={[{ name: 'Как работаем', href: '/kak-rabotaem' }]} />
 
-    <article class="page">
-      <h1>Как работает независимый консультант по недвижимости в&nbsp;Эквадоре</h1>
+    <article class="page reveal">
+      <span class="eyebrow gold">Модель работы</span>
+      <h1>Как работает<br>независимый <em>консультант</em><br>по&nbsp;недвижимости</h1>
       <p class="lead">
-        Объясняю модель работы — почему я не риэлтор, кто такой партнёр-корредор, как делятся роли в сделке
-        и какие этапы проходит покупка.
+        Объясняю, почему я не риэлтор, кто такой партнёр-корредор и как делятся роли в&nbsp;сделке.
       </p>
 
       <div class="prose">
@@ -63,10 +63,7 @@ const faqs = [
         </p>
 
         <h2>Кто такой партнёр-корредор и что он делает</h2>
-        <p>
-          Партнёр-корредор — лицензированный риэлтор-юрист, с которым я работаю по каждой сделке. Его зона
-          ответственности:
-        </p>
+        <p>Партнёр-корредор — лицензированный риэлтор-юрист, с которым я работаю по каждой сделке. Его зона ответственности:</p>
         <ul>
           <li>Юридическое оформление escritura (договора купли-продажи у нотариуса)</li>
           <li>Регистрация перехода права в Registro de la Propiedad</li>
@@ -89,33 +86,12 @@ const faqs = [
 
         <h2>Этапы сделки</h2>
         <ol class="steps">
-          <li>
-            <strong>Стратегическая консультация ($150, 60 мин).</strong>
-            Разбираем бюджет, цели, формат, города. Выходим с конкретным планом действий.
-          </li>
-          <li>
-            <strong>Подбор объектов.</strong>
-            Я ищу по всему рынку — корредоры, частные продажи, застройщики. Формирую short-list 3–7 объектов
-            под вашу задачу.
-          </li>
-          <li>
-            <strong>Проверка документов (due diligence).</strong>
-            Certificado de gravámenes, история собственника, технический осмотр, проверка по налогам, плану
-            расположения, разрешениям.
-          </li>
-          <li>
-            <strong>Переговоры.</strong>
-            Веду торг от вашего имени. Стандартная скидка от заявленной цены — 8–18% в зависимости от
-            ликвидности объекта.
-          </li>
-          <li>
-            <strong>Подписание у нотариуса.</strong>
-            Escritura de compraventa с участием партнёра-корредора. Лично или по доверенности.
-          </li>
-          <li>
-            <strong>Регистрация и передача ключей.</strong>
-            Внесение в Registro de la Propiedad, оплата alcabala, акт приёма-передачи.
-          </li>
+          <li><strong>Стратегическая консультация ($150, 60&nbsp;мин).</strong> Разбираем бюджет, цели, формат, города.</li>
+          <li><strong>Подбор объектов.</strong> Корредоры, частные продажи, застройщики. Short-list 3–7 объектов.</li>
+          <li><strong>Due diligence.</strong> Certificado de gravámenes, история, технический осмотр, проверка по налогам.</li>
+          <li><strong>Переговоры.</strong> Стандартная скидка от заявленной&nbsp;— 8–18%.</li>
+          <li><strong>Подписание у нотариуса.</strong> Escritura de compraventa с участием партнёра-корредора.</li>
+          <li><strong>Регистрация и передача ключей.</strong> Внесение в Registro de la Propiedad, оплата alcabala.</li>
         </ol>
 
         <h2>Чем отличается от работы с обычным риэлтором</h2>
@@ -139,23 +115,54 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .page { padding: 8px 0 40px; }
-  .page h1 { font-size: 36px; line-height: 1.2; margin: 18px 0 18px; }
-  @media (max-width: 640px) { .page h1 { font-size: 26px; } }
-  .lead { font-size: 18px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 28px; }
+  .page { padding: 12px 0 40px; }
+  .page > .eyebrow { display: block; margin: 16px 0 18px; }
+  .page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5.5vw, 72px);
+    line-height: 1;
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
+  }
+  .page h1 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lead {
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0 0 36px;
+    font-weight: 300;
+  }
   .steps {
-    margin: 16px 0 28px;
-    padding-left: 20px;
-    color: var(--text-secondary);
-    font-size: 16px;
-    line-height: 1.65;
+    margin: 18px 0 32px;
+    padding-left: 0;
+    list-style: none;
+    counter-reset: step;
   }
   .steps li {
-    margin-bottom: 14px;
+    counter-increment: step;
+    padding: 18px 0 18px 56px;
+    position: relative;
+    color: var(--text-dim);
+    font-size: 16px;
+    line-height: 1.65;
+    border-bottom: 1px solid rgba(157, 127, 255, 0.08);
+    font-weight: 300;
   }
-  .steps strong {
-    color: var(--text-primary);
-    display: block;
-    margin-bottom: 4px;
+  .steps li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--gold-champagne);
+    letter-spacing: 0.1em;
   }
+  .steps strong { color: var(--text-light); display: block; margin-bottom: 4px; font-weight: 500; }
+  .steps li:last-child { border-bottom: none; }
 </style>

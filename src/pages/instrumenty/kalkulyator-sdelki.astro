@@ -16,11 +16,12 @@ import DisclaimerBlock from '@components/DisclaimerBlock.astro';
       { name: 'Калькулятор сделки', href: '/instrumenty/kalkulyator-sdelki' },
     ]} />
 
-    <article class="page">
-      <h1>Калькулятор сопровождения сделки</h1>
+    <article class="page reveal">
+      <span class="eyebrow gold">Калькулятор</span>
+      <h1>Калькулятор<br><em>сопровождения</em> сделки</h1>
       <p class="lead">
-        Подбирает фикс-пакет или&nbsp;гибридную модель под&nbsp;ваш бюджет. Показывает ориентировочный гонорар,
-        состав работ и&nbsp;сроки.
+        Подбирает фикс-пакет или&nbsp;гибридную модель под&nbsp;ваш бюджет. Показывает гонорар, состав работ
+        и&nbsp;сроки.
       </p>
 
       <PriceCalculatorEmbed height="1180px" />
@@ -34,8 +35,8 @@ import DisclaimerBlock from '@components/DisclaimerBlock.astro';
           <li>Калькулятор покажет ориентир по фикс-пакету или гибридной модели.</li>
         </ol>
         <p>
-          Это ориентир, не оферта. Финальная стоимость согласовывается на стратегической консультации после разбора
-          вашей задачи. См. также <a href="/tseny">страницу цен</a> с подробным объяснением модели и FAQ.
+          Это ориентир, не оферта. Финальная стоимость согласовывается на стратегической консультации.
+          См. также <a href="/tseny">страницу цен</a> с подробным объяснением модели и FAQ.
         </p>
       </div>
 
@@ -46,9 +47,27 @@ import DisclaimerBlock from '@components/DisclaimerBlock.astro';
 </BaseLayout>
 
 <style>
-  .page { padding: 8px 0 40px; }
-  .page h1 { font-size: 32px; line-height: 1.2; margin: 18px 0 16px; }
-  @media (max-width: 640px) { .page h1 { font-size: 24px; } }
-  .lead { font-size: 17px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 24px; }
+  .page { padding: 12px 0 40px; }
+  .page > .eyebrow { display: block; margin: 16px 0 18px; }
+  .page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1;
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
+  }
+  .page h1 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lead {
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0 0 28px;
+    font-weight: 300;
+  }
   .under { margin-top: 28px; }
 </style>

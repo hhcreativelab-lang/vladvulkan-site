@@ -20,7 +20,7 @@ const presets: Record<Variant, { heading: string; text: string; ctaLabel: string
   },
   commercial: {
     heading: 'Готовы обсудить вашу задачу?',
-    text: 'Расскажите коротко о ситуации в Telegram: бюджет, тип объекта, город. Отвечу в течение 24 часов. Если нужен глубокий разбор — назначу стратегическую консультацию ($150, 60 минут).',
+    text: 'Расскажите коротко в Telegram: бюджет, тип объекта, город. Отвечу в течение 24 часов. Если нужен глубокий разбор — назначу стратегическую консультацию ($150, 60 минут).',
     ctaLabel: 'Написать в Telegram',
   },
   category: {
@@ -36,46 +36,80 @@ const finalText = text ?? preset.text;
 const finalLabel = ctaLabel ?? preset.ctaLabel;
 ---
 
-<section class="cta-block" aria-labelledby="cta-heading">
-  <div class="cta-inner">
+<section class="cta-section reveal" aria-labelledby="cta-heading">
+  <div class="cta-card">
+    <span class="pillar-corner pc-tl"></span>
+    <span class="pillar-corner pc-tr"></span>
+    <span class="pillar-corner pc-bl"></span>
+    <span class="pillar-corner pc-br"></span>
+
+    <div class="cta-eyebrow">
+      <span></span>Стратегическая консультация
+    </div>
     <h2 id="cta-heading">{finalHeading}</h2>
     <p>{finalText}</p>
-    <a href={SITE.telegramUrl} class="btn btn-primary cta-btn" rel="noopener">
+    <a href={SITE.telegramUrl} class="btn btn-violet" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>
+      </svg>
       {finalLabel}
     </a>
   </div>
 </section>
 
 <style>
-  .cta-block {
-    margin: 48px 0 32px;
+  .cta-section {
+    margin: clamp(60px, 8vw, 100px) 0 40px;
   }
 
-  .cta-inner {
-    background: var(--accent-light);
-    border: 1px solid var(--accent-mid);
-    border-radius: 16px;
-    padding: 32px 28px;
+  .cta-card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(22, 20, 26, 0.75) 0%, rgba(16, 14, 20, 0.85) 100%);
+    border: 1px solid rgba(157, 127, 255, 0.12);
+    border-radius: 8px;
+    padding: clamp(40px, 5vw, 64px);
     text-align: center;
+    backdrop-filter: blur(12px);
+    overflow: hidden;
   }
 
-  .cta-inner h2 {
-    color: var(--accent-deep);
-    font-size: 22px;
-    margin: 0 0 12px;
+  .cta-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-champagne);
+    margin-bottom: 24px;
+  }
+  .cta-eyebrow span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.7);
+    animation: pulse 2s ease-in-out infinite;
   }
 
-  .cta-inner p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--accent-deep);
-    opacity: 0.85;
-    max-width: 580px;
-    margin: 0 auto 22px;
+  .cta-card h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.1;
+    color: var(--text-light);
+    margin: 0 0 18px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: -0.02em;
   }
 
-  .cta-btn {
-    font-size: 15px;
-    padding: 13px 26px;
+  .cta-card p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    max-width: 640px;
+    margin: 0 auto 32px;
+    font-weight: 300;
   }
 </style>

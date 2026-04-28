@@ -11,59 +11,64 @@ interface Props {
 const { slug, name, description, count } = Astro.props;
 ---
 
-<a href={`/znaniya/${slug}`} class="category-card card">
+<a href={`/znaniya/${slug}`} class="cat-card pillar">
+  <span class="pillar-corner pc-tl"></span>
+  <span class="pillar-corner pc-tr"></span>
+  <span class="pillar-corner pc-bl"></span>
+  <span class="pillar-corner pc-br"></span>
+
   <h3>{name}</h3>
   <p>{description}</p>
   <div class="bottom">
-    {typeof count === 'number' && (
+    {typeof count === 'number' ? (
       <span class="count">{count} {count === 1 ? 'статья' : count < 5 ? 'статьи' : 'статей'}</span>
+    ) : (
+      <span class="count">скоро</span>
     )}
     <span class="arrow">→</span>
   </div>
 </a>
 
 <style>
-  .category-card {
+  .cat-card {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     height: 100%;
+    padding: clamp(28px, 3vw, 36px);
+    text-decoration: none;
   }
-
-  .category-card h3 {
-    font-size: 18px;
-    font-weight: 500;
+  .cat-card h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
     margin: 0;
-    color: var(--text-primary);
+    color: var(--text-light);
+    letter-spacing: -0.02em;
   }
-
-  .category-card p {
+  .cat-card p {
     font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.5;
+    color: var(--text-dim);
+    line-height: 1.6;
     margin: 0;
     flex: 1;
+    font-weight: 300;
   }
-
   .bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 12px;
-    color: var(--accent-dark);
-    font-size: 13px;
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--text-mute);
+    text-transform: uppercase;
   }
-
-  .count {
-    color: var(--text-tertiary);
-  }
-
   .arrow {
     font-size: 18px;
-    transition: transform 0.15s ease;
+    color: var(--violet-bright);
+    transition: transform 0.4s var(--ease-premium);
   }
-
-  .category-card:hover .arrow {
-    transform: translateX(3px);
-  }
+  .cat-card:hover .arrow { transform: translateX(4px); }
 </style>

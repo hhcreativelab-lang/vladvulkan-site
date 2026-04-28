@@ -39,14 +39,17 @@ const schema = breadcrumbListSchema(
 
 <style>
   .breadcrumbs {
-    margin: 22px 0 14px;
-    font-size: 13px;
-    color: var(--text-tertiary);
+    margin: 28px 0 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mute);
   }
   .breadcrumbs ol {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -54,19 +57,14 @@ const schema = breadcrumbListSchema(
   .breadcrumbs li {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
   }
   .breadcrumbs a {
-    color: var(--text-secondary);
+    color: var(--text-mute);
+    text-decoration: none;
+    transition: color 0.3s;
   }
-  .breadcrumbs a:hover {
-    color: var(--accent-dark);
-  }
-  .breadcrumbs .sep {
-    color: var(--text-tertiary);
-    opacity: 0.6;
-  }
-  .breadcrumbs [aria-current="page"] {
-    color: var(--text-primary);
-  }
+  .breadcrumbs a:hover { color: var(--gold-champagne); }
+  .breadcrumbs .sep { color: var(--text-soft); opacity: 0.6; }
+  .breadcrumbs [aria-current="page"] { color: var(--text-light); }
 </style>

@@ -30,8 +30,6 @@ const articles = allArticles
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
 const url = canonicalUrl(`/znaniya/${category}`);
-
-// Сопутствующие категории — 3 случайные другие
 const otherCats = Object.values(CATEGORIES).filter((c) => c.slug !== category);
 
 const schemas = [
@@ -59,14 +57,13 @@ const schemas = [
       { name: cat.name, href: `/znaniya/${cat.slug}` },
     ]} />
 
-    <article class="page">
-      <header class="cat-header">
-        <h1>{cat.name}</h1>
-        <p class="lead">{cat.description}.</p>
-      </header>
+    <article class="page reveal">
+      <span class="eyebrow gold">Категория</span>
+      <h1>{cat.name}</h1>
+      <p class="lead">{cat.description}.</p>
 
       {articles.length > 0 ? (
-        <div class="articles-grid">
+        <div class="articles-grid reveal-stagger">
           {articles.map((a) => (
             <ArticleCard
               href={`/znaniya/${a.id}`}
@@ -78,16 +75,20 @@ const schemas = [
           ))}
         </div>
       ) : (
-        <div class="empty-state">
+        <div class="empty-state pillar">
+          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
+          <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
+          <span class="es-eyebrow">Категория готовится</span>
           <h2>В&nbsp;этой категории пока нет статей</h2>
           <p>
-            Статьи добавляются по&nbsp;приоритетам SEO-стратегии. Если у&nbsp;вас есть конкретный вопрос
-            из&nbsp;этой темы&nbsp;— напишите в&nbsp;Telegram, возможно ваш вопрос станет следующей публикацией.
+            Если у&nbsp;вас есть конкретный вопрос из&nbsp;этой темы&nbsp;— напишите в&nbsp;Telegram, возможно
+            ваш вопрос станет следующей публикацией.
           </p>
         </div>
       )}
 
       <section class="related-cats">
+        <span class="eyebrow gold">Смежные темы</span>
         <h2>Связанные категории</h2>
         <div class="cats-grid">
           {otherCats.slice(0, 3).map((c) => (
@@ -103,41 +104,71 @@ const schemas = [
 </BaseLayout>
 
 <style>
-  .page { padding: 8px 0 40px; }
-  .cat-header { margin: 18px 0 28px; }
-  .cat-header h1 { font-size: 36px; line-height: 1.2; margin: 0 0 12px; }
-  @media (max-width: 640px) { .cat-header h1 { font-size: 28px; } }
-  .lead { font-size: 18px; line-height: 1.55; color: var(--text-secondary); margin: 0; max-width: 720px; }
+  .page { padding: 12px 0 40px; }
+  .page > .eyebrow { display: block; margin: 16px 0 18px; }
+  .page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1;
+    margin: 0 0 18px;
+    letter-spacing: -0.03em;
+  }
+  .lead {
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.55;
+    color: var(--text-dim);
+    margin: 0 0 36px;
+    font-weight: 300;
+    max-width: 720px;
+  }
 
   .articles-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-    margin-bottom: 48px;
+    gap: 20px;
+    margin-bottom: 60px;
   }
 
   .empty-state {
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px 24px;
-    margin-bottom: 48px;
     text-align: center;
+    padding: clamp(36px, 4vw, 56px);
+    margin-bottom: 60px;
   }
-  .empty-state h2 { font-size: 20px; margin: 0 0 10px; }
+  .es-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-champagne);
+    margin-bottom: 14px;
+  }
+  .empty-state h2 {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.6vw, 28px);
+    margin: 0 0 12px;
+    color: var(--text-light);
+  }
   .empty-state p {
-    color: var(--text-secondary);
+    color: var(--text-dim);
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.65;
     max-width: 520px;
     margin: 0 auto;
+    font-weight: 300;
   }
 
-  .related-cats { margin: 56px 0 16px; }
-  .related-cats h2 { font-size: 22px; margin-bottom: 18px; }
+  .related-cats { margin: 60px 0 16px; }
+  .related-cats .eyebrow { display: block; margin-bottom: 12px; }
+  .related-cats h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 40px);
+    margin: 0 0 24px;
+    letter-spacing: -0.02em;
+  }
   .cats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
+    gap: 20px;
   }
 </style>

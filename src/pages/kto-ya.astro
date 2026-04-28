@@ -3,7 +3,6 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
 import CTABlock from '@components/CTABlock.astro';
 import DisclaimerBlock from '@components/DisclaimerBlock.astro';
-import { SITE } from '@lib/constants';
 import { personSchema } from '@lib/schema';
 ---
 
@@ -15,13 +14,13 @@ import { personSchema } from '@lib/schema';
   <div class="container-narrow">
     <Breadcrumbs items={[{ name: 'О Владе', href: '/kto-ya' }]} />
 
-    <article class="page">
-      <h1>Влад Вулкан — Consultor Inmobiliario в Эквадоре</h1>
+    <article class="page reveal">
+      <span class="eyebrow gold">Об авторе</span>
+      <h1>Влад&nbsp;<em>Вулкан</em><br>Consultor Inmobiliario в&nbsp;Эквадоре</h1>
       <p class="lead">
         Я — независимый консультант по&nbsp;недвижимости в&nbsp;Эквадоре для&nbsp;русскоязычной аудитории.
         13&nbsp;лет живу в&nbsp;Латинской Америке, 8+&nbsp;лет работаю в&nbsp;недвижимости. Базируюсь в&nbsp;Эквадоре,
-        веду сделки в&nbsp;Куэнке, Кито, Гуаякиле, Салинасе и&nbsp;Манте. Работаю как consultor inmobiliario&nbsp;—
-        это позволяет мне быть независимым от&nbsp;агентств и&nbsp;работать только на&nbsp;стороне клиента.
+        веду сделки в&nbsp;Куэнке, Кито, Гуаякиле, Салинасе и&nbsp;Манте.
       </p>
 
       <div class="prose">
@@ -56,10 +55,7 @@ import { personSchema } from '@lib/schema';
         </ul>
 
         <h3>Пять городов как основная зона</h3>
-        <p>
-          Куэнка, Кито, Гуаякиль, Салинас, Манта. Другие города — обсуждаем индивидуально, если объект и
-          бюджет того стоят.
-        </p>
+        <p>Куэнка, Кито, Гуаякиль, Салинас, Манта. Другие города — обсуждаем индивидуально.</p>
 
         <h3>Стратегическая консультация — первый шаг</h3>
         <p>
@@ -75,24 +71,27 @@ import { personSchema } from '@lib/schema';
 </BaseLayout>
 
 <style>
-  .page {
-    padding: 8px 0 40px;
-  }
-
+  .page { padding: 12px 0 40px; }
+  .page > .eyebrow { display: block; margin: 16px 0 18px; }
   .page h1 {
-    font-size: 38px;
-    line-height: 1.2;
-    margin: 18px 0 18px;
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1;
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
   }
-
-  @media (max-width: 640px) {
-    .page h1 { font-size: 28px; }
+  .page h1 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
-
   .lead {
-    font-size: 19px;
+    font-size: clamp(17px, 1.5vw, 21px);
     line-height: 1.6;
-    color: var(--text-secondary);
-    margin: 0 0 28px;
+    color: var(--text-dim);
+    margin: 0 0 36px;
+    font-weight: 300;
+    max-width: 720px;
   }
 </style>

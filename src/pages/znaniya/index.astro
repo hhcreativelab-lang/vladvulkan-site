@@ -32,15 +32,15 @@ const counts = Object.fromEntries(
   <div class="container">
     <Breadcrumbs items={[{ name: 'Знания', href: '/znaniya' }]} />
 
-    <article class="page">
-      <h1>Всё про Эквадор для&nbsp;русскоязычных</h1>
+    <article class="page reveal">
+      <span class="eyebrow gold">Каталог знаний</span>
+      <h1>Всё про&nbsp;Эквадор<br>для&nbsp;<em>русскоязычных</em></h1>
       <p class="lead">
         Семь категорий — от&nbsp;денег и&nbsp;банков до&nbsp;сравнения стран. Опираюсь на&nbsp;реальную практику работы
-        в&nbsp;недвижимости и&nbsp;13&nbsp;лет жизни в&nbsp;Латинской Америке. Каждая статья содержит конкретные цифры
-        и&nbsp;источники, обновляется по&nbsp;мере изменения данных.
+        в&nbsp;недвижимости и&nbsp;13&nbsp;лет жизни в&nbsp;Латинской Америке.
       </p>
 
-      <div class="categories-grid">
+      <div class="categories-grid reveal-stagger">
         {Object.values(CATEGORIES).map((cat) => (
           <CategoryCard
             slug={cat.slug}
@@ -52,12 +52,14 @@ const counts = Object.fromEntries(
       </div>
 
       {allArticles.length === 0 && (
-        <div class="empty-state">
-          <h2>Каталог запускается</h2>
+        <div class="empty-state pillar">
+          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
+          <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
+          <span class="es-eyebrow">Каталог запускается</span>
+          <h2>Структура готова — статьи на подходе</h2>
           <p>
-            Структура категорий готова — статьи добавляются постепенно. Если у&nbsp;вас есть конкретный вопрос
-            про&nbsp;Эквадор, на&nbsp;который пока нет статьи&nbsp;— напишите в&nbsp;Telegram, возможно ваш вопрос станет
-            следующей публикацией.
+            Если у&nbsp;вас есть конкретный вопрос про&nbsp;Эквадор, на&nbsp;который пока нет статьи&nbsp;— напишите
+            в&nbsp;Telegram, возможно ваш вопрос станет следующей публикацией.
           </p>
         </div>
       )}
@@ -69,43 +71,64 @@ const counts = Object.fromEntries(
 </BaseLayout>
 
 <style>
-  .page { padding: 8px 0 40px; }
-  .page h1 { font-size: 38px; line-height: 1.2; margin: 18px 0 16px; }
-  @media (max-width: 640px) { .page h1 { font-size: 28px; } }
+  .page { padding: 12px 0 40px; }
+  .page > .eyebrow { display: block; margin: 16px 0 18px; }
+  .page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1;
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
+  }
+  .page h1 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
   .lead {
-    font-size: 18px;
+    font-size: clamp(17px, 1.5vw, 21px);
     line-height: 1.6;
-    color: var(--text-secondary);
-    margin: 0 0 32px;
+    color: var(--text-dim);
+    margin: 0 0 36px;
+    font-weight: 300;
     max-width: 760px;
   }
 
   .categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
+    gap: 20px;
     margin-bottom: 48px;
   }
 
   .empty-state {
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px 24px;
-    margin-bottom: 32px;
     text-align: center;
+    padding: clamp(36px, 4vw, 56px);
+    margin-bottom: 32px;
   }
-
+  .es-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-champagne);
+    margin-bottom: 14px;
+  }
   .empty-state h2 {
-    font-size: 22px;
-    margin: 0 0 12px;
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3vw, 32px);
+    margin: 0 0 14px;
+    color: var(--text-light);
+    letter-spacing: -0.02em;
   }
-
   .empty-state p {
-    color: var(--text-secondary);
-    font-size: 16px;
-    line-height: 1.6;
-    max-width: 520px;
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 540px;
     margin: 0 auto;
+    font-weight: 300;
   }
 </style>

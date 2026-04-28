@@ -16,41 +16,43 @@ import { SITE } from '@lib/constants';
       { name: 'Налоговый калькулятор', href: '/instrumenty/nalogovyy-kalkulyator' },
     ]} />
 
-    <article class="page">
-      <h1>Налоговый калькулятор покупки недвижимости в&nbsp;Эквадоре</h1>
+    <article class="page reveal">
+      <span class="eyebrow gold">В разработке</span>
+      <h1>Налоговый<br><em>калькулятор</em> покупки</h1>
       <p class="lead">
         Расчёт alcabala, регистрационных сборов и&nbsp;нотариальных расходов под&nbsp;конкретный объект и&nbsp;муниципалитет.
       </p>
 
-      <div class="placeholder">
-        <div class="badge">В разработке</div>
+      <div class="placeholder pillar">
+        <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
+        <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
+
+        <div class="ph-eyebrow">Готовится к запуску</div>
         <h2>Скоро будет доступен</h2>
         <p>
-          Налоговый калькулятор появится здесь в&nbsp;ближайших обновлениях. Он&nbsp;учтёт alcabala (~1% от&nbsp;кадастровой
-          оценки, ставка зависит от&nbsp;муниципалитета), регистрационные сборы (~0.4%), нотариальные расходы
-          ($300–600 в&nbsp;зависимости от&nbsp;суммы) и&nbsp;ставку ICUS (impuesto al capital urbano específico)
-          по&nbsp;вашей зоне.
+          Калькулятор учтёт alcabala (~1% от&nbsp;кадастровой оценки), регистрационные сборы (~0.4%), нотариальные
+          расходы и&nbsp;ставку ICUS по&nbsp;вашей зоне.
         </p>
         <p>
           <strong>Пока:</strong> для&nbsp;точного расчёта под&nbsp;ваш объект и&nbsp;город — напишите в&nbsp;Telegram.
-          Отвечу с&nbsp;разбивкой по&nbsp;статьям расходов в&nbsp;течение&nbsp;24&nbsp;часов.
+          Отвечу с&nbsp;разбивкой по&nbsp;статьям расходов.
         </p>
-        <a href={SITE.telegramUrl} class="btn btn-primary" rel="noopener">Написать в Telegram</a>
+        <a href={SITE.telegramUrl} class="btn btn-violet" rel="noopener" style="margin-top: 12px">Написать в Telegram</a>
       </div>
 
       <div class="prose">
         <h2>Какие налоги и сборы платит покупатель</h2>
         <ul>
-          <li><strong>Alcabala</strong> — налог на передачу имущества, ~1% от кадастровой оценки. Ставка устанавливается муниципалитетом, обычно 0.96–1%.</li>
-          <li><strong>Регистрационный сбор</strong> в Registro de la Propiedad — около 0.4% от стоимости сделки.</li>
-          <li><strong>Нотариальные расходы</strong> — фиксированная сетка по сумме сделки. На объект $80–150K — $300–500. На объект $300K+ — $500–800.</li>
-          <li><strong>Сверка с кадастром и муниципалитетом</strong> по неуплаченным налогам предыдущего собственника — обычно бесплатно или символическая сумма.</li>
+          <li><strong>Alcabala</strong> — налог на передачу имущества, ~1% от кадастровой оценки.</li>
+          <li><strong>Регистрационный сбор</strong> в Registro de la Propiedad — около 0.4%.</li>
+          <li><strong>Нотариальные расходы</strong> — фиксированная сетка по сумме сделки. На объект $80–150K — $300–500.</li>
+          <li><strong>Сверка с кадастром и муниципалитетом</strong> по неуплаченным налогам — обычно бесплатно.</li>
         </ul>
 
         <h2>Что НЕ платит покупатель</h2>
         <ul>
           <li>Комиссию агентства продавца — она на стороне продавца</li>
-          <li>Гонорар партнёра-корредора по нашей модели — это отдельная договорная сумма, не государственный налог</li>
+          <li>Гонорар партнёра-корредора по нашей модели — это отдельная договорная сумма</li>
           <li>Налог на прирост капитала (ganancia ocasional) — это налог продавца</li>
         </ul>
 
@@ -69,48 +71,56 @@ import { SITE } from '@lib/constants';
 </BaseLayout>
 
 <style>
-  .page { padding: 8px 0 40px; }
-  .page h1 { font-size: 30px; line-height: 1.2; margin: 18px 0 16px; }
-  @media (max-width: 640px) { .page h1 { font-size: 24px; } }
-  .lead { font-size: 17px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 28px; }
+  .page { padding: 12px 0 40px; }
+  .page > .eyebrow { display: block; margin: 16px 0 18px; }
+  .page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1;
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
+  }
+  .page h1 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lead {
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0 0 28px;
+    font-weight: 300;
+  }
 
   .placeholder {
-    background: var(--accent-light);
-    border: 1px solid var(--accent-mid);
-    border-radius: 16px;
-    padding: 28px 26px;
     text-align: center;
+    padding: clamp(36px, 4vw, 56px);
     margin-bottom: 40px;
   }
-
-  .badge {
-    display: inline-block;
+  .ph-eyebrow {
+    font-family: var(--font-mono);
     font-size: 11px;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    background: var(--accent-dark);
-    color: #fff;
-    padding: 5px 12px;
-    border-radius: 999px;
+    color: var(--gold-champagne);
     margin-bottom: 14px;
   }
-
   .placeholder h2 {
-    color: var(--accent-deep);
-    font-size: 22px;
-    margin: 0 0 12px;
+    font-family: var(--font-display);
+    color: var(--text-light);
+    font-size: clamp(28px, 3.5vw, 38px);
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
   }
-
   .placeholder p {
-    color: var(--accent-deep);
-    opacity: 0.85;
+    color: var(--text-dim);
     font-size: 15px;
-    line-height: 1.6;
-    max-width: 560px;
+    line-height: 1.65;
+    max-width: 540px;
     margin: 0 auto 14px;
+    font-weight: 300;
   }
-
-  .placeholder .btn {
-    margin-top: 8px;
-  }
+  .placeholder strong { color: var(--gold-champagne); font-weight: 500; }
 </style>

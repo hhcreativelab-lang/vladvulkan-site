@@ -3,10 +3,14 @@ interface Props {
   height?: string;
 }
 
-const { height = '1100px' } = Astro.props;
+const { height = '1180px' } = Astro.props;
 ---
 
 <div class="calc-embed">
+  <span class="pillar-corner pc-tl"></span>
+  <span class="pillar-corner pc-tr"></span>
+  <span class="pillar-corner pc-bl"></span>
+  <span class="pillar-corner pc-br"></span>
   <iframe
     src="/pricing-calculator.html"
     title="Калькулятор сопровождения сделки"
@@ -14,25 +18,26 @@ const { height = '1100px' } = Astro.props;
     style={`height: ${height};`}
   ></iframe>
   <noscript>
-    <p>
-      Калькулятор требует JavaScript. Откройте напрямую:
-      <a href="/pricing-calculator.html">/pricing-calculator.html</a>
-    </p>
+    <p>Калькулятор требует JavaScript. <a href="/pricing-calculator.html">Открыть напрямую</a>.</p>
   </noscript>
 </div>
 
 <style>
   .calc-embed {
-    margin: 24px 0;
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    position: relative;
+    margin: 32px 0;
+    border: 1px solid rgba(157, 127, 255, 0.12);
+    border-radius: 8px;
     overflow: hidden;
-    background: var(--bg-elevated);
+    background: var(--midnight);
+    backdrop-filter: blur(8px);
   }
-
   .calc-embed iframe {
     width: 100%;
     border: 0;
     display: block;
+    background: var(--bg);
   }
+  .calc-embed .pillar-corner { z-index: 2; }
+  .calc-embed .pillar-corner::before, .calc-embed .pillar-corner::after { background: var(--gold-champagne); opacity: 0.5; }
 </style>

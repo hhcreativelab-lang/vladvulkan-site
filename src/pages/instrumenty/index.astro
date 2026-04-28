@@ -8,16 +8,14 @@ const tools = [
   {
     href: '/instrumenty/kalkulyator-sdelki',
     title: 'Калькулятор сопровождения сделки',
-    description:
-      'Подбирает фикс или гибридную модель под ваш бюджет. Показывает ориентировочный гонорар, сроки и состав работ.',
+    description: 'Подбирает фикс или гибридную модель под ваш бюджет. Показывает гонорар, сроки и состав работ.',
     status: 'available',
     statusLabel: 'Готов',
   },
   {
     href: '/instrumenty/nalogovyy-kalkulyator',
     title: 'Налоговый калькулятор покупки',
-    description:
-      'Расчёт alcabala, регистрационных сборов и нотариальных расходов при покупке недвижимости в Эквадоре.',
+    description: 'Расчёт alcabala, регистрационных сборов и нотариальных расходов при покупке недвижимости.',
     status: 'soon',
     statusLabel: 'Скоро',
   },
@@ -26,21 +24,24 @@ const tools = [
 
 <BaseLayout
   title="Инструменты — расчёты и калькуляторы по недвижимости в Эквадоре"
-  description="Инструменты независимого консультанта по недвижимости в Эквадоре: калькулятор сделки, налоговый калькулятор, чек-листы. Бесплатно."
+  description="Инструменты независимого консультанта по недвижимости в Эквадоре: калькулятор сделки, налоговый калькулятор. Бесплатно."
 >
   <div class="container-narrow">
     <Breadcrumbs items={[{ name: 'Инструменты', href: '/instrumenty' }]} />
 
-    <article class="page">
-      <h1>Инструменты</h1>
+    <article class="page reveal">
+      <span class="eyebrow gold">Инструменты</span>
+      <h1>Расчёты и&nbsp;<em>калькуляторы</em></h1>
       <p class="lead">
-        Калькуляторы и&nbsp;справочные материалы по&nbsp;покупке недвижимости в&nbsp;Эквадоре. Бесплатно,
-        без&nbsp;регистрации.
+        Калькуляторы и&nbsp;справочные материалы по&nbsp;покупке недвижимости в&nbsp;Эквадоре. Бесплатно, без&nbsp;регистрации.
       </p>
 
-      <div class="tools">
+      <div class="tools reveal-stagger">
         {tools.map((t) => (
-          <a href={t.href} class:list={["tool-card", "card", { disabled: t.status === 'soon' }]}>
+          <a href={t.href} class:list={["tool-card pillar", { disabled: t.status === 'soon' }]}>
+            <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
+            <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
+
             <div class="row">
               <h2>{t.title}</h2>
               <span class:list={["status", t.status]}>{t.statusLabel}</span>
@@ -62,75 +63,89 @@ const tools = [
 </BaseLayout>
 
 <style>
-  .page { padding: 8px 0 40px; }
-  .page h1 { font-size: 36px; line-height: 1.2; margin: 18px 0 16px; }
-  @media (max-width: 640px) { .page h1 { font-size: 28px; } }
-  .lead { font-size: 18px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 28px; }
-
+  .page { padding: 12px 0 40px; }
+  .page > .eyebrow { display: block; margin: 16px 0 18px; }
+  .page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1;
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
+  }
+  .page h1 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lead {
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0 0 36px;
+    font-weight: 300;
+  }
   .tools {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-bottom: 32px;
+    gap: 16px;
+    margin-bottom: 40px;
   }
-
   .tool-card {
     text-decoration: none;
-    color: var(--text-primary);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+    padding: clamp(28px, 3vw, 36px);
   }
-
   .tool-card .row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
+    flex-wrap: wrap;
   }
-
   .tool-card h2 {
-    font-size: 19px;
+    font-family: var(--font-display);
+    font-size: 22px;
     margin: 0;
+    color: var(--text-light);
+    letter-spacing: -0.02em;
   }
-
   .tool-card p {
-    color: var(--text-secondary);
+    color: var(--text-dim);
     font-size: 15px;
-    line-height: 1.55;
+    line-height: 1.6;
     margin: 0;
+    font-weight: 300;
   }
-
   .status {
-    font-size: 11px;
+    font-family: var(--font-mono);
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 10px;
+    letter-spacing: 0.3em;
+    padding: 5px 12px;
     border-radius: 999px;
     flex-shrink: 0;
+    border: 1px solid;
   }
-
   .status.available {
-    background: var(--success-bg);
-    color: var(--success);
+    background: rgba(74, 222, 128, 0.08);
+    color: var(--green);
+    border-color: rgba(74, 222, 128, 0.4);
   }
-
   .status.soon {
-    background: var(--bg-surface);
-    color: var(--text-tertiary);
+    background: rgba(229, 198, 120, 0.06);
+    color: var(--gold-champagne);
+    border-color: rgba(229, 198, 120, 0.3);
   }
-
   .arrow {
-    color: var(--accent-dark);
-    font-size: 14px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--violet-bright);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     margin-top: 6px;
   }
-
-  .arrow.muted {
-    color: var(--text-tertiary);
-  }
-
-  .tool-card.disabled {
-    opacity: 0.85;
-  }
+  .arrow.muted { color: var(--text-mute); }
 </style>
