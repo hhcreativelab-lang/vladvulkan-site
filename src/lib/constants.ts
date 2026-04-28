@@ -6,8 +6,8 @@ export const SITE = {
   description:
     'Независимая консультация по недвижимости в Эквадоре для русскоязычной аудитории',
   email: 'PLACEHOLDER@vladvulkan.com', // ПЛЕЙСХОЛДЕР
-  telegramUrl: 'https://t.me/PLACEHOLDER', // ПЛЕЙСХОЛДЕР
-  telegramHandle: '@PLACEHOLDER', // ПЛЕЙСХОЛДЕР
+  telegramUrl: 'https://t.me/Vlad_Vulkan',
+  telegramHandle: '@Vlad_Vulkan',
   youtubeUrl: 'https://youtube.com/@PLACEHOLDER', // ПЛЕЙСХОЛДЕР
   phone: '+593968954358',
   phoneDisplay: '+593 96 895 4358',
