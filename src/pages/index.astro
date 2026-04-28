@@ -298,18 +298,21 @@ const schemas = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 35% 35%;
-    filter: contrast(1.02) saturate(0.95) brightness(1);
+    /* 20% — показать левую часть фото, чтобы Влад был в left-half viewport */
+    object-position: 20% 35%;
+    filter: contrast(1.05) saturate(0.92) brightness(0.7);
     animation: heroKenBurns 35s ease-in-out infinite alternate;
   }
   .hero-photo-overlay {
     position: absolute;
     inset: 0;
     background:
-      /* Снизу — переход в void */
-      linear-gradient(180deg, transparent 0%, transparent 55%, rgba(7, 3, 16, 0.55) 82%, var(--void) 100%),
-      /* Лёгкая фиолетовая тонировка */
-      linear-gradient(135deg, rgba(76, 29, 149, 0.18) 0%, transparent 55%);
+      /* Затемнение под текст справа, фото видно слева (Влад) */
+      linear-gradient(90deg, transparent 0%, rgba(7, 3, 16, 0.15) 30%, rgba(7, 3, 16, 0.55) 55%, rgba(7, 3, 16, 0.78) 78%, rgba(7, 3, 16, 0.85) 100%),
+      /* Снизу — переход в void для следующей секции */
+      linear-gradient(180deg, transparent 0%, transparent 55%, rgba(7, 3, 16, 0.5) 82%, var(--void) 100%),
+      /* Лёгкая фиолетовая тонировка справа */
+      linear-gradient(225deg, rgba(76, 29, 149, 0.22) 0%, transparent 55%);
   }
   picture { display: contents; }
   @keyframes heroKenBurns {
@@ -354,9 +357,18 @@ const schemas = [
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-end;
+    text-align: right;
     gap: clamp(28px, 3vw, 44px);
     padding-top: clamp(120px, 18vh, 200px);
     padding-bottom: clamp(40px, 6vw, 80px);
+    padding-right: clamp(8px, 2vw, 28px);
+  }
+  /* Текстовые блоки прижаты к правой стороне с ограничением ширины */
+  .hero-content > .hero-eyebrow,
+  .hero-content > .cities,
+  .hero-content > .hero-sub-wrap {
+    max-width: min(700px, 100%);
   }
 
   .hero-eyebrow {
@@ -365,13 +377,13 @@ const schemas = [
 
   .hero-title {
     font-family: var(--font-display);
-    font-size: clamp(56px, 10vw, 140px);
-    line-height: 0.92;
+    font-size: clamp(48px, 7.5vw, 120px);
+    line-height: 0.94;
     font-weight: 400;
     letter-spacing: -0.04em;
     color: var(--text-light);
     margin: 0;
-    max-width: 60ch;
+    align-self: stretch;
     text-shadow:
       0 0 48px rgba(7, 3, 16, 0.95),
       0 4px 24px rgba(7, 3, 16, 0.85),
@@ -449,13 +461,14 @@ const schemas = [
   /* SUB */
   .hero-sub-wrap {
     position: relative;
-    padding-left: 24px;
+    padding-right: 24px;
     max-width: 640px;
+    text-align: right;
   }
   .hero-sub-wrap::before {
     content: '';
     position: absolute;
-    top: 8px; bottom: 8px; left: 0;
+    top: 8px; bottom: 8px; right: 0;
     width: 2px;
     background: linear-gradient(180deg, var(--violet-bright), transparent);
     border-radius: 2px;
@@ -481,7 +494,7 @@ const schemas = [
     display: flex;
     flex-direction: column;
     gap: 24px;
-    align-items: flex-start;
+    align-items: flex-end;
   }
 
   .btn-quiz {
