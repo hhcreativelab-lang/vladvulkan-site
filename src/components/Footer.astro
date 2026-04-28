@@ -1,0 +1,200 @@
+---
+import { SITE, DISCLAIMER, CATEGORIES } from '@lib/constants';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="col">
+        <div class="brand-block">
+          <span class="brand-mark" aria-hidden="true">В</span>
+          <div>
+            <div class="brand-name">{SITE.brandName}</div>
+            <div class="brand-tag">{SITE.brandTagline}</div>
+          </div>
+        </div>
+        <p class="footer-about">
+          Независимая консультация по недвижимости в&nbsp;Эквадоре. Куэнка, Кито,
+          Гуаякиль, Салинас, Манта.
+        </p>
+      </div>
+
+      <div class="col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="/uslugi/soprovozhdenie-sdelki">Сопровождение сделки</a></li>
+          <li><a href="/uslugi/konsultatsiya">Стратегическая консультация</a></li>
+          <li><a href="/uslugi/proverka-objekta">Проверка объекта</a></li>
+          <li><a href="/tseny">Цены</a></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h4>Знания</h4>
+        <ul>
+          {Object.values(CATEGORIES).map((cat) => (
+            <li><a href={`/znaniya/${cat.slug}`}>{cat.name}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="col">
+        <h4>Ещё</h4>
+        <ul>
+          <li><a href="/kto-ya">О Владе</a></li>
+          <li><a href="/kak-rabotaem">Как работаем</a></li>
+          <li><a href="/instrumenty">Инструменты</a></li>
+          <li><a href="/kontakty">Контакты</a></li>
+        </ul>
+        <h4 class="socials-h">Связь</h4>
+        <ul>
+          <li><a href={SITE.telegramUrl} rel="noopener">Telegram</a></li>
+          <li><a href={SITE.youtubeUrl} rel="noopener">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-disclaimer">
+      <strong>Consultor inmobiliario.</strong>
+      {DISCLAIMER.ru.replace('Consultor inmobiliario. ', '')}
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {year} {SITE.brandName}. Все права защищены.</span>
+      <a href="/politika-konfidentsialnosti">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg-surface);
+    padding: 56px 0 28px;
+    margin-top: 80px;
+  }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.4fr 1fr;
+    gap: 36px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 880px) {
+    .footer-cols {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .footer-cols {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .col h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-tertiary);
+    margin: 0 0 12px;
+    font-weight: 500;
+  }
+
+  .socials-h {
+    margin-top: 22px;
+  }
+
+  .col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .col a {
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+
+  .col a:hover {
+    color: var(--accent-dark);
+  }
+
+  .brand-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--accent-dark);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .brand-tag {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-about {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-width: 320px;
+  }
+
+  .footer-disclaimer {
+    font-size: 13px;
+    color: var(--text-secondary);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    line-height: 1.55;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+
+  .footer-bottom a {
+    color: var(--text-tertiary);
+  }
+
+  .footer-bottom a:hover {
+    color: var(--accent-dark);
+  }
+</style>

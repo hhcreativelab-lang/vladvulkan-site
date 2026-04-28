@@ -1,0 +1,406 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CategoryCard from '@components/CategoryCard.astro';
+import FAQBlock from '@components/FAQBlock.astro';
+import CTABlock from '@components/CTABlock.astro';
+import PriceCalculatorEmbed from '@components/PriceCalculatorEmbed.astro';
+import { SITE, CATEGORIES } from '@lib/constants';
+import { professionalServiceSchema, faqPageSchema } from '@lib/schema';
+
+const homeFaqs = [
+  {
+    question: 'Вы риэлтор?',
+    answer:
+      'Нет. Я consultor inmobiliario — независимый консультант. Лицензированный партнёр-корредор участвует в сделке как юридический оформитель. Это даёт вам двух независимых экспертов вместо одного, у которого конфликт интересов с продавцом.',
+  },
+  {
+    question: 'Почему у вас нет лицензии риэлтора?',
+    answer:
+      'Я сознательно работаю как consultor inmobiliario. Лицензированный риэлтор получает комиссию от продавца — это создаёт конфликт интересов. Мой гонорар платите вы — поэтому я работаю только на вашей стороне. Юридическую часть сделки оформляет лицензированный партнёр.',
+  },
+  {
+    question: 'Как проходит сделка?',
+    answer:
+      'Стратегическая консультация → подбор объектов → проверка документов → переговоры → подписание у нотариуса с участием партнёра-корредора → передача ключей. Я веду весь процесс, партнёр обеспечивает юридическое оформление.',
+  },
+  {
+    question: 'Сколько это стоит?',
+    answer:
+      'До бюджета $120K — фикс-пакет от $3000. От $120K — гибридная модель: ретейнер при подписании + процент от цены сделки + минимальный гонорар. Полный расчёт под вашу ситуацию — в калькуляторе на странице цен.',
+  },
+  {
+    question: 'Вы работаете удалённо?',
+    answer:
+      'Да. Три формата: вы в Эквадоре сами осматриваете объекты, я даю экспертную оценку; гибридный — я отбираю кандидатов, вы прилетаете на финал; полностью удалённый — я работаю за вас по нотариальной доверенности.',
+  },
+];
+
+const cityCards = [
+  { name: 'Куэнка', description: 'Колониальный центр, мягкий климат 2500м, безопасность, развитая инфраструктура. Топ для жизни и долгосрочной аренды.' },
+  { name: 'Кито', description: 'Столица, бизнес-центр, дипломатические миссии. Высота 2850м. Подходит для бизнеса и работы с госорганами.' },
+  { name: 'Гуаякиль', description: 'Порт, экономическая столица. Жара и влажность. Сильный сегмент элитной недвижимости (Samborondón).' },
+  { name: 'Салинас', description: 'Океан, Тихоокеанское побережье, сезонная аренда. Высокая инвестиционная доходность краткосрочки.' },
+  { name: 'Манта', description: 'Развивающийся курорт + порт. Ниже цены, чем Салинас, выше потенциал роста при инфраструктурных проектах.' },
+];
+
+const schemas = [
+  professionalServiceSchema(),
+  faqPageSchema(homeFaqs)!,
+];
+---
+
+<BaseLayout
+  title="Независимая консультация по недвижимости в Эквадоре"
+  description="Consultor inmobiliario для русскоязычных. 8+ лет опыта в недвижимости Эквадора. Куэнка, Кито, Гуаякиль, Салинас, Манта. Независимая экспертиза, не риэлтор."
+  jsonLd={schemas}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <h1>Независимая консультация по&nbsp;недвижимости в&nbsp;Эквадоре</h1>
+          <p class="hero-sub">
+            Я — Влад Вулкан, consultor inmobiliario для&nbsp;русскоязычной аудитории. 13&nbsp;лет в&nbsp;Латинской Америке,
+            8+&nbsp;лет в&nbsp;недвижимости. Работаю на&nbsp;стороне клиента, не&nbsp;получаю комиссию от&nbsp;продавца.
+          </p>
+          <div class="hero-cta">
+            <a href={SITE.telegramUrl} class="btn btn-primary" rel="noopener">Написать в Telegram</a>
+            <a href="/tseny" class="btn btn-secondary">Узнать стоимость</a>
+          </div>
+          <div class="hero-meta">
+            <div><strong>13&nbsp;лет</strong> в Латинской Америке</div>
+            <div><strong>8+&nbsp;лет</strong> в недвижимости</div>
+            <div><strong>5&nbsp;городов</strong> работы</div>
+            <div><strong>RU&nbsp;+&nbsp;ES</strong> билингв</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Кратко обо мне -->
+  <section class="section section-tight">
+    <div class="container-narrow">
+      <h2>Кратко обо мне</h2>
+      <ul class="bullet-list">
+        <li>13 лет в Латинской Америке</li>
+        <li>8+ лет опыта в недвижимости</li>
+        <li>Билингв: испанский + русский</li>
+        <li>Базируюсь в Эквадоре, работаю в 5 городах: Куэнка, Кито, Гуаякиль, Салинас, Манта</li>
+        <li>Основатель компании HH Faro — испаноязычный консалтинг по недвижимости</li>
+      </ul>
+      <a href="/kto-ya" class="text-link">Подробнее обо мне →</a>
+    </div>
+  </section>
+
+  <!-- Услуги -->
+  <section class="section section-surface">
+    <div class="container">
+      <div class="section-head">
+        <h2>Мои услуги</h2>
+        <p>Три формата — от 60-минутной консультации до полного сопровождения сделки.</p>
+      </div>
+      <div class="cards-3">
+        <a href="/uslugi/soprovozhdenie-sdelki" class="card service-card">
+          <div class="badge">От $3000 / гибрид</div>
+          <h3>Сопровождение сделки</h3>
+          <p>Подбор объекта по всему рынку, due diligence, переговоры, сопровождение у нотариуса. Юридическое оформление — лицензированный партнёр-корредор.</p>
+          <span class="arrow">Подробнее →</span>
+        </a>
+        <a href="/uslugi/konsultatsiya" class="card service-card">
+          <div class="badge">$150 / 60 мин</div>
+          <h3>Стратегическая консультация</h3>
+          <p>60 минут разбираем вашу ситуацию: бюджет, цели, какие города и форматы подходят. Засчитывается в стоимость пакета, если идём дальше.</p>
+          <span class="arrow">Подробнее →</span>
+        </a>
+        <a href="/uslugi/proverka-objekta" class="card service-card">
+          <div class="badge">$1500 фикс</div>
+          <h3>Проверка объекта</h3>
+          <p>Вы нашли объект сами. Я проверяю документы, историю, технику, вычитываю договор, веду переговоры. Подходит, если просто нужен второй взгляд.</p>
+          <span class="arrow">Подробнее →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Чего НЕ ждать -->
+  <section class="section">
+    <div class="container-narrow">
+      <h2>Чего вам не стоит ждать от меня</h2>
+      <ul class="bullet-list">
+        <li>Не выступаю лицензированным риэлтором — сделки юридически проводит партнёр-корредор</li>
+        <li>У меня нет «своей базы объектов» — подбираю из всего рынка</li>
+        <li>Не получаю комиссии от продавцов или агентств — поэтому работаю только на вашей стороне</li>
+        <li>Не оформляю ВНЖ in-house — связываю с лицензированным юристом-партнёром</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Как работаем -->
+  <section class="section section-surface">
+    <div class="container-narrow">
+      <h2>Модель: консультант + лицензированный партнёр</h2>
+      <p class="section-text">
+        Я — консультант. Я разбираю вашу задачу, ищу подходящие объекты по всему рынку, проверяю документы,
+        торгуюсь от вашего имени. Юридически сделку оформляет лицензированный партнёр-корредор: подписания,
+        доверенности, нотариус. Эта модель даёт вам двух независимых экспертов вместо одного риэлтора, который
+        одновременно представляет и вас, и продавца. Я отвечаю за вашу выгоду в сделке. Партнёр — за юридическую
+        чистоту.
+      </p>
+      <a href="/kak-rabotaem" class="text-link">Подробнее о модели работы →</a>
+    </div>
+  </section>
+
+  <!-- Города -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>География работы</h2>
+        <p>Пять городов как основная зона. Другие — индивидуально.</p>
+      </div>
+      <div class="cards-3 cities-grid">
+        {cityCards.map((city) => (
+          <div class="card city-card">
+            <h3>{city.name}</h3>
+            <p>{city.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Калькулятор -->
+  <section class="section section-surface">
+    <div class="container-narrow">
+      <div class="section-head">
+        <h2>Рассчитайте стоимость сопровождения</h2>
+        <p>Калькулятор подскажет ориентир по фикс-пакету или гибридной модели под ваш бюджет.</p>
+      </div>
+      <PriceCalculatorEmbed />
+      <div class="under-calc">
+        <a href="/tseny" class="text-link">Подробнее о моделях ценообразования →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Каталог -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Всё про Эквадор для русскоязычных</h2>
+        <p>Каталог знаний — деньги, недвижимость, безопасность, ВНЖ, жизнь, сравнения и бизнес.</p>
+      </div>
+      <div class="cards-3">
+        {Object.values(CATEGORIES).map((cat) => (
+          <CategoryCard slug={cat.slug} name={cat.name} description={cat.description} />
+        ))}
+      </div>
+      <div class="under-grid">
+        <a href="/znaniya" class="btn btn-secondary">Открыть каталог</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <div class="container-narrow">
+    <FAQBlock faqs={homeFaqs} skipSchema />
+  </div>
+
+  <!-- Финальный CTA -->
+  <div class="container-narrow">
+    <CTABlock
+      variant="commercial"
+      heading="Готовы обсудить вашу задачу?"
+      text="60 минут стратегической консультации — $150. Разберём бюджет, цели, города. Засчитывается в стоимость пакета, если идём дальше."
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 56px 0 24px;
+  }
+
+  .hero-text {
+    max-width: 760px;
+  }
+
+  .hero h1 {
+    font-size: 46px;
+    line-height: 1.1;
+    margin: 0 0 20px;
+    letter-spacing: -0.8px;
+  }
+
+  @media (max-width: 720px) {
+    .hero { padding: 32px 0 12px; }
+    .hero h1 { font-size: 32px; }
+  }
+
+  .hero-sub {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    max-width: 660px;
+    margin: 0 0 28px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    padding: 18px 0 6px;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+
+  .hero-meta strong {
+    display: block;
+    color: var(--text-primary);
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+
+  .section-tight {
+    padding: 32px 0;
+  }
+
+  .section-surface {
+    background: var(--bg-surface);
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 32px;
+  }
+
+  .section-head h2 {
+    margin: 0 0 8px;
+  }
+
+  .section-head p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .section-text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .cards-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .cities-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .service-card .badge {
+    align-self: flex-start;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--accent-light);
+    color: var(--accent-deep);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .service-card h3 {
+    font-size: 19px;
+    margin: 4px 0 0;
+  }
+
+  .service-card p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+  }
+
+  .service-card .arrow {
+    color: var(--accent-dark);
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .city-card h3 {
+    font-size: 17px;
+    margin: 0 0 6px;
+  }
+
+  .city-card p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+
+  .bullet-list li {
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .bullet-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .text-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--accent-dark);
+    font-weight: 500;
+  }
+
+  .under-calc, .under-grid {
+    text-align: center;
+    margin-top: 24px;
+  }
+</style>

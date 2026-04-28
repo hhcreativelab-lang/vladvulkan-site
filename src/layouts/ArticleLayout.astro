@@ -1,0 +1,235 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import AuthorCard from '@components/AuthorCard.astro';
+import FAQBlock from '@components/FAQBlock.astro';
+import CTABlock from '@components/CTABlock.astro';
+import DisclaimerBlock from '@components/DisclaimerBlock.astro';
+import ArticleCard from '@components/ArticleCard.astro';
+import { CATEGORIES, type CategorySlug } from '@lib/constants';
+import { articleSchema, faqPageSchema } from '@lib/schema';
+import { canonicalUrl } from '@lib/seo';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  description: string;
+  category: CategorySlug;
+  pubDate: Date;
+  updatedDate: Date;
+  ogImage?: string;
+  shortAnswer?: string;
+  keyNumbers?: string[];
+  faq?: Array<{ question: string; answer: string }>;
+  related?: string[]; // массив slug-ов: "category/slug"
+}
+
+const {
+  title,
+  description,
+  category,
+  pubDate,
+  updatedDate,
+  ogImage,
+  shortAnswer,
+  keyNumbers,
+  faq,
+  related,
+} = Astro.props;
+
+const cat = CATEGORIES[category];
+const url = canonicalUrl(Astro.url.pathname);
+
+const schemas: Array<Record<string, unknown>> = [
+  articleSchema({ title, description, url, image: ogImage, datePublished: pubDate, dateModified: updatedDate, category }),
+];
+const faqSchema = faqPageSchema(faq ?? []);
+if (faqSchema) schemas.push(faqSchema);
+
+// Связанные статьи
+let relatedArticles: Array<{ id: string; data: { title: string; description: string; category: CategorySlug } }> = [];
+if (related && related.length > 0) {
+  const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+  relatedArticles = allArticles
+    .filter((a) => related.includes(a.id))
+    .map((a) => ({ id: a.id, data: { title: a.data.title, description: a.data.description, category: a.data.category } }));
+}
+
+const fmtDate = (d: Date) => new Intl.DateTimeFormat('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+---
+
+<BaseLayout title={title} description={description} ogImage={ogImage} jsonLd={schemas}>
+  <article class="article-page">
+    <div class="container-narrow">
+      <Breadcrumbs items={[
+        { name: 'Знания', href: '/znaniya' },
+        { name: cat.name, href: `/znaniya/${cat.slug}` },
+        { name: title, href: Astro.url.pathname },
+      ]} />
+
+      <header class="article-header">
+        <h1>{title}</h1>
+        <p class="lead">{description}</p>
+      </header>
+
+      <AuthorCard />
+
+      <div class="meta-row">
+        <time datetime={pubDate.toISOString()}>Опубликовано: {fmtDate(pubDate)}</time>
+        {updatedDate.getTime() !== pubDate.getTime() && (
+          <time datetime={updatedDate.toISOString()}>Обновлено: {fmtDate(updatedDate)}</time>
+        )}
+      </div>
+
+      {shortAnswer && (
+        <div class="short-answer" role="note">
+          <span class="emoji" aria-hidden="true">📌</span>
+          <div>
+            <strong>Краткий ответ:</strong> {shortAnswer}
+          </div>
+        </div>
+      )}
+
+      {keyNumbers && keyNumbers.length > 0 && (
+        <div class="key-numbers">
+          <div class="kn-title">
+            <span class="emoji" aria-hidden="true">📊</span>
+            <strong>Главные цифры</strong>
+          </div>
+          <ul>
+            {keyNumbers.map((n) => <li set:html={n} />)}
+          </ul>
+        </div>
+      )}
+
+      <div class="prose article-content">
+        <slot />
+      </div>
+
+      {faq && faq.length > 0 && <FAQBlock faqs={faq} skipSchema />}
+
+      {relatedArticles.length > 0 && (
+        <section class="related" aria-labelledby="related-h">
+          <h2 id="related-h">Связанные статьи</h2>
+          <div class="related-grid">
+            {relatedArticles.map((a) => (
+              <ArticleCard
+                href={`/znaniya/${a.id}`}
+                title={a.data.title}
+                description={a.data.description}
+                category={a.data.category}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <CTABlock variant="info" />
+
+      <DisclaimerBlock variant="box" />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    padding: 8px 0 40px;
+  }
+
+  .article-header {
+    margin: 18px 0 12px;
+  }
+
+  .article-header h1 {
+    font-size: 38px;
+    line-height: 1.2;
+    margin: 0 0 16px;
+  }
+
+  @media (max-width: 640px) {
+    .article-header h1 {
+      font-size: 28px;
+    }
+  }
+
+  .lead {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin-bottom: 24px;
+  }
+
+  .short-answer {
+    display: flex;
+    gap: 12px;
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 24px 0;
+    color: var(--accent-deep);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .short-answer .emoji {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .key-numbers {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 24px 0 32px;
+  }
+
+  .kn-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: var(--text-primary);
+  }
+
+  .key-numbers ul {
+    margin: 0;
+    padding-left: 22px;
+    color: var(--text-secondary);
+    font-size: 15px;
+  }
+
+  .key-numbers li {
+    margin-bottom: 4px;
+  }
+
+  .article-content {
+    margin-top: 8px;
+  }
+
+  .related {
+    margin: 56px 0 16px;
+  }
+
+  .related h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+</style>

@@ -1,0 +1,13 @@
+/* TEAM */
+
+Vlad Vulkan — Consultor Inmobiliario
+Site: https://vladvulkan.com
+Languages: ru, es
+Location: Cuenca, Ecuador
+
+/* SITE */
+
+Last update: 2026
+Built with: Astro, Tailwind CSS v4, MDX
+Hosted on: Cloudflare Pages
+Standards: HTML5, CSS3, Schema.org JSON-LD

@@ -1,0 +1,111 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CategoryCard from '@components/CategoryCard.astro';
+import CTABlock from '@components/CTABlock.astro';
+import DisclaimerBlock from '@components/DisclaimerBlock.astro';
+import { CATEGORIES } from '@lib/constants';
+import { collectionPageSchema } from '@lib/schema';
+import { canonicalUrl } from '@lib/seo';
+import { getCollection } from 'astro:content';
+
+const url = canonicalUrl('/znaniya');
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const counts = Object.fromEntries(
+  Object.values(CATEGORIES).map((cat) => [
+    cat.slug,
+    allArticles.filter((a) => a.data.category === cat.slug).length,
+  ]),
+) as Record<string, number>;
+---
+
+<BaseLayout
+  title="Каталог знаний об Эквадоре"
+  description="Полный гид об Эквадоре для русскоязычных: деньги и банки, недвижимость, безопасность, ВНЖ, жизнь, сравнения стран, бизнес. От независимого консультанта."
+  jsonLd={collectionPageSchema({
+    name: 'Каталог знаний об Эквадоре',
+    description: 'Полный гид об Эквадоре для русскоязычных по семи категориям',
+    url,
+  })}
+>
+  <div class="container">
+    <Breadcrumbs items={[{ name: 'Знания', href: '/znaniya' }]} />
+
+    <article class="page">
+      <h1>Всё про Эквадор для&nbsp;русскоязычных</h1>
+      <p class="lead">
+        Семь категорий — от&nbsp;денег и&nbsp;банков до&nbsp;сравнения стран. Опираюсь на&nbsp;реальную практику работы
+        в&nbsp;недвижимости и&nbsp;13&nbsp;лет жизни в&nbsp;Латинской Америке. Каждая статья содержит конкретные цифры
+        и&nbsp;источники, обновляется по&nbsp;мере изменения данных.
+      </p>
+
+      <div class="categories-grid">
+        {Object.values(CATEGORIES).map((cat) => (
+          <CategoryCard
+            slug={cat.slug}
+            name={cat.name}
+            description={cat.description}
+            count={counts[cat.slug]}
+          />
+        ))}
+      </div>
+
+      {allArticles.length === 0 && (
+        <div class="empty-state">
+          <h2>Каталог запускается</h2>
+          <p>
+            Структура категорий готова — статьи добавляются постепенно. Если у&nbsp;вас есть конкретный вопрос
+            про&nbsp;Эквадор, на&nbsp;который пока нет статьи&nbsp;— напишите в&nbsp;Telegram, возможно ваш вопрос станет
+            следующей публикацией.
+          </p>
+        </div>
+      )}
+
+      <CTABlock variant="category" />
+      <DisclaimerBlock />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .page { padding: 8px 0 40px; }
+  .page h1 { font-size: 38px; line-height: 1.2; margin: 18px 0 16px; }
+  @media (max-width: 640px) { .page h1 { font-size: 28px; } }
+  .lead {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0 0 32px;
+    max-width: 760px;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .empty-state {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .empty-state h2 {
+    font-size: 22px;
+    margin: 0 0 12px;
+  }
+
+  .empty-state p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+</style>

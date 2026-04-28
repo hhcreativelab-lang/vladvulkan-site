@@ -1,0 +1,38 @@
+---
+interface Props {
+  height?: string;
+}
+
+const { height = '1100px' } = Astro.props;
+---
+
+<div class="calc-embed">
+  <iframe
+    src="/pricing-calculator.html"
+    title="Калькулятор сопровождения сделки"
+    loading="lazy"
+    style={`height: ${height};`}
+  ></iframe>
+  <noscript>
+    <p>
+      Калькулятор требует JavaScript. Откройте напрямую:
+      <a href="/pricing-calculator.html">/pricing-calculator.html</a>
+    </p>
+  </noscript>
+</div>
+
+<style>
+  .calc-embed {
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--bg-elevated);
+  }
+
+  .calc-embed iframe {
+    width: 100%;
+    border: 0;
+    display: block;
+  }
+</style>

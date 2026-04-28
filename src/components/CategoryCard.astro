@@ -1,0 +1,69 @@
+---
+import { type CategorySlug } from '@lib/constants';
+
+interface Props {
+  slug: CategorySlug;
+  name: string;
+  description: string;
+  count?: number;
+}
+
+const { slug, name, description, count } = Astro.props;
+---
+
+<a href={`/znaniya/${slug}`} class="category-card card">
+  <h3>{name}</h3>
+  <p>{description}</p>
+  <div class="bottom">
+    {typeof count === 'number' && (
+      <span class="count">{count} {count === 1 ? 'статья' : count < 5 ? 'статьи' : 'статей'}</span>
+    )}
+    <span class="arrow">→</span>
+  </div>
+</a>
+
+<style>
+  .category-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+  }
+
+  .category-card h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  .category-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    color: var(--accent-dark);
+    font-size: 13px;
+  }
+
+  .count {
+    color: var(--text-tertiary);
+  }
+
+  .arrow {
+    font-size: 18px;
+    transition: transform 0.15s ease;
+  }
+
+  .category-card:hover .arrow {
+    transform: translateX(3px);
+  }
+</style>

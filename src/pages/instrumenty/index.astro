@@ -1,0 +1,136 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CTABlock from '@components/CTABlock.astro';
+import DisclaimerBlock from '@components/DisclaimerBlock.astro';
+
+const tools = [
+  {
+    href: '/instrumenty/kalkulyator-sdelki',
+    title: 'Калькулятор сопровождения сделки',
+    description:
+      'Подбирает фикс или гибридную модель под ваш бюджет. Показывает ориентировочный гонорар, сроки и состав работ.',
+    status: 'available',
+    statusLabel: 'Готов',
+  },
+  {
+    href: '/instrumenty/nalogovyy-kalkulyator',
+    title: 'Налоговый калькулятор покупки',
+    description:
+      'Расчёт alcabala, регистрационных сборов и нотариальных расходов при покупке недвижимости в Эквадоре.',
+    status: 'soon',
+    statusLabel: 'Скоро',
+  },
+];
+---
+
+<BaseLayout
+  title="Инструменты — расчёты и калькуляторы по недвижимости в Эквадоре"
+  description="Инструменты независимого консультанта по недвижимости в Эквадоре: калькулятор сделки, налоговый калькулятор, чек-листы. Бесплатно."
+>
+  <div class="container-narrow">
+    <Breadcrumbs items={[{ name: 'Инструменты', href: '/instrumenty' }]} />
+
+    <article class="page">
+      <h1>Инструменты</h1>
+      <p class="lead">
+        Калькуляторы и&nbsp;справочные материалы по&nbsp;покупке недвижимости в&nbsp;Эквадоре. Бесплатно,
+        без&nbsp;регистрации.
+      </p>
+
+      <div class="tools">
+        {tools.map((t) => (
+          <a href={t.href} class:list={["tool-card", "card", { disabled: t.status === 'soon' }]}>
+            <div class="row">
+              <h2>{t.title}</h2>
+              <span class:list={["status", t.status]}>{t.statusLabel}</span>
+            </div>
+            <p>{t.description}</p>
+            {t.status === 'available' ? (
+              <span class="arrow">Открыть →</span>
+            ) : (
+              <span class="arrow muted">В разработке</span>
+            )}
+          </a>
+        ))}
+      </div>
+
+      <CTABlock variant="commercial" />
+      <DisclaimerBlock />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .page { padding: 8px 0 40px; }
+  .page h1 { font-size: 36px; line-height: 1.2; margin: 18px 0 16px; }
+  @media (max-width: 640px) { .page h1 { font-size: 28px; } }
+  .lead { font-size: 18px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 28px; }
+
+  .tools {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .tool-card {
+    text-decoration: none;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tool-card .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tool-card h2 {
+    font-size: 19px;
+    margin: 0;
+  }
+
+  .tool-card p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .status {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+
+  .status.available {
+    background: var(--success-bg);
+    color: var(--success);
+  }
+
+  .status.soon {
+    background: var(--bg-surface);
+    color: var(--text-tertiary);
+  }
+
+  .arrow {
+    color: var(--accent-dark);
+    font-size: 14px;
+    margin-top: 6px;
+  }
+
+  .arrow.muted {
+    color: var(--text-tertiary);
+  }
+
+  .tool-card.disabled {
+    opacity: 0.85;
+  }
+</style>

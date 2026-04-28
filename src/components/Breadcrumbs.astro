@@ -1,0 +1,72 @@
+---
+import { SITE } from '@lib/constants';
+import { breadcrumbListSchema } from '@lib/schema';
+
+interface Props {
+  items: Array<{ name: string; href: string }>;
+}
+
+const { items } = Astro.props;
+
+const fullItems = [{ name: 'Главная', href: '/' }, ...items];
+const schema = breadcrumbListSchema(
+  fullItems.map((i) => ({
+    name: i.name,
+    url: i.href === '/' ? SITE.url : `${SITE.url}${i.href}`,
+  })),
+);
+---
+
+<nav class="breadcrumbs" aria-label="Хлебные крошки">
+  <ol>
+    {fullItems.map((item, i) => {
+      const isLast = i === fullItems.length - 1;
+      return (
+        <li>
+          {isLast ? (
+            <span aria-current="page">{item.name}</span>
+          ) : (
+            <a href={item.href}>{item.name}</a>
+          )}
+          {!isLast && <span class="sep" aria-hidden="true">/</span>}
+        </li>
+      );
+    })}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<style>
+  .breadcrumbs {
+    margin: 22px 0 14px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .breadcrumbs li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .breadcrumbs a {
+    color: var(--text-secondary);
+  }
+  .breadcrumbs a:hover {
+    color: var(--accent-dark);
+  }
+  .breadcrumbs .sep {
+    color: var(--text-tertiary);
+    opacity: 0.6;
+  }
+  .breadcrumbs [aria-current="page"] {
+    color: var(--text-primary);
+  }
+</style>

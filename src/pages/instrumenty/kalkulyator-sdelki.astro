@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import PriceCalculatorEmbed from '@components/PriceCalculatorEmbed.astro';
+import CTABlock from '@components/CTABlock.astro';
+import DisclaimerBlock from '@components/DisclaimerBlock.astro';
+---
+
+<BaseLayout
+  title="Калькулятор стоимости сопровождения сделки в Эквадоре"
+  description="Бесплатный калькулятор сопровождения сделки покупки недвижимости в Эквадоре. Расчёт фикс-пакета или гибридной модели под ваш бюджет."
+>
+  <div class="container-narrow">
+    <Breadcrumbs items={[
+      { name: 'Инструменты', href: '/instrumenty' },
+      { name: 'Калькулятор сделки', href: '/instrumenty/kalkulyator-sdelki' },
+    ]} />
+
+    <article class="page">
+      <h1>Калькулятор сопровождения сделки</h1>
+      <p class="lead">
+        Подбирает фикс-пакет или&nbsp;гибридную модель под&nbsp;ваш бюджет. Показывает ориентировочный гонорар,
+        состав работ и&nbsp;сроки.
+      </p>
+
+      <PriceCalculatorEmbed height="1180px" />
+
+      <div class="prose under">
+        <h2>Как использовать</h2>
+        <ol>
+          <li>Выберите формат присутствия — рядом / на финал / удалённо.</li>
+          <li>Укажите бюджет покупки.</li>
+          <li>Выберите город и сегмент.</li>
+          <li>Калькулятор покажет ориентир по фикс-пакету или гибридной модели.</li>
+        </ol>
+        <p>
+          Это ориентир, не оферта. Финальная стоимость согласовывается на стратегической консультации после разбора
+          вашей задачи. См. также <a href="/tseny">страницу цен</a> с подробным объяснением модели и FAQ.
+        </p>
+      </div>
+
+      <CTABlock variant="commercial" />
+      <DisclaimerBlock />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .page { padding: 8px 0 40px; }
+  .page h1 { font-size: 32px; line-height: 1.2; margin: 18px 0 16px; }
+  @media (max-width: 640px) { .page h1 { font-size: 24px; } }
+  .lead { font-size: 17px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 24px; }
+  .under { margin-top: 28px; }
+</style>

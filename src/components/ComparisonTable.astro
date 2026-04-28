@@ -1,0 +1,85 @@
+---
+interface Row {
+  label: string;
+  cells: string[];
+}
+
+interface Props {
+  caption?: string;
+  headers: string[];
+  rows: Row[];
+}
+
+const { caption, headers, rows } = Astro.props;
+---
+
+<div class="cmp-table-wrap">
+  <table>
+    {caption && <caption>{caption}</caption>}
+    <thead>
+      <tr>
+        <th></th>
+        {headers.map((h) => <th>{h}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          <th scope="row">{row.label}</th>
+          {row.cells.map((cell) => <td set:html={cell} />)}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .cmp-table-wrap {
+    overflow-x: auto;
+    margin: 22px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  caption {
+    text-align: left;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+  }
+
+  thead th {
+    background: var(--bg-surface);
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 13px;
+  }
+
+  tbody th {
+    font-weight: 500;
+    color: var(--text-primary);
+    width: 28%;
+    background: var(--bg-elevated);
+  }
+
+  tbody tr:last-child th,
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+import { SITE } from '@lib/constants';
+
+type Variant = 'info' | 'commercial' | 'category';
+
+interface Props {
+  variant?: Variant;
+  heading?: string;
+  text?: string;
+  ctaLabel?: string;
+}
+
+const { variant = 'info', heading, text, ctaLabel } = Astro.props;
+
+const presets: Record<Variant, { heading: string; text: string; ctaLabel: string }> = {
+  info: {
+    heading: 'Нужна помощь с покупкой недвижимости в Эквадоре?',
+    text: 'Я — Влад Вулкан, consultor inmobiliario. Помогаю русскоязычным клиентам разобраться с рынком Эквадора, проверить объекты, провести сделку — без риэлторского конфликта интересов. Стратегическая консультация — 60 минут, $150. Если идём дальше — сумма засчитывается в пакет.',
+    ctaLabel: 'Написать в Telegram',
+  },
+  commercial: {
+    heading: 'Готовы обсудить вашу задачу?',
+    text: 'Расскажите коротко о ситуации в Telegram: бюджет, тип объекта, город. Отвечу в течение 24 часов. Если нужен глубокий разбор — назначу стратегическую консультацию ($150, 60 минут).',
+    ctaLabel: 'Написать в Telegram',
+  },
+  category: {
+    heading: 'В каталоге не нашли ответ?',
+    text: 'Если у вас конкретный вопрос про Эквадор, на который нет статьи — напишите. Возможно, ваш вопрос станет следующей публикацией. Если нужна персональная консультация — $150 за 60 минут.',
+    ctaLabel: 'Написать в Telegram',
+  },
+};
+
+const preset = presets[variant];
+const finalHeading = heading ?? preset.heading;
+const finalText = text ?? preset.text;
+const finalLabel = ctaLabel ?? preset.ctaLabel;
+---
+
+<section class="cta-block" aria-labelledby="cta-heading">
+  <div class="cta-inner">
+    <h2 id="cta-heading">{finalHeading}</h2>
+    <p>{finalText}</p>
+    <a href={SITE.telegramUrl} class="btn btn-primary cta-btn" rel="noopener">
+      {finalLabel}
+    </a>
+  </div>
+</section>
+
+<style>
+  .cta-block {
+    margin: 48px 0 32px;
+  }
+
+  .cta-inner {
+    background: var(--accent-light);
+    border: 1px solid var(--accent-mid);
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .cta-inner h2 {
+    color: var(--accent-deep);
+    font-size: 22px;
+    margin: 0 0 12px;
+  }
+
+  .cta-inner p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--accent-deep);
+    opacity: 0.85;
+    max-width: 580px;
+    margin: 0 auto 22px;
+  }
+
+  .cta-btn {
+    font-size: 15px;
+    padding: 13px 26px;
+  }
+</style>

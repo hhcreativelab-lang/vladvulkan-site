@@ -1,0 +1,69 @@
+---
+import { SITE } from '@lib/constants';
+import { generateTitle, truncateDescription, canonicalUrl } from '@lib/seo';
+import { professionalServiceSchema } from '@lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  pathname: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>> | null;
+  noIndex?: boolean;
+  includeBrandInTitle?: boolean;
+}
+
+const {
+  title,
+  description,
+  pathname,
+  ogImage,
+  jsonLd,
+  noIndex = false,
+  includeBrandInTitle = true,
+} = Astro.props;
+
+const fullTitle = generateTitle(title, includeBrandInTitle);
+const cleanDescription = truncateDescription(description, 160);
+const canonical = canonicalUrl(pathname);
+// OG: предпочитаем JPG/PNG (для соцсетей), но на старте лежит SVG-плейсхолдер.
+// Пользователю — заменить на /og/default.jpg (1200x630) перед боевым запуском.
+const ogImageUrl = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : `${SITE.url}${ogImage}`)
+  : `${SITE.url}/og/default.svg`;
+
+// Если jsonLd не передан — кладём дефолтный ProfessionalService
+const schemas = jsonLd
+  ? Array.isArray(jsonLd) ? jsonLd : [jsonLd]
+  : [professionalServiceSchema()];
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={cleanDescription} />
+<link rel="canonical" href={canonical} />
+
+{noIndex && <meta name="robots" content="noindex,nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={cleanDescription} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content="ru_RU" />
+<meta property="og:site_name" content={SITE.brandName} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={cleanDescription} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<!-- Geo -->
+<meta name="geo.region" content="EC-A" />
+<meta name="geo.placename" content="Cuenca, Ecuador" />
+
+<!-- JSON-LD -->
+{schemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

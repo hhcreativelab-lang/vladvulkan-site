@@ -1,0 +1,143 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import ArticleCard from '@components/ArticleCard.astro';
+import CategoryCard from '@components/CategoryCard.astro';
+import CTABlock from '@components/CTABlock.astro';
+import DisclaimerBlock from '@components/DisclaimerBlock.astro';
+import { CATEGORIES, type CategorySlug } from '@lib/constants';
+import { collectionPageSchema, breadcrumbListSchema } from '@lib/schema';
+import { canonicalUrl } from '@lib/seo';
+import { getCollection } from 'astro:content';
+import { SITE } from '@lib/constants';
+
+export async function getStaticPaths() {
+  return Object.values(CATEGORIES).map((cat) => ({
+    params: { category: cat.slug },
+  }));
+}
+
+const { category } = Astro.params as { category: CategorySlug };
+const cat = CATEGORIES[category];
+
+if (!cat) {
+  return Astro.redirect('/znaniya');
+}
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const articles = allArticles
+  .filter((a) => a.data.category === category)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const url = canonicalUrl(`/znaniya/${category}`);
+
+// Сопутствующие категории — 3 случайные другие
+const otherCats = Object.values(CATEGORIES).filter((c) => c.slug !== category);
+
+const schemas = [
+  collectionPageSchema({
+    name: `${cat.name} — каталог знаний об Эквадоре`,
+    description: cat.description,
+    url,
+  }),
+  breadcrumbListSchema([
+    { name: 'Главная', url: SITE.url },
+    { name: 'Знания', url: `${SITE.url}/znaniya` },
+    { name: cat.name, url },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`${cat.name} — каталог знаний об Эквадоре`}
+  description={`${cat.description}. Подробные статьи от независимого консультанта по недвижимости в Эквадоре.`}
+  jsonLd={schemas}
+>
+  <div class="container">
+    <Breadcrumbs items={[
+      { name: 'Знания', href: '/znaniya' },
+      { name: cat.name, href: `/znaniya/${cat.slug}` },
+    ]} />
+
+    <article class="page">
+      <header class="cat-header">
+        <h1>{cat.name}</h1>
+        <p class="lead">{cat.description}.</p>
+      </header>
+
+      {articles.length > 0 ? (
+        <div class="articles-grid">
+          {articles.map((a) => (
+            <ArticleCard
+              href={`/znaniya/${a.id}`}
+              title={a.data.title}
+              description={a.data.description}
+              category={a.data.category}
+              pubDate={a.data.pubDate}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <h2>В&nbsp;этой категории пока нет статей</h2>
+          <p>
+            Статьи добавляются по&nbsp;приоритетам SEO-стратегии. Если у&nbsp;вас есть конкретный вопрос
+            из&nbsp;этой темы&nbsp;— напишите в&nbsp;Telegram, возможно ваш вопрос станет следующей публикацией.
+          </p>
+        </div>
+      )}
+
+      <section class="related-cats">
+        <h2>Связанные категории</h2>
+        <div class="cats-grid">
+          {otherCats.slice(0, 3).map((c) => (
+            <CategoryCard slug={c.slug} name={c.name} description={c.description} />
+          ))}
+        </div>
+      </section>
+
+      <CTABlock variant="category" />
+      <DisclaimerBlock />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .page { padding: 8px 0 40px; }
+  .cat-header { margin: 18px 0 28px; }
+  .cat-header h1 { font-size: 36px; line-height: 1.2; margin: 0 0 12px; }
+  @media (max-width: 640px) { .cat-header h1 { font-size: 28px; } }
+  .lead { font-size: 18px; line-height: 1.55; color: var(--text-secondary); margin: 0; max-width: 720px; }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .empty-state {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .empty-state h2 { font-size: 20px; margin: 0 0 10px; }
+  .empty-state p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .related-cats { margin: 56px 0 16px; }
+  .related-cats h2 { font-size: 22px; margin-bottom: 18px; }
+  .cats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+</style>
