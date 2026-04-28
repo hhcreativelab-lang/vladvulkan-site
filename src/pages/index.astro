@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import CategoryCard from '@components/CategoryCard.astro';
 import FAQBlock from '@components/FAQBlock.astro';
 import Icon from '@components/Icon.astro';
+import EcuadorMap from '@components/EcuadorMap.astro';
 import { SITE, CATEGORIES } from '@lib/constants';
 import { professionalServiceSchema, faqPageSchema } from '@lib/schema';
 
@@ -47,8 +48,6 @@ const facts = [
   { icon: 'dollar', label: 'Национальная валюта', value: 'USD', meta: 'С 2000 года' },
   { icon: 'home', label: 'Экспаты в Куэнке', value: '8 000+', meta: 'Иностранные резиденты' },
   { icon: 'chat', label: 'Русскоязычная диаспора', value: '3–4 тыс.', meta: 'По всем городам' },
-  { icon: 'passport', label: 'Безвизовый въезд', value: '90 дней', meta: 'РФ · BY · UA · KZ' },
-  { icon: 'award', label: 'Объекты ЮНЕСКО', value: '2', meta: 'Куэнка · Кито' },
 ] as const;
 
 const cities = [
@@ -208,8 +207,7 @@ const schemas = [
     <div class="container">
       <div class="facts-head reveal">
         <span class="eyebrow gold">Эквадор в цифрах</span>
-        <h2>Шесть фактов,<br>которые <em>важно знать</em></h2>
-        <p>Базовые параметры страны. Те самые цифры, на&nbsp;которые опирается каждое решение о&nbsp;переезде или инвестиции в&nbsp;Эквадор.</p>
+        <h2>Четыре факта,<br>которые <em>важно знать</em></h2>
       </div>
 
       <div class="facts-grid reveal-stagger">
@@ -222,6 +220,20 @@ const schemas = [
             <div class="fact-meta">{f.meta}</div>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 3D КАРТА ЭКВАДОРА ============== -->
+  <section class="map-section noise">
+    <div class="container">
+      <div class="map-section-head reveal">
+        <span class="eyebrow gold">География</span>
+        <h2>Эквадор<br><em>в&nbsp;четырёх измерениях</em></h2>
+        <p>Четыре природных региона, пять городов работы. Наведите на&nbsp;регион&nbsp;— увидите подробности.</p>
+      </div>
+      <div class="map-section-body reveal">
+        <EcuadorMap />
       </div>
     </div>
   </section>
@@ -788,7 +800,7 @@ const schemas = [
   .facts-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 18px;
     position: relative;
     z-index: 2;
   }
@@ -841,6 +853,44 @@ const schemas = [
     color: var(--text-dim);
     font-weight: 300;
     margin-top: auto;
+  }
+
+  /* ============== MAP SECTION ============== */
+  .map-section {
+    position: relative;
+    background: var(--midnight);
+    padding: clamp(80px, 10vw, 140px) 0;
+    overflow: hidden;
+  }
+  .map-section-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto clamp(36px, 5vw, 56px);
+  }
+  .map-section-head .eyebrow { display: block; margin-bottom: 14px; }
+  .map-section-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    margin: 0 0 18px;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+  .map-section-head h2 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .map-section-head p {
+    color: var(--text-dim);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 300;
+  }
+  .map-section-body {
+    max-width: 980px;
+    margin: 0 auto;
   }
 
   /* ============== SERVICES SECTION ============== */

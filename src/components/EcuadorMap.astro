@@ -1,0 +1,538 @@
+---
+/**
+ * Интерактивная стилизованная карта Эквадора.
+ * 4 региона + 5 городов работы. 3D-tilt при движении мыши, hover-подсветка регионов,
+ * tooltip с названием на русском.
+ */
+
+const regions = [
+  {
+    id: 'costa',
+    nameRu: 'Коста',
+    nameLat: 'Costa',
+    desc: 'Тихоокеанское побережье',
+    color: '#9D7FFF',
+    cities: 'Гуаякиль · Манта · Салинас · Эсмеральдас',
+    // Узкая западная полоса
+    path: 'M 100 80 L 145 95 L 165 130 L 178 175 L 195 230 L 210 285 L 225 340 L 230 395 L 220 450 L 200 500 L 175 540 L 145 565 L 110 580 L 90 555 L 95 510 L 100 460 L 90 410 L 80 360 L 75 305 L 80 250 L 90 195 L 95 140 Z',
+  },
+  {
+    id: 'sierra',
+    nameRu: 'Сьерра',
+    nameLat: 'Sierra',
+    desc: 'Андские нагорья',
+    color: '#E5C678',
+    cities: 'Кито · Куэнка · Амбато · Лоха',
+    // Центральная вертикальная полоса
+    path: 'M 195 230 L 230 200 L 270 195 L 305 210 L 320 250 L 325 295 L 320 340 L 310 385 L 295 425 L 275 460 L 250 490 L 220 510 L 200 500 L 210 450 L 220 395 L 225 340 L 220 285 Z',
+  },
+  {
+    id: 'amazonia',
+    nameRu: 'Амазония',
+    nameLat: 'Amazonía',
+    desc: 'Восточные джунгли',
+    color: '#4ADE80',
+    cities: 'Тена · Пуйо · Мачала · Сукумбиос',
+    // Большая восточная часть
+    path: 'M 305 210 L 360 195 L 420 200 L 480 220 L 520 250 L 555 290 L 575 340 L 570 395 L 555 445 L 525 485 L 480 510 L 425 515 L 370 505 L 320 480 L 285 445 L 270 395 L 280 340 L 295 290 L 320 250 Z',
+  },
+  {
+    id: 'galapagos',
+    nameRu: 'Галапагосы',
+    nameLat: 'Galápagos',
+    desc: 'Архипелаг в океане',
+    color: '#2AABEE',
+    cities: 'Сан-Кристобаль · Санта-Крус · Изабела',
+    // Несколько островов в левом-нижнем углу (отдельные path)
+    path: 'M 30 600 q 8 -8 18 -5 q 6 4 4 12 q -3 6 -10 6 q -10 0 -12 -13 Z M 55 615 q 5 -4 11 -2 q 4 3 2 8 q -3 4 -8 3 q -6 -2 -5 -9 Z M 80 630 q 6 -5 13 -3 q 5 4 2 10 q -4 5 -10 4 q -7 -3 -5 -11 Z',
+  },
+];
+
+const cities = [
+  { name: 'Кито', cx: 252, cy: 268, accent: '#E5C678', label: 'CAPITAL' },
+  { name: 'Куэнка', cx: 240, cy: 425, accent: '#E5C678', label: 'HQ' },
+  { name: 'Гуаякиль', cx: 165, cy: 415, accent: '#9D7FFF', label: 'PORT' },
+  { name: 'Манта', cx: 130, cy: 295, accent: '#9D7FFF', label: 'COAST' },
+  { name: 'Салинас', cx: 105, cy: 460, accent: '#9D7FFF', label: 'BEACH' },
+];
+---
+
+<div class="map-wrap">
+  <!-- 3D-сцена -->
+  <div class="map-scene" id="ecuMapScene">
+    <div class="map-card" id="ecuMapCard">
+      <!-- декоративные элементы -->
+      <div class="map-grid" aria-hidden="true"></div>
+      <div class="compass" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.25">
+          <circle cx="32" cy="32" r="22" />
+          <path d="M32 12 L36 32 L32 52 L28 32 Z" fill="currentColor" opacity="0.3" />
+          <path d="M32 12 L36 32 L32 52 L28 32 Z" />
+          <path d="M12 32 L52 32 M32 12 L32 52" stroke-dasharray="2 4" opacity="0.5" />
+          <text x="32" y="9" text-anchor="middle" font-size="6" font-family="JetBrains Mono, monospace" fill="currentColor" stroke="none">N</text>
+          <text x="32" y="60" text-anchor="middle" font-size="6" font-family="JetBrains Mono, monospace" fill="currentColor" stroke="none">S</text>
+          <text x="6" y="34" text-anchor="middle" font-size="6" font-family="JetBrains Mono, monospace" fill="currentColor" stroke="none">W</text>
+          <text x="58" y="34" text-anchor="middle" font-size="6" font-family="JetBrains Mono, monospace" fill="currentColor" stroke="none">E</text>
+        </svg>
+      </div>
+
+      <!-- Заголовок -->
+      <div class="map-title">
+        <span class="map-eyebrow">Republic of Ecuador</span>
+        <h3>Эквадор<br><em>по&nbsp;регионам</em></h3>
+      </div>
+
+      <!-- SVG карта -->
+      <svg
+        class="map-svg"
+        viewBox="0 0 640 700"
+        preserveAspectRatio="xMidYMid meet"
+        aria-label="Карта Эквадора с регионами и городами работы"
+      >
+        <defs>
+          <filter id="mapGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" />
+          </filter>
+          <linearGradient id="oceanGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(42, 171, 238, 0.04)" />
+            <stop offset="100%" stop-color="rgba(42, 171, 238, 0.10)" />
+          </linearGradient>
+        </defs>
+
+        <!-- Океан фон -->
+        <rect width="640" height="700" fill="url(#oceanGrad)" />
+
+        <!-- Контуры регионов -->
+        <g class="regions">
+          {regions.map((r) => (
+            <path
+              class="region"
+              d={r.path}
+              data-region={r.id}
+              data-name={r.nameRu}
+              data-name-lat={r.nameLat}
+              data-desc={r.desc}
+              data-cities={r.cities}
+              style={`--region-color: ${r.color};`}
+            />
+          ))}
+        </g>
+
+        <!-- Города -->
+        <g class="cities">
+          {cities.map((city) => (
+            <g class="city-pin" data-city={city.name} style={`--city-color: ${city.accent};`}>
+              <circle class="city-glow" cx={city.cx} cy={city.cy} r="14" />
+              <circle class="city-dot" cx={city.cx} cy={city.cy} r="5" />
+              <circle class="city-core" cx={city.cx} cy={city.cy} r="2" />
+              <text class="city-label" x={city.cx + 12} y={city.cy + 4} font-size="13" font-family="Fraunces, serif">
+                {city.name}
+              </text>
+            </g>
+          ))}
+        </g>
+
+        <!-- Меридиан экватора -->
+        <line class="equator" x1="0" y1="290" x2="640" y2="290" />
+        <text class="equator-label" x="630" y="285" text-anchor="end" font-size="9" font-family="JetBrains Mono, monospace">
+          0° EQUATOR · 0° EQUATOR
+        </text>
+      </svg>
+
+      <!-- Tooltip -->
+      <div class="map-tooltip" id="mapTooltip" aria-hidden="true">
+        <span class="tt-eyebrow"></span>
+        <span class="tt-name"></span>
+        <span class="tt-desc"></span>
+        <span class="tt-cities"></span>
+      </div>
+
+      <!-- Легенда регионов -->
+      <div class="map-legend">
+        {regions.map((r) => (
+          <div class="legend-item" data-region-trigger={r.id}>
+            <span class="legend-dot" style={`background: ${r.color};`}></span>
+            <div class="legend-meta">
+              <span class="legend-name">{r.nameRu}</span>
+              <span class="legend-sub">{r.nameLat}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .map-wrap {
+    position: relative;
+    perspective: 1600px;
+    perspective-origin: center;
+  }
+
+  .map-scene {
+    transform-style: preserve-3d;
+    transition: transform 0.5s var(--ease-premium);
+  }
+
+  .map-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(22, 18, 32, 0.8) 0%, rgba(11, 5, 24, 0.95) 100%);
+    border: 1px solid rgba(157, 127, 255, 0.15);
+    border-radius: 12px;
+    padding: clamp(24px, 3vw, 48px);
+    backdrop-filter: blur(16px);
+    transform-style: preserve-3d;
+    transition: transform 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium);
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(229, 198, 120, 0.05) inset,
+      0 30px 80px rgba(7, 3, 16, 0.6),
+      0 12px 32px rgba(106, 61, 232, 0.15);
+  }
+
+  /* Тонкая золотая хайрлайн сверху */
+  .map-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-champagne), transparent);
+    opacity: 0.6;
+  }
+
+  /* Декоративная сетка */
+  .map-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(157, 127, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(157, 127, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.7) 0%, transparent 70%);
+  }
+
+  .compass {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    color: var(--gold-champagne);
+    opacity: 0.5;
+    transform: translateZ(40px);
+    transition: opacity 0.4s, transform 0.4s var(--ease-premium);
+  }
+  .map-card:hover .compass { opacity: 0.85; transform: translateZ(60px) rotate(-12deg); }
+
+  .map-title {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 16px;
+    transform: translateZ(20px);
+  }
+  .map-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-champagne);
+    margin-bottom: 8px;
+  }
+  .map-title h3 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 44px);
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+  }
+  .map-title em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .map-svg {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    transform: translateZ(30px);
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+  }
+
+  /* Регионы */
+  .region {
+    fill: var(--region-color);
+    fill-opacity: 0.18;
+    stroke: var(--region-color);
+    stroke-width: 1.5;
+    stroke-opacity: 0.55;
+    cursor: pointer;
+    transition: fill-opacity 0.4s var(--ease-premium), stroke-opacity 0.4s var(--ease-premium), stroke-width 0.4s, filter 0.4s;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .region:hover {
+    fill-opacity: 0.5;
+    stroke-opacity: 1;
+    stroke-width: 2.5;
+    filter: drop-shadow(0 0 16px var(--region-color));
+  }
+  .region.active {
+    fill-opacity: 0.5;
+    stroke-opacity: 1;
+    stroke-width: 2.5;
+    filter: drop-shadow(0 0 16px var(--region-color));
+  }
+
+  /* Экватор */
+  .equator {
+    stroke: var(--gold-champagne);
+    stroke-width: 0.5;
+    stroke-dasharray: 6 4;
+    opacity: 0.4;
+  }
+  .equator-label {
+    fill: var(--gold-champagne);
+    opacity: 0.5;
+    letter-spacing: 0.3em;
+  }
+
+  /* Города */
+  .city-pin {
+    cursor: pointer;
+    transition: transform 0.4s var(--ease-premium);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .city-pin:hover { transform: scale(1.18); }
+  .city-glow {
+    fill: var(--city-color);
+    opacity: 0;
+    filter: blur(6px);
+    transition: opacity 0.4s var(--ease-premium);
+  }
+  .city-pin:hover .city-glow { opacity: 0.8; }
+  .city-dot {
+    fill: var(--bg-elevated);
+    stroke: var(--city-color);
+    stroke-width: 2;
+  }
+  .city-core {
+    fill: var(--city-color);
+  }
+  .city-label {
+    fill: var(--text-light);
+    font-weight: 400;
+    pointer-events: none;
+    paint-order: stroke;
+    stroke: var(--bg-elevated);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Tooltip */
+  .map-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: rgba(11, 5, 24, 0.95);
+    border: 1px solid rgba(229, 198, 120, 0.4);
+    border-radius: 4px;
+    padding: 14px 18px;
+    backdrop-filter: blur(20px);
+    transform: translateZ(80px);
+    opacity: 0;
+    transition: opacity 0.25s var(--ease-premium);
+    z-index: 10;
+    min-width: 220px;
+    box-shadow: 0 20px 60px rgba(7, 3, 16, 0.7);
+  }
+  .map-tooltip.visible { opacity: 1; }
+  .tt-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-champagne);
+    margin-bottom: 6px;
+  }
+  .tt-name {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--text-light);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    margin-bottom: 4px;
+  }
+  .tt-desc {
+    display: block;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    font-weight: 300;
+  }
+  .tt-cities {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--violet-bright);
+    letter-spacing: 0.1em;
+  }
+
+  /* Легенда */
+  .map-legend {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(157, 127, 255, 0.1);
+    transform: translateZ(20px);
+  }
+  @media (max-width: 720px) {
+    .map-legend { grid-template-columns: repeat(2, 1fr); }
+    .compass { width: 32px; height: 32px; top: 18px; right: 18px; }
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .legend-item:hover { transform: translateY(-2px); }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 12px currentColor;
+    flex-shrink: 0;
+  }
+  .legend-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .legend-name {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1;
+  }
+  .legend-sub {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .map-scene, .map-card, .map-svg, .compass, .map-title, .map-legend, .map-tooltip {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const scene = document.getElementById('ecuMapScene');
+    const card = document.getElementById('ecuMapCard');
+    const tooltip = document.getElementById('mapTooltip');
+    if (!scene || !card || !tooltip) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ttEyebrow = tooltip.querySelector('.tt-eyebrow');
+    const ttName = tooltip.querySelector('.tt-name');
+    const ttDesc = tooltip.querySelector('.tt-desc');
+    const ttCities = tooltip.querySelector('.tt-cities');
+
+    // 3D tilt
+    if (!reduced) {
+      scene.addEventListener('mousemove', (ev) => {
+        const r = scene.getBoundingClientRect();
+        const x = (ev.clientX - r.left) / r.width - 0.5;
+        const y = (ev.clientY - r.top) / r.height - 0.5;
+        scene.style.transform = `rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+      });
+      scene.addEventListener('mouseleave', () => {
+        scene.style.transform = 'rotateY(0) rotateX(0)';
+      });
+    }
+
+    // Tooltip + region highlight
+    const showTip = (ev, payload) => {
+      ttEyebrow.textContent = 'Регион · ' + payload.lat;
+      ttName.textContent = payload.name;
+      ttDesc.textContent = payload.desc;
+      ttCities.textContent = payload.cities;
+      const cardRect = card.getBoundingClientRect();
+      const tx = ev.clientX - cardRect.left + 16;
+      const ty = ev.clientY - cardRect.top + 16;
+      const ttW = tooltip.offsetWidth || 260;
+      const ttH = tooltip.offsetHeight || 100;
+      const maxX = card.clientWidth - ttW - 16;
+      const maxY = card.clientHeight - ttH - 16;
+      tooltip.style.left = Math.min(tx, maxX) + 'px';
+      tooltip.style.top = Math.min(ty, maxY) + 'px';
+      tooltip.classList.add('visible');
+    };
+    const hideTip = () => tooltip.classList.remove('visible');
+
+    document.querySelectorAll('.region').forEach((region) => {
+      region.addEventListener('mousemove', (ev) => {
+        showTip(ev, {
+          name: region.dataset.name,
+          lat: region.dataset.nameLat,
+          desc: region.dataset.desc,
+          cities: region.dataset.cities,
+        });
+      });
+      region.addEventListener('mouseleave', hideTip);
+    });
+
+    // Trigger from legend
+    document.querySelectorAll('[data-region-trigger]').forEach((leg) => {
+      leg.addEventListener('mouseenter', () => {
+        const id = leg.dataset.regionTrigger;
+        const region = document.querySelector(`.region[data-region="${id}"]`);
+        if (region) region.classList.add('active');
+      });
+      leg.addEventListener('mouseleave', () => {
+        const id = leg.dataset.regionTrigger;
+        const region = document.querySelector(`.region[data-region="${id}"]`);
+        if (region) region.classList.remove('active');
+      });
+    });
+
+    // City tooltip
+    document.querySelectorAll('.city-pin').forEach((pin) => {
+      const cityName = pin.dataset.city;
+      pin.addEventListener('mousemove', (ev) => {
+        ttEyebrow.textContent = 'Город работы';
+        ttName.textContent = cityName;
+        ttDesc.textContent = 'Один из 5 направлений сопровождения';
+        ttCities.textContent = '';
+        const cardRect = card.getBoundingClientRect();
+        const tx = ev.clientX - cardRect.left + 16;
+        const ty = ev.clientY - cardRect.top + 16;
+        const ttW = tooltip.offsetWidth || 240;
+        const ttH = tooltip.offsetHeight || 80;
+        tooltip.style.left = Math.min(tx, card.clientWidth - ttW - 16) + 'px';
+        tooltip.style.top = Math.min(ty, card.clientHeight - ttH - 16) + 'px';
+        tooltip.classList.add('visible');
+      });
+      pin.addEventListener('mouseleave', hideTip);
+    });
+  })();
+</script>
