@@ -2,7 +2,7 @@ export const SITE = {
   url: 'https://vladvulkan.com', // ПЛЕЙСХОЛДЕР — заменить на реальный домен
   brandName: 'Влад Вулкан',
   brandNameEn: 'Vlad Vulkan',
-  brandTagline: 'Consultor Inmobiliario',
+  brandTagline: 'Независимый эксперт по недвижимости',
   description:
     'Независимая консультация по недвижимости в Эквадоре для русскоязычной аудитории',
   email: 'PLACEHOLDER@vladvulkan.com', // ПЛЕЙСХОЛДЕР
@@ -16,7 +16,7 @@ export const SITE = {
   founder: {
     name: 'Vlad Vulkan',
     nameRu: 'Влад Вулкан',
-    jobTitle: 'Consultor Inmobiliario',
+    jobTitle: 'Независимый эксперт по недвижимости',
     description:
       'Независимый консультант по недвижимости в Эквадоре. 13 лет в Латинской Америке, 8+ лет опыта в недвижимости. Билингв: испанский + русский.',
     languages: ['ru', 'es'],
@@ -32,8 +32,8 @@ export const SITE = {
 } as const;
 
 export const DISCLAIMER = {
-  ru: 'Consultor inmobiliario. Не являюсь лицензированным риэлтором. Сделки проводятся через лицензированных партнёров в Эквадоре.',
-  es: 'Consultor inmobiliario independiente. Las transacciones inmobiliarias se realizan a través de corredores de bienes raíces licenciados en Ecuador.',
+  ru: 'Независимый эксперт. Сделки оформляются юридически через лицензированных партнёров-корредоров. Сейчас я на пути получения собственной лицензии.',
+  es: 'Experto independiente. Las transacciones inmobiliarias se formalizan a través de corredores de bienes raíces licenciados en Ecuador.',
 } as const;
 
 export type CategorySlug =

@@ -12,7 +12,7 @@ export function professionalServiceSchema(): JSONLD {
     name: `${SITE.brandName} — ${SITE.brandTagline}`,
     alternateName: `${SITE.brandNameEn} Real Estate Consulting`,
     description:
-      'Независимая консультация по недвижимости в Эквадоре для русскоязычной аудитории. Consultor inmobiliario, не лицензированный риэлтор. Сделки через лицензированных партнёров.',
+      'Независимая экспертиза по недвижимости в Эквадоре для русскоязычной аудитории. Сопровождение сделок через лицензированных партнёров-корредоров.',
     url: SITE.url,
     logo: `${SITE.url}/favicon.svg`,
     image: `${SITE.url}/og/default.svg`,

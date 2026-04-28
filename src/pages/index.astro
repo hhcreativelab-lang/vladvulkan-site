@@ -393,19 +393,19 @@ const schemas = [
     height: 100%;
     object-fit: cover;
     object-position: 22% 35%;
-    filter: contrast(1.05) saturate(0.92) brightness(0.7);
+    /* HD-режим: чуть выше яркость, контраст и насыщенность.
+       Никакого подавления цвета — фото читается чётко. */
+    filter: contrast(1.1) saturate(1.05) brightness(0.9);
     animation: heroKenBurns 35s ease-in-out infinite alternate;
   }
   .hero-photo-overlay {
     position: absolute;
     inset: 0;
     background:
-      /* Затемнение справа под текст. Слева — Влад открыт. */
-      linear-gradient(90deg, transparent 0%, rgba(7, 3, 16, 0.05) 35%, rgba(7, 3, 16, 0.45) 55%, rgba(7, 3, 16, 0.78) 78%, rgba(7, 3, 16, 0.88) 100%),
-      /* Снизу переход в void */
-      linear-gradient(180deg, transparent 0%, transparent 60%, rgba(7, 3, 16, 0.5) 85%, var(--void) 100%),
-      /* Тонировка фиолет */
-      linear-gradient(225deg, rgba(76, 29, 149, 0.22) 0%, transparent 55%);
+      /* Плавное затемнение справа под текст */
+      linear-gradient(90deg, transparent 0%, transparent 30%, rgba(7, 3, 16, 0.35) 55%, rgba(7, 3, 16, 0.7) 80%, rgba(7, 3, 16, 0.78) 100%),
+      /* Снизу — короткий переход в void */
+      linear-gradient(180deg, transparent 0%, transparent 65%, rgba(7, 3, 16, 0.45) 88%, var(--void) 100%);
   }
   picture { display: contents; }
   @keyframes heroKenBurns {
@@ -726,10 +726,10 @@ const schemas = [
 
   @media (max-width: 880px) {
     .hero-grid { grid-template-columns: 1fr; padding-top: 130px; }
-    .hero-photo img { object-position: 30% 35%; filter: contrast(1.05) saturate(0.92) brightness(0.5); }
+    .hero-photo img { object-position: 30% 35%; filter: contrast(1.08) saturate(1) brightness(0.65); }
     .hero-photo-overlay {
       background:
-        linear-gradient(180deg, rgba(7, 3, 16, 0.5) 0%, rgba(7, 3, 16, 0.7) 100%);
+        linear-gradient(180deg, rgba(7, 3, 16, 0.45) 0%, rgba(7, 3, 16, 0.65) 100%);
     }
   }
 
