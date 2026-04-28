@@ -9,6 +9,8 @@ export const SITE = {
   telegramUrl: 'https://t.me/PLACEHOLDER', // ПЛЕЙСХОЛДЕР
   telegramHandle: '@PLACEHOLDER', // ПЛЕЙСХОЛДЕР
   youtubeUrl: 'https://youtube.com/@PLACEHOLDER', // ПЛЕЙСХОЛДЕР
+  phone: '+593999999999', // ПЛЕЙСХОЛДЕР — заменить на реальный номер
+  phoneDisplay: '+593 99 999 9999', // отображаемый формат
   defaultLocale: 'ru',
   cities: ['Cuenca', 'Quito', 'Guayaquil', 'Manta', 'Salinas'],
   founder: {

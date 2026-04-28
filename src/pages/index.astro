@@ -180,12 +180,35 @@ const schemas = [
         <div class="hero-actions">
           <a href={SITE.telegramUrl} class="btn-quiz" rel="noopener">
             <span class="btn-quiz-main">
-              Получить <em>консультацию</em>
+              Свяжитесь <em>со&nbsp;мной</em>
             </span>
             <span class="btn-quiz-divider"></span>
-            <span class="btn-quiz-meta">$150 · 60 мин</span>
+            <span class="btn-quiz-meta">Ответ за 24 ч</span>
           </a>
+
+          <div class="social">
+            <a href={SITE.telegramUrl} class="soc-link tg" rel="noopener">
+              <span class="soc-dot"></span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.05 2.434 2.42 9.9c-1.34.525-1.33 1.276-.242 1.606l5.05 1.577 11.688-7.372c.553-.334 1.057-.155.641.213L9.117 14.47l-.363 5.439c.523 0 .753-.24 1.046-.524l2.507-2.422 5.21 3.833c.96.528 1.65.256 1.889-.89l3.418-16.081c.349-1.405-.54-2.044-1.772-1.39"/></svg>
+              Telegram
+            </a>
+            <a href={SITE.youtubeUrl} class="soc-link yt" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8M9.6 15.6V8.4l6.2 3.6z"/></svg>
+              YouTube
+            </a>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div class="clock-bar container">
+      <div class="clocks">
+        <div class="clock active"><span class="clock-dot"></span><span class="clock-name">Куэнка</span><span class="clock-time" id="t-cuenca">—:—</span></div>
+        <div class="clock"><span class="clock-dot"></span><span class="clock-name">Москва</span><span class="clock-time" id="t-moscow">—:—</span></div>
+        <div class="clock"><span class="clock-dot"></span><span class="clock-name">Киев</span><span class="clock-time" id="t-kyiv">—:—</span></div>
+        <div class="clock"><span class="clock-dot"></span><span class="clock-name">Берлин</span><span class="clock-time" id="t-berlin">—:—</span></div>
+        <div class="clock"><span class="clock-dot"></span><span class="clock-name">Нью-Йорк</span><span class="clock-time" id="t-ny">—:—</span></div>
+        <div class="clock"><span class="clock-dot"></span><span class="clock-name">Торонто</span><span class="clock-time" id="t-toronto">—:—</span></div>
       </div>
     </div>
   </section>
@@ -568,10 +591,99 @@ const schemas = [
 
   .hero-actions {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
+    gap: 20px;
+  }
+
+  .social {
+    display: flex;
+    gap: 10px;
     flex-wrap: wrap;
   }
+  .soc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    background: rgba(16, 8, 34, 0.6);
+    border: 1px solid rgba(157, 127, 255, 0.18);
+    border-radius: 2px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.6s var(--ease-premium), box-shadow 0.6s var(--ease-premium), background 0.6s var(--ease-premium), color 0.4s;
+  }
+  .soc-link.tg:hover {
+    border-color: var(--tg-blue);
+    background: rgba(42, 171, 238, 0.08);
+    color: var(--text-light);
+    box-shadow: 0 0 0 1px rgba(42, 171, 238, 0.4), 0 0 20px rgba(42, 171, 238, 0.25);
+  }
+  .soc-link.tg:hover svg { color: var(--tg-blue); }
+  .soc-link.yt:hover {
+    border-color: var(--yt-red);
+    background: rgba(255, 0, 51, 0.06);
+    color: var(--text-light);
+    box-shadow: 0 0 0 1px rgba(255, 0, 51, 0.4), 0 0 20px rgba(255, 0, 51, 0.25);
+  }
+  .soc-link.yt:hover svg { color: var(--yt-red); }
+  .soc-link svg { width: 15px; height: 15px; opacity: 0.85; transition: color 0.4s, opacity 0.4s; }
+  .soc-link:hover svg { opacity: 1; }
+  .soc-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.5);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* CLOCK BAR — внизу hero */
+  .clock-bar {
+    position: relative;
+    z-index: 6;
+    padding-bottom: 28px;
+    padding-top: 12px;
+    display: flex;
+    justify-content: center;
+  }
+  .clocks {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 2.4vw, 38px);
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .clock {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--text-mute);
+    transition: color 0.4s;
+    text-shadow: 0 1px 6px rgba(7, 3, 16, 0.85);
+  }
+  .clock.active { color: var(--text-light); }
+  .clock-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--text-soft);
+  }
+  .clock.active .clock-dot {
+    background: var(--green);
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .clock-name { font-weight: 500; color: var(--violet-bright); }
+  .clock-time { color: var(--ivory); font-weight: 600; margin-left: 3px; letter-spacing: 0.04em; }
+  .clock.active .clock-time { color: var(--text-light); font-weight: 700; }
 
   /* Split CTA */
   .btn-quiz {
