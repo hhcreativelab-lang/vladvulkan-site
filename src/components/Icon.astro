@@ -1,33 +1,33 @@
 ---
 /**
- * Уникальный набор иконок, нарисованных под Влада Вулкана.
- * Стиль: тонкие линии 1.5, лёгкие акценты filled-fragments,
- * мягкие закругления, теплый акцент через currentColor + var(--warm).
+ * Иконки в едином сдержанном стиле — тонкие однотонные линии, без заливок.
+ * Размер 32px, stroke-width 1.25, currentColor с золотым акцентом через 1-2 деталями.
  */
 type IconName =
-  | 'compass'      // подбор / навигация по рынку
-  | 'shield-check' // due diligence
-  | 'handshake'    // переговоры
-  | 'document'     // escritura / договор
-  | 'pin'          // география
-  | 'gem'          // премиум-сегмент
-  | 'key'          // ключи / закрытие сделки
-  | 'chart'        // цены / аналитика
-  | 'chat'         // консультация
-  | 'globe'        // ЛатАм
-  | 'star'         // отзыв
+  | 'compass'
+  | 'shield-check'
+  | 'handshake'
+  | 'document'
+  | 'pin'
+  | 'gem'
+  | 'key'
+  | 'chart'
+  | 'chat'
+  | 'globe'
+  | 'star'
   | 'arrow-up-right'
-  | 'send'         // telegram-style
+  | 'send'
   | 'spark'
-  | 'users'        // население / диаспора
-  | 'sun'          // климат
-  | 'dollar'       // валюта
-  | 'award'        // ЮНЕСКО
-  | 'clock'        // часовой пояс
-  | 'passport'     // визы
-  | 'home'         // объект жилья
-  | 'building'     // премиум-объект
-  | 'beach';       // побережье
+  | 'users'
+  | 'sun'
+  | 'dollar'
+  | 'award'
+  | 'clock'
+  | 'passport'
+  | 'home'
+  | 'building'
+  | 'beach'
+  | 'leaf';
 
 interface Props {
   name: IconName;
@@ -37,7 +37,7 @@ interface Props {
   ariaLabel?: string;
 }
 
-const { name, size = 28, stroke = 1.5, class: className, ariaLabel } = Astro.props;
+const { name, size = 32, stroke = 1.25, class: className, ariaLabel } = Astro.props;
 const ariaProps = ariaLabel
   ? { 'aria-label': ariaLabel, role: 'img' }
   : { 'aria-hidden': 'true' };
@@ -49,200 +49,198 @@ const ariaProps = ariaLabel
   height={size}
   viewBox="0 0 32 32"
   fill="none"
+  stroke="currentColor"
+  stroke-width={stroke}
+  stroke-linecap="round"
+  stroke-linejoin="round"
   class={className}
   {...ariaProps}
 >
   {name === 'compass' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
+    <>
       <circle cx="16" cy="16" r="13" />
-      <path d="M21.5 10.5 18 18l-7.5 3.5L14 14z" fill="var(--warm-soft)" />
-      <circle cx="16" cy="16" r="1.4" fill="currentColor" stroke="none" />
-    </g>
+      <circle cx="16" cy="16" r="9" opacity="0.4" />
+      <path d="m20.5 11.5-3 7-6 3 3-7z" />
+      <circle cx="16" cy="16" r="0.8" fill="currentColor" stroke="none" />
+    </>
   )}
 
   {name === 'shield-check' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 3 5 7v8c0 6 4.5 11 11 14 6.5-3 11-8 11-14V7z" fill="var(--accent-light)" />
-      <path d="m11 16 3.5 3.5L21 12" stroke-width={stroke + 0.4} />
-    </g>
+    <>
+      <path d="M16 3 5.5 6.5v8c0 6 4.5 11.2 10.5 14 6-2.8 10.5-8 10.5-14v-8z" />
+      <path d="m11.5 16 3.2 3.2L21 13.5" />
+    </>
   )}
 
   {name === 'handshake' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 14.5 9 9l4 1 3-2 4 2 5 2.5" fill="var(--warm-soft)" />
+    <>
+      <path d="M3 14.5 9 9l4 1 3-2 4 2 5 2.5" />
       <path d="m13 17 2.5 2.5a2 2 0 0 0 2.8-2.8L13 11l-3 3a2 2 0 0 0 2.8 2.8L16 14" />
       <path d="M19 14.5 22.5 18a2 2 0 1 1-2.8 2.8L17 18" />
-    </g>
+    </>
   )}
 
   {name === 'document' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M8 4h11l5 5v17a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="var(--accent-lighter)" />
+    <>
+      <path d="M8 4h11l5 5v17a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
       <path d="M19 4v5h5" />
-      <path d="M11 14h10" />
-      <path d="M11 18h10" />
-      <path d="M11 22q3-1 5 0t4 0" stroke="var(--warm-deep)" stroke-width={stroke + 0.4} />
-    </g>
+      <path d="M11 14h10M11 18h10M11 22h6" />
+    </>
   )}
 
   {name === 'pin' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 28s-9-7.5-9-15a9 9 0 1 1 18 0c0 7.5-9 15-9 15z" fill="var(--warm-soft)" />
-      <circle cx="16" cy="13" r="3.4" fill="var(--bg)" />
-    </g>
+    <>
+      <path d="M16 28s-9-7.5-9-15a9 9 0 1 1 18 0c0 7.5-9 15-9 15z" />
+      <circle cx="16" cy="13" r="3.4" />
+    </>
   )}
 
   {name === 'gem' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 5h14l5 7-12 15L4 12z" fill="var(--accent-light)" />
+    <>
+      <path d="M9 5h14l5 7-12 15L4 12z" />
       <path d="M4 12h24" />
-      <path d="m9 5 4 7-3 0" />
-      <path d="m23 5-4 7 3 0" />
-      <path d="m13 12 3 15 3-15" />
-    </g>
+      <path d="M9 5l4 7h6l4-7" />
+      <path d="M13 12 16 27 19 12" />
+    </>
   )}
 
   {name === 'key' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="10" cy="16" r="6" fill="var(--accent-light)" />
+    <>
+      <circle cx="10" cy="16" r="6" />
       <circle cx="10" cy="16" r="1.5" fill="currentColor" stroke="none" />
-      <path d="M16 16h12" />
-      <path d="M22 16v4" />
-      <path d="M26 16v3" />
-    </g>
+      <path d="M16 16h12M22 16v4M26 16v3" />
+    </>
   )}
 
   {name === 'chart' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
+    <>
       <path d="M4 26h24" />
-      <path d="M7 22V14" />
-      <path d="M13 22V8" />
-      <path d="M19 22v-6" />
-      <path d="M25 22V12" />
-      <path d="m4 14 9-9 6 6 9-7" stroke="var(--warm-deep)" stroke-width={stroke + 0.3} />
-      <circle cx="13" cy="5" r="1.2" fill="var(--warm-deep)" stroke="none" />
-      <circle cx="19" cy="11" r="1.2" fill="var(--warm-deep)" stroke="none" />
-    </g>
+      <path d="M7 22V14M13 22V8M19 22v-6M25 22V12" />
+      <path d="m4 14 9-9 6 6 9-7" />
+      <circle cx="13" cy="5" r="1" fill="currentColor" stroke="none" />
+      <circle cx="19" cy="11" r="1" fill="currentColor" stroke="none" />
+    </>
   )}
 
   {name === 'chat' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 7a3 3 0 0 1 3-3h16a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-9l-7 5v-5H8a3 3 0 0 1-3-3z" fill="var(--accent-lighter)" />
-      <circle cx="11" cy="13" r="1.2" fill="currentColor" stroke="none" />
-      <circle cx="16" cy="13" r="1.2" fill="currentColor" stroke="none" />
-      <circle cx="21" cy="13" r="1.2" fill="currentColor" stroke="none" />
-    </g>
+    <>
+      <path d="M5 7a3 3 0 0 1 3-3h16a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-9l-7 5v-5H8a3 3 0 0 1-3-3z" />
+      <path d="M11 13h.01M16 13h.01M21 13h.01" />
+    </>
   )}
 
   {name === 'globe' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="16" cy="16" r="13" fill="var(--accent-light)" />
+    <>
+      <circle cx="16" cy="16" r="13" />
       <path d="M3 16h26" />
       <path d="M16 3c4 4 4 22 0 26" />
       <path d="M16 3c-4 4-4 22 0 26" />
-    </g>
+    </>
   )}
 
   {name === 'star' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 3 20 12l9 1.3-6.5 6.4L24.5 29 16 24l-8.5 5 2-9.3L3 13.3 12 12z" fill="var(--warm-soft)" />
-    </g>
+    <path d="M16 3 20 12l9 1.3-6.5 6.4L24.5 29 16 24l-8.5 5 2-9.3L3 13.3 12 12z" />
   )}
 
   {name === 'arrow-up-right' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
+    <>
       <path d="M9 23 23 9" />
       <path d="M11 9h12v12" />
-    </g>
+    </>
   )}
 
   {name === 'send' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="m29 3-9 26-5-12-12-5z" fill="var(--accent-light)" />
+    <>
+      <path d="m29 3-9 26-5-12-12-5z" />
       <path d="M29 3 14 18" />
-    </g>
+    </>
   )}
 
   {name === 'spark' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 3v6M16 23v6M3 16h6M23 16h6M7 7l4 4M21 21l4 4M25 7l-4 4M11 21l-4 4" stroke="var(--warm-deep)" />
-      <circle cx="16" cy="16" r="3" fill="var(--warm-soft)" />
-    </g>
+    <>
+      <path d="M16 2v8M16 22v8M2 16h8M22 16h8M6 6l5.5 5.5M20.5 20.5 26 26M26 6l-5.5 5.5M11.5 20.5 6 26" />
+      <circle cx="16" cy="16" r="2" />
+    </>
   )}
 
   {name === 'users' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="11" cy="12" r="4.5" fill="var(--accent-light)" />
+    <>
+      <circle cx="11" cy="12" r="4.5" />
       <path d="M3 27c0-4.5 3.5-8 8-8s8 3.5 8 8" />
-      <circle cx="22" cy="10" r="3.5" fill="var(--warm-soft)" />
-      <path d="M17 19c1.5-1 3.2-1.5 5-1.5 3.3 0 6 2.5 6 6" />
-    </g>
+      <circle cx="22" cy="11" r="3.5" />
+      <path d="M19 19c1.5-0.7 3-1 4.5-1 3 0 5.5 2.4 5.5 5.5" />
+    </>
   )}
 
   {name === 'sun' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="16" cy="16" r="6" fill="var(--warm-soft)" />
-      <path d="M16 3v3M16 26v3M3 16h3M26 16h3M6.5 6.5l2 2M23.5 23.5l2 2M25.5 6.5l-2 2M8.5 23.5l-2 2" stroke="var(--warm-deep)" />
-    </g>
+    <>
+      <circle cx="16" cy="16" r="5.5" />
+      <path d="M16 2v3M16 27v3M2 16h3M27 16h3M5.5 5.5l2.2 2.2M24.3 24.3l2.2 2.2M26.5 5.5l-2.2 2.2M7.7 24.3l-2.2 2.2" />
+    </>
   )}
 
   {name === 'dollar' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="16" cy="16" r="13" fill="var(--accent-light)" />
-      <path d="M21 11.5c-1.5-1.5-3.5-2-5.5-1.7-2 .3-3.5 1.7-3.5 3.5 0 4 9 2.5 9 6.5 0 2-1.7 3.5-3.8 3.7-2.4.3-4.5-.6-6-2.2" stroke-width={stroke + 0.3} />
-      <path d="M16 7.5v3.5M16 21v3.5" stroke-width={stroke + 0.3} />
-    </g>
+    <>
+      <circle cx="16" cy="16" r="13" />
+      <path d="M21 11c-1.5-1.4-3.4-2-5.4-1.7-2 .3-3.6 1.7-3.6 3.5 0 4 9 2.5 9 6.5 0 1.9-1.7 3.5-3.8 3.7-2.4.3-4.5-.6-6-2.2" />
+      <path d="M16 7v3.5M16 21v4" />
+    </>
   )}
 
   {name === 'award' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="16" cy="13" r="8" fill="var(--warm-soft)" />
+    <>
+      <circle cx="16" cy="13" r="8" />
       <path d="m11 19-3 9 8-4 8 4-3-9" />
-      <path d="m13 13 2 2 4-4" stroke="var(--warm-deep)" stroke-width={stroke + 0.4} />
-    </g>
+      <path d="m13 13 2.2 2.2L19 11" />
+    </>
   )}
 
   {name === 'clock' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="16" cy="16" r="13" fill="var(--accent-light)" />
-      <path d="M16 8v8l5 3" stroke-width={stroke + 0.3} />
-      <circle cx="16" cy="16" r="1" fill="currentColor" stroke="none" />
-    </g>
+    <>
+      <circle cx="16" cy="16" r="13" />
+      <path d="M16 8v8l5 3" />
+    </>
   )}
 
   {name === 'passport' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <rect x="6" y="3" width="20" height="26" rx="2" fill="var(--accent-lighter)" />
-      <circle cx="16" cy="13" r="4.5" fill="var(--warm-soft)" />
-      <path d="M11.5 23h9" />
-      <path d="M13 26h6" />
-    </g>
+    <>
+      <rect x="6" y="3" width="20" height="26" rx="2" />
+      <circle cx="16" cy="13" r="4.5" />
+      <path d="M11.5 23h9M13 26h6" />
+    </>
   )}
 
   {name === 'home' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 14 16 4l11 10v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z" fill="var(--accent-light)" />
+    <>
+      <path d="M5 14 16 4l11 10v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z" />
       <path d="M13 29v-7h6v7" />
-    </g>
+    </>
   )}
 
   {name === 'building' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 29V6h14v23" fill="var(--accent-light)" />
+    <>
+      <path d="M9 29V6h14v23" />
       <path d="M5 29h22" />
       <path d="M13 11h2M19 11h2M13 16h2M19 16h2M13 21h2M19 21h2" />
       <path d="M14 29v-4h4v4" />
-    </g>
+    </>
   )}
 
   {name === 'beach' && (
-    <g stroke="currentColor" stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 22h26" stroke-width={stroke + 0.3} />
-      <path d="M3 26h26" />
-      <path d="M14 22V8" />
-      <path d="M14 8c-3 0-6 2-7 5 2-1 5-1 7 0z" fill="var(--warm-soft)" />
-      <path d="M14 8c3 0 6 2 7 5-2-1-5-1-7 0z" fill="var(--warm-soft)" />
-      <circle cx="22" cy="10" r="3" fill="var(--warm-deep)" stroke="none" />
-    </g>
+    <>
+      <path d="M3 24h26" />
+      <path d="M3 28h26" />
+      <path d="M14 24V8" />
+      <path d="M14 8c-3.5 0-7 2.5-8 5.5 2.5-1.2 5.5-1.2 8 0z" />
+      <path d="M14 8c3.5 0 7 2.5 8 5.5-2.5-1.2-5.5-1.2-8 0z" />
+      <circle cx="22" cy="9" r="2.5" />
+    </>
+  )}
+
+  {name === 'leaf' && (
+    <>
+      <path d="M5 27c0-12 9-22 22-22 0 12-10 22-22 22z" />
+      <path d="M5 27 18 14" />
+    </>
   )}
 </svg>

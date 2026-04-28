@@ -8,24 +8,24 @@ import { professionalServiceSchema, faqPageSchema } from '@lib/schema';
 
 const homeFaqs = [
   {
-    question: 'Вы риэлтор?',
+    question: 'Как устроена работа со сделкой?',
     answer:
-      'Нет. Я сопровождаю сделки как независимый эксперт на стороне покупателя. Лицензированный партнёр-корредор оформляет сделку юридически. Это даёт два независимых эксперта вместо одного, у которого конфликт интересов с продавцом.',
+      'Я сопровождаю клиента как независимый эксперт. Юридическое оформление сделки идёт через лицензированного партнёра-корредора. Сейчас я также на пути получения собственной лицензии. Такая модель даёт два независимых эксперта на стороне покупателя.',
   },
   {
-    question: 'У вас есть лицензия?',
+    question: 'Какой у вас опыт?',
     answer:
-      'Я не работаю как лицензированный риэлтор сознательно — лицензия привязывает к стороне продавца. Зато за плечами 8+ лет реальной работы в недвижимости Эквадора и 13 лет жизни в Латинской Америке. Опыт — это и есть моя лицензия.',
+      '13 лет жизни в Латинской Америке и 8+ лет работы в недвижимости Эквадора. Знаю рынки Куэнки, Кито, Гуаякиля, побережья — на уровне реальных сделок, не теории. Билингв (испанский + русский), работаю напрямую с местными нотариусами и банками.',
   },
   {
     question: 'Как проходит сделка?',
     answer:
-      'Стратегическая консультация → подбор объектов по всему рынку → due diligence документов → переговоры → подписание у нотариуса с участием партнёра-корредора → передача ключей. Я веду весь процесс, партнёр обеспечивает юридическое оформление.',
+      'Стратегическая консультация → подбор объектов по всему рынку → due diligence документов → переговоры → подписание у нотариуса → передача ключей. Я веду весь процесс, партнёр обеспечивает юридическое оформление.',
   },
   {
     question: 'Сколько это стоит?',
     answer:
-      'До бюджета $120K — фикс-пакет от $3000. От $120K — гибридная модель: ретейнер + процент от цены сделки. Стратегическая консультация — $150 за 60 минут, засчитывается в стоимость пакета.',
+      'Стратегическая консультация — $100 за 60 минут, засчитывается в пакет. Проверка объекта — $1000 фикс. Сопровождение сделки — от $3000 фикс-пакет (бюджет до $120K) или гибридная модель от $120K.',
   },
   {
     question: 'Вы работаете удалённо?',
@@ -43,14 +43,12 @@ const heroCities = [
 ];
 
 const facts = [
-  { icon: 'users', label: 'Население Эквадора', value: '18 млн', meta: 'Население страны' },
-  { icon: 'sun', label: 'Климат Куэнки', value: '15–22°C', meta: 'Круглый год' },
-  { icon: 'dollar', label: 'Валюта', value: 'USD', meta: 'С 2000 года' },
-  { icon: 'handshake', label: 'Экспаты в Куэнке', value: '8 000+', meta: 'Иностранные резиденты' },
-  { icon: 'award', label: 'Объекты ЮНЕСКО', value: '5', meta: 'Всемирное наследие' },
-  { icon: 'chat', label: 'Русскоязычная диаспора', value: '3–4 тыс.', meta: 'По всей стране' },
-  { icon: 'clock', label: 'Часовой пояс', value: 'UTC−5', meta: 'Москва −8 часов' },
+  { icon: 'users', label: 'Население Эквадора', value: '18 млн', meta: 'По стране' },
+  { icon: 'dollar', label: 'Национальная валюта', value: 'USD', meta: 'С 2000 года' },
+  { icon: 'home', label: 'Экспаты в Куэнке', value: '8 000+', meta: 'Иностранные резиденты' },
+  { icon: 'chat', label: 'Русскоязычная диаспора', value: '3–4 тыс.', meta: 'По всем городам' },
   { icon: 'passport', label: 'Безвизовый въезд', value: '90 дней', meta: 'РФ · BY · UA · KZ' },
+  { icon: 'award', label: 'Объекты ЮНЕСКО', value: '2', meta: 'Куэнка · Кито' },
 ] as const;
 
 const cities = [
@@ -113,14 +111,6 @@ const examples = [
     note: 'Центр, вид на Анды',
     detail: 'La Carolina или Cumbayá. 4 спальни, терраса 80м². Закрытый комплекс с консьержем, спа, паркингом. Прямой выход к рынку премиум-аренды.',
   },
-];
-
-const directions = [
-  { name: 'Куэнка', tag: 'Жильё / инвестиция' },
-  { name: 'Кито', tag: 'Бизнес / премиум' },
-  { name: 'Гуаякиль', tag: 'Элит / Samborondón' },
-  { name: 'Манта', tag: 'Побережье / рост' },
-  { name: 'Салинас', tag: 'Курорт / доходность' },
 ];
 
 const schemas = [
@@ -213,21 +203,20 @@ const schemas = [
     </div>
   </section>
 
-  <!-- ============== FACTS — 8 плашек ============== -->
+  <!-- ============== FACTS — 6 плашек ============== -->
   <section class="facts-section noise">
     <div class="container">
       <div class="facts-head reveal">
         <span class="eyebrow gold">Эквадор в цифрах</span>
-        <h2>8&nbsp;фактов,<br>которые <em>важно знать</em></h2>
-        <p>Базовые параметры страны и&nbsp;Куэнки. Те самые цифры, на&nbsp;которые опирается каждое решение о&nbsp;переезде или инвестиции.</p>
+        <h2>Шесть фактов,<br>которые <em>важно знать</em></h2>
+        <p>Базовые параметры страны. Те самые цифры, на&nbsp;которые опирается каждое решение о&nbsp;переезде или инвестиции в&nbsp;Эквадор.</p>
       </div>
 
       <div class="facts-grid reveal-stagger">
         {facts.map((f) => (
           <div class="fact-tile">
-            <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
-            <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
-            <div class="fact-icon"><Icon name={f.icon} size={36} /></div>
+            <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-br"></span>
+            <div class="fact-icon"><Icon name={f.icon} size={32} stroke={1.25} /></div>
             <div class="fact-label">{f.label}</div>
             <div class="fact-value">{f.value}</div>
             <div class="fact-meta">{f.meta}</div>
@@ -237,39 +226,43 @@ const schemas = [
     </div>
   </section>
 
-  <!-- ============== USLUGI ============== -->
+  <!-- ============== USLUGI — 4 ФОРМЫ ============== -->
   <section class="services-section">
     <div class="container">
       <div class="services-head reveal">
-        <span class="eyebrow gold">Что я делаю</span>
-        <h2>Три формата —<br><em>от консультации до сделки</em></h2>
-        <p>Все услуги работают по&nbsp;модели независимый эксперт + лицензированный партнёр-корредор. Юридическую часть оформляет партнёр.</p>
+        <span class="eyebrow gold">Четыре формы работы</span>
+        <h2>От&nbsp;консультации<br><em>до&nbsp;сделки и&nbsp;инвестиций</em></h2>
+        <p>Подберите формат под&nbsp;свою задачу. Юридическое оформление сделки идёт через лицензированного партнёра-корредора.</p>
       </div>
 
-      <div class="services-grid reveal-stagger">
-        <a href="/uslugi/soprovozhdenie-sdelki" class="service-card pillar">
-          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
-          <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
+      <div class="services-grid four-cols reveal-stagger">
+        <a href="/uslugi/konsultatsiya" class="service-card pillar pillar-2c">
+          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-br"></span>
+          <div class="srv-eyebrow">Первый шаг</div>
+          <h3>Стратегическая консультация</h3>
+          <p>60 минут разбираем ситуацию: бюджет, цели, города и&nbsp;форматы. Засчитывается в&nbsp;пакет.</p>
+          <div class="srv-bottom"><span class="srv-price">$100 · 60 мин</span><span class="srv-arrow">→</span></div>
+        </a>
+        <a href="/uslugi/proverka-objekta" class="service-card pillar pillar-2c">
+          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-br"></span>
+          <div class="srv-eyebrow">Только проверка</div>
+          <h3>Проверка объекта</h3>
+          <p>Вы нашли объект сами. Я делаю due diligence, проверяю цену против рынка, веду торг.</p>
+          <div class="srv-bottom"><span class="srv-price">$1000 фикс</span><span class="srv-arrow">→</span></div>
+        </a>
+        <a href="/uslugi/soprovozhdenie-sdelki" class="service-card pillar pillar-2c">
+          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-br"></span>
           <div class="srv-eyebrow">Полный пакет</div>
           <h3>Сопровождение сделки</h3>
           <p>Подбор объекта по&nbsp;всему рынку, due diligence, переговоры, сопровождение у&nbsp;нотариуса.</p>
           <div class="srv-bottom"><span class="srv-price">От $3000 / гибрид</span><span class="srv-arrow">→</span></div>
         </a>
-        <a href="/uslugi/konsultatsiya" class="service-card pillar">
-          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
-          <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
-          <div class="srv-eyebrow">Первый шаг</div>
-          <h3>Стратегическая консультация</h3>
-          <p>60 минут разбираем ситуацию: бюджет, цели, города и&nbsp;форматы. Засчитывается в&nbsp;пакет.</p>
-          <div class="srv-bottom"><span class="srv-price">$150 · 60 мин</span><span class="srv-arrow">→</span></div>
-        </a>
-        <a href="/uslugi/proverka-objekta" class="service-card pillar">
-          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
-          <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
-          <div class="srv-eyebrow">Только проверка</div>
-          <h3>Проверка объекта</h3>
-          <p>Вы нашли объект сами. Я делаю due diligence, проверяю цену против рынка, веду торг.</p>
-          <div class="srv-bottom"><span class="srv-price">$1500 фикс</span><span class="srv-arrow">→</span></div>
+        <a href={SITE.telegramUrl} class="service-card pillar pillar-2c" rel="noopener">
+          <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-br"></span>
+          <div class="srv-eyebrow">Индивидуально</div>
+          <h3>Инвестиционные возможности</h3>
+          <p>Есть идея, проект, объект или интерес к&nbsp;инвестициям в&nbsp;Эквадоре? Напишите в&nbsp;Telegram&nbsp;— рассмотрим и&nbsp;ответим.</p>
+          <div class="srv-bottom"><span class="srv-price">По запросу</span><span class="srv-arrow">→</span></div>
         </a>
       </div>
     </div>
@@ -289,7 +282,7 @@ const schemas = [
           <details class="city-item" open={i === 0}>
             <summary>
               <div class="city-summary">
-                <div class="city-icon"><Icon name={city.icon} size={32} /></div>
+                <div class="city-icon"><Icon name={city.icon} size={26} stroke={1.25} /></div>
                 <div class="city-text">
                   <div class="city-name">{city.name}</div>
                   <div class="city-sub-name">{city.sub}</div>
@@ -322,10 +315,9 @@ const schemas = [
 
       <div class="examples-grid reveal-stagger">
         {examples.map((ex) => (
-          <div class="example-card pillar">
-            <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
-            <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
-            <div class="ex-icon"><Icon name={ex.icon} size={40} /></div>
+          <div class="example-card pillar pillar-2c">
+            <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-br"></span>
+            <div class="ex-icon"><Icon name={ex.icon} size={32} stroke={1.25} /></div>
             <h3>{ex.title}</h3>
             <div class="ex-price">{ex.price}</div>
             <div class="ex-note">{ex.note}</div>
@@ -381,21 +373,6 @@ const schemas = [
           <span class="btn-quiz-divider"></span>
           <span class="btn-quiz-meta">2 минуты</span>
         </a>
-      </div>
-
-      <div class="directions">
-        <span class="dir-label">5&nbsp;направлений работы</span>
-        <div class="dir-list">
-          {directions.map((d, i) => (
-            <>
-              {i > 0 && <span class="dir-sep">·</span>}
-              <span class="dir-item">
-                <strong>{d.name}</strong>
-                <span class="dir-tag">{d.tag}</span>
-              </span>
-            </>
-          ))}
-        </div>
       </div>
     </div>
   </section>
@@ -902,7 +879,15 @@ const schemas = [
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(20px, 2.5vw, 36px);
   }
-  @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } }
+  .services-grid.four-cols {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 1100px) {
+    .services-grid.four-cols { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .services-grid, .services-grid.four-cols { grid-template-columns: 1fr; }
+  }
   .service-card {
     display: flex;
     flex-direction: column;
@@ -1285,56 +1270,5 @@ const schemas = [
   .final-actions {
     display: flex;
     justify-content: center;
-    margin-bottom: 56px;
-  }
-
-  .directions {
-    border-top: 1px solid rgba(229, 198, 120, 0.18);
-    padding-top: 32px;
-    max-width: 920px;
-    margin: 0 auto;
-  }
-  .dir-label {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold-champagne);
-    margin-bottom: 18px;
-  }
-  .dir-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    justify-content: center;
-    align-items: center;
-  }
-  .dir-item {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
-  .dir-item strong {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--text-light);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  .dir-tag {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ivory-dim);
-  }
-  .dir-sep {
-    color: var(--text-soft);
-    opacity: 0.5;
-    font-size: 18px;
-    align-self: center;
   }
 </style>

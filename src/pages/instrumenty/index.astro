@@ -1,19 +1,22 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
+import Icon from '@components/Icon.astro';
 import CTABlock from '@components/CTABlock.astro';
 import DisclaimerBlock from '@components/DisclaimerBlock.astro';
 
 const tools = [
   {
     href: '/instrumenty/kalkulyator-sdelki',
+    icon: 'chart',
     title: 'Калькулятор сопровождения сделки',
-    description: 'Подбирает фикс или гибридную модель под ваш бюджет. Показывает гонорар, сроки и состав работ.',
+    description: 'Подбирает фикс или гибридную модель под ваш бюджет. Показывает гонорар, состав работ и сроки.',
     status: 'available',
     statusLabel: 'Готов',
   },
   {
     href: '/instrumenty/nalogovyy-kalkulyator',
+    icon: 'document',
     title: 'Налоговый калькулятор покупки',
     description: 'Расчёт alcabala, регистрационных сборов и нотариальных расходов при покупке недвижимости.',
     status: 'soon',
@@ -24,24 +27,22 @@ const tools = [
 
 <BaseLayout
   title="Инструменты — расчёты и калькуляторы по недвижимости в Эквадоре"
-  description="Инструменты независимого консультанта по недвижимости в Эквадоре: калькулятор сделки, налоговый калькулятор. Бесплатно."
+  description="Инструменты независимого эксперта по недвижимости в Эквадоре: калькулятор сделки, налоговый калькулятор. Бесплатно."
 >
   <div class="container-narrow">
     <Breadcrumbs items={[{ name: 'Инструменты', href: '/instrumenty' }]} />
 
     <article class="page reveal">
       <span class="eyebrow gold">Инструменты</span>
-      <h1>Расчёты и&nbsp;<em>калькуляторы</em></h1>
+      <h1>Расчёты<br>и&nbsp;<em>калькуляторы</em></h1>
       <p class="lead">
         Калькуляторы и&nbsp;справочные материалы по&nbsp;покупке недвижимости в&nbsp;Эквадоре. Бесплатно, без&nbsp;регистрации.
       </p>
 
       <div class="tools reveal-stagger">
         {tools.map((t) => (
-          <a href={t.href} class:list={["tool-card pillar", { disabled: t.status === 'soon' }]}>
-            <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
-            <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
-
+          <a href={t.href} class:list={["tool-card frame-bar", { disabled: t.status === 'soon' }]}>
+            <div class="tool-icon"><Icon name={t.icon} size={32} stroke={1.25} /></div>
             <div class="row">
               <h2>{t.title}</h2>
               <span class:list={["status", t.status]}>{t.statusLabel}</span>
@@ -95,9 +96,9 @@ const tools = [
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: clamp(28px, 3vw, 36px);
+    gap: 12px;
   }
+  .tool-icon { color: var(--gold-champagne); }
   .tool-card .row {
     display: flex;
     justify-content: space-between;

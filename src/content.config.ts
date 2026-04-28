@@ -14,6 +14,7 @@ const articles = defineCollection({
       'zhizn',
       'sravnenie',
       'biznes',
+      'zdorovye',
     ]),
     mainKeyword: z.string(),
     supportingKeywords: z.array(z.string()).default([]),

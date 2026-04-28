@@ -1,12 +1,33 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
+import Icon from '@components/Icon.astro';
 import CTABlock from '@components/CTABlock.astro';
 import DisclaimerBlock from '@components/DisclaimerBlock.astro';
+import { SITE } from '@lib/constants';
 
 const services = [
   {
+    href: '/uslugi/konsultatsiya',
+    icon: 'compass',
+    eyebrow: 'Первый шаг',
+    badge: '$100 · 60 мин',
+    title: 'Стратегическая консультация',
+    description: '60 минут разбираем вашу ситуацию: бюджет, цели, какие города и форматы недвижимости подходят.',
+    forWhom: 'Для тех, кто на стадии «понять рынок и принять решение». Удобный первый шаг.',
+  },
+  {
+    href: '/uslugi/proverka-objekta',
+    icon: 'shield-check',
+    eyebrow: 'Только проверка',
+    badge: '$1000 фикс',
+    title: 'Проверка объекта',
+    description: 'Вы нашли объект сами. Я проверяю документы, историю, технику, вычитываю договор и веду торг.',
+    forWhom: 'Для тех, у кого уже есть конкретный объект и нужен независимый второй взгляд + торг.',
+  },
+  {
     href: '/uslugi/soprovozhdenie-sdelki',
+    icon: 'handshake',
     eyebrow: 'Полный пакет',
     badge: 'От $3000 / гибрид',
     title: 'Сопровождение сделки',
@@ -14,45 +35,36 @@ const services = [
     forWhom: 'Для тех, кто хочет переложить процесс целиком — от первой консультации до получения ключей.',
   },
   {
-    href: '/uslugi/konsultatsiya',
-    eyebrow: 'Первый шаг',
-    badge: '$150 · 60 мин',
-    title: 'Стратегическая консультация',
-    description: '60 минут разбираем вашу ситуацию: бюджет, цели, какие города и форматы недвижимости подходят.',
-    forWhom: 'Для тех, кто на стадии «понять рынок и принять решение». Удобный первый шаг.',
-  },
-  {
-    href: '/uslugi/proverka-objekta',
-    eyebrow: 'Только проверка',
-    badge: '$1500 фикс',
-    title: 'Проверка объекта',
-    description: 'Вы нашли объект сами. Я проверяю документы, историю, технику, вычитываю договор и веду торг.',
-    forWhom: 'Для тех, у кого уже есть конкретный объект и нужен независимый второй взгляд + торг.',
+    href: SITE.telegramUrl,
+    external: true,
+    icon: 'gem',
+    eyebrow: 'Индивидуально',
+    badge: 'По запросу',
+    title: 'Инвестиционные возможности',
+    description: 'Есть проект, объект или идея для инвестиций в Эквадоре? Напишите в Telegram — рассмотрим и подскажем, чем сможем помочь.',
+    forWhom: 'Для тех, у кого есть конкретное предложение или нестандартный сценарий.',
   },
 ];
 ---
 
 <BaseLayout
-  title="Услуги — независимая консультация по недвижимости в Эквадоре"
-  description="Три формата работы: сопровождение сделки, стратегическая консультация, проверка объекта. Прозрачная модель и фиксированные гонорары."
+  title="Услуги — независимая экспертиза по недвижимости в Эквадоре"
+  description="Четыре формата работы: стратегическая консультация, проверка объекта, полное сопровождение сделки и индивидуальные инвестиционные запросы."
 >
   <div class="container-narrow">
     <Breadcrumbs items={[{ name: 'Услуги', href: '/uslugi' }]} />
 
     <article class="page reveal">
-      <span class="eyebrow gold">Услуги</span>
-      <h1>Три формата —<br><em>от консультации до сделки</em></h1>
+      <span class="eyebrow gold">Четыре формы работы</span>
+      <h1>От&nbsp;консультации<br><em>до&nbsp;сделки и&nbsp;инвестиций</em></h1>
       <p class="lead">
-        Все услуги работают по&nbsp;модели consultor inmobiliario&nbsp;+ лицензированный партнёр-корредор.
-        Выберите тот, что соответствует вашей стадии.
+        Подберите формат под&nbsp;свою задачу. Сделки оформляются юридически через лицензированного партнёра-корредора&nbsp;— я&nbsp;на&nbsp;пути получения собственной лицензии.
       </p>
 
       <div class="services reveal-stagger">
         {services.map((s) => (
-          <a href={s.href} class="srv-card pillar">
-            <span class="pillar-corner pc-tl"></span><span class="pillar-corner pc-tr"></span>
-            <span class="pillar-corner pc-bl"></span><span class="pillar-corner pc-br"></span>
-
+          <a href={s.href} class="srv-card frame-bar" rel={s.external ? 'noopener' : undefined}>
+            <div class="srv-icon"><Icon name={s.icon} size={32} stroke={1.25} /></div>
             <div class="srv-top">
               <div class="srv-eyebrow">{s.eyebrow}</div>
               <span class="srv-badge">{s.badge}</span>
@@ -97,13 +109,17 @@ const services = [
   .services {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 18px;
     margin-bottom: 40px;
   }
   .srv-card {
     display: block;
     text-decoration: none;
     padding: clamp(28px, 3.5vw, 40px);
+  }
+  .srv-icon {
+    color: var(--gold-champagne);
+    margin-bottom: 18px;
   }
   .srv-top {
     display: flex;

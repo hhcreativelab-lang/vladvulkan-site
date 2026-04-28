@@ -2,9 +2,55 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
 import PriceCalculatorEmbed from '@components/PriceCalculatorEmbed.astro';
+import Icon from '@components/Icon.astro';
 import FAQBlock from '@components/FAQBlock.astro';
 import CTABlock from '@components/CTABlock.astro';
 import DisclaimerBlock from '@components/DisclaimerBlock.astro';
+
+const tiers = [
+  {
+    icon: 'compass',
+    eyebrow: 'Первый шаг',
+    title: 'Стратегическая консультация',
+    price: '$100',
+    unit: '60 минут',
+    points: [
+      'Разбор бюджета, целей, сроков',
+      'Карта городов и сегментов под задачу',
+      'Реальные цены м², ожидаемая доходность',
+      'План следующих шагов',
+    ],
+    note: 'Засчитывается в стоимость пакета сопровождения, если идём дальше.',
+  },
+  {
+    icon: 'shield-check',
+    eyebrow: 'Только проверка',
+    title: 'Проверка объекта (due diligence)',
+    price: '$1000',
+    unit: 'фиксированная стоимость',
+    points: [
+      'Certificado de gravámenes, история собственности',
+      'Физический осмотр, сверка с кадастром',
+      'Анализ цены против рынка',
+      'Письменный отчёт + 30-минутный разбор',
+    ],
+    note: 'Подходит, если вы уже определились с объектом и нужен независимый второй взгляд.',
+  },
+  {
+    icon: 'handshake',
+    eyebrow: 'Полный пакет',
+    title: 'Сопровождение сделки',
+    price: 'От $3000',
+    unit: 'фикс / гибрид',
+    points: [
+      'Подбор объектов из всего рынка',
+      'Due diligence + переговоры',
+      'Сопровождение у нотариуса с партнёром-корредором',
+      'Регистрация в Registro de la Propiedad',
+    ],
+    note: 'Бюджет до $120K — фикс-пакет от $3000. От $120K — гибридная модель: ретейнер + процент.',
+  },
+];
 
 const faqs = [
   {
@@ -32,50 +78,49 @@ const faqs = [
 
 <BaseLayout
   title="Стоимость сопровождения сделки с недвижимостью в Эквадоре"
-  description="Цены на услуги независимого консультанта по недвижимости в Эквадоре. Фикс-пакет до $120K и гибридная модель от $120K. Калькулятор расчёта."
+  description="Цены на услуги независимого эксперта по недвижимости в Эквадоре. Консультация $100, проверка объекта $1000, сопровождение от $3000. Калькулятор."
 >
   <div class="container-narrow">
     <Breadcrumbs items={[{ name: 'Цены', href: '/tseny' }]} />
 
     <article class="page reveal">
       <span class="eyebrow gold">Прозрачность</span>
-      <h1>Стоимость<br><em>сопровождения сделки</em></h1>
+      <h1>Стоимость<br><em>сопровождения</em></h1>
       <p class="lead">
-        Две модели — фикс-пакет до&nbsp;$120K и&nbsp;гибридная от&nbsp;$120K. Стратегическая консультация $150 засчитывается в&nbsp;пакет.
+        Три формата с&nbsp;понятными ценами. Стратегическая консультация $100 засчитывается в&nbsp;стоимость пакета,
+        если идём дальше.
       </p>
 
-      <div class="prose">
-        <h2>Фикс-пакет (бюджет до $120K)</h2>
-        <p>Фиксированная цена за полное сопровождение сделки. Оплата 50/50.</p>
-        <ul>
-          <li>Стратегический брифинг и план</li>
-          <li>Подбор объектов из всего рынка</li>
-          <li>Due diligence (документы, история, технический осмотр)</li>
-          <li>Переговоры и торг от вашего имени</li>
-          <li>Сопровождение у нотариуса с участием партнёра-корредора</li>
-          <li>Регистрация в Registro de la Propiedad</li>
-        </ul>
-
-        <h2>Гибридная модель (бюджет от $120K)</h2>
-        <p>Ретейнер + процент от финальной цены сделки. Ставка снижается с ростом бюджета:</p>
-        <ul>
-          <li>3% на бюджете $120K</li>
-          <li>2% на бюджете $300K</li>
-          <li>1.5% на бюджете $700K</li>
-          <li>1.2% на бюджете $1.5M+</li>
-        </ul>
-
-        <h2>Стратегическая консультация — $150</h2>
-        <p>60 минут разбираем вашу ситуацию: бюджет, цели, города, формат. $150 засчитываются в стоимость пакета, если идём дальше.</p>
-
-        <h2>Проверка объекта — $1500 фикс</h2>
-        <p>Подходит, если вы уже определились с объектом и хотите независимый второй взгляд. Полный due diligence + торг.</p>
-
-        <h2>Калькулятор</h2>
-        <p>Подберите формат и&nbsp;бюджет&nbsp;— посмотрите ориентировочную стоимость:</p>
+      <div class="tiers reveal-stagger">
+        {tiers.map((tier) => (
+          <div class="tier frame-bar">
+            <div class="tier-head">
+              <div class="tier-icon"><Icon name={tier.icon} size={28} stroke={1.25} /></div>
+              <div class="tier-meta">
+                <div class="tier-eyebrow">{tier.eyebrow}</div>
+                <h2>{tier.title}</h2>
+              </div>
+            </div>
+            <div class="tier-price-row">
+              <div class="tier-price">{tier.price}</div>
+              <div class="tier-unit">{tier.unit}</div>
+            </div>
+            <ul class="tier-points">
+              {tier.points.map((p) => <li>{p}</li>)}
+            </ul>
+            <div class="tier-note">{tier.note}</div>
+          </div>
+        ))}
       </div>
 
-      <PriceCalculatorEmbed />
+      <div class="calc-section reveal">
+        <div class="calc-head">
+          <span class="eyebrow gold">Калькулятор</span>
+          <h2>Расчёт под&nbsp;вашу <em>ситуацию</em></h2>
+          <p>Выберите бюджет, формат и&nbsp;город&nbsp;— калькулятор подскажет ориентир по&nbsp;гонорару.</p>
+        </div>
+        <PriceCalculatorEmbed />
+      </div>
 
       <FAQBlock faqs={faqs} />
       <CTABlock variant="commercial" />
@@ -105,6 +150,139 @@ const faqs = [
     line-height: 1.6;
     color: var(--text-dim);
     margin: 0 0 36px;
+    font-weight: 300;
+  }
+
+  .tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 60px;
+  }
+
+  .tier {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .tier-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .tier-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(229, 198, 120, 0.08);
+    border: 1px solid rgba(229, 198, 120, 0.25);
+    color: var(--gold-champagne);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tier-meta { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .tier-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-champagne);
+  }
+  .tier h2 {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.6vw, 30px);
+    color: var(--text-light);
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .tier-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(157, 127, 255, 0.1);
+  }
+  .tier-price {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 48px);
+    color: var(--violet-bright);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+  }
+  .tier-unit {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+  }
+
+  .tier-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tier-points li {
+    padding-left: 22px;
+    position: relative;
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+  .tier-points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 12px;
+    height: 1px;
+    background: var(--gold-champagne);
+  }
+
+  .tier-note {
+    font-size: 13px;
+    color: var(--text-mute);
+    line-height: 1.55;
+    padding-top: 14px;
+    border-top: 1px solid rgba(157, 127, 255, 0.1);
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+
+  .calc-section {
+    margin: 60px 0 40px;
+  }
+  .calc-head {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .calc-head .eyebrow { display: block; margin-bottom: 12px; }
+  .calc-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 42px);
+    margin: 0 0 12px;
+    letter-spacing: -0.025em;
+  }
+  .calc-head h2 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .calc-head p {
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
     font-weight: 300;
   }
 </style>

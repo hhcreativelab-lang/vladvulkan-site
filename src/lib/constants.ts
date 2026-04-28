@@ -43,7 +43,8 @@ export type CategorySlug =
   | 'relokatsiya'
   | 'zhizn'
   | 'sravnenie'
-  | 'biznes';
+  | 'biznes'
+  | 'zdorovye';
 
 export const CATEGORIES: Record<
   CategorySlug,
@@ -78,6 +79,12 @@ export const CATEGORIES: Record<
     slug: 'zhizn',
     short: 'Жизнь',
     description: 'Стоимость, медицина, школы, климат',
+  },
+  zdorovye: {
+    name: 'Здоровье и экология',
+    slug: 'zdorovye',
+    short: 'Здоровье',
+    description: 'Чистый воздух, биоразнообразие, медицина и экологические зоны',
   },
   sravnenie: {
     name: 'Сравнения стран',

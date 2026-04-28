@@ -407,6 +407,90 @@ a.pillar { color: var(--text-light); text-decoration: none; }
   transition: border-color 0.6s var(--ease-premium), transform 0.5s var(--ease-premium), box-shadow 0.6s var(--ease-premium);
   backdrop-filter: blur(8px);
 }
+
+/* ============================================ */
+/* Альтернативный стиль карточки для внутренних */
+/* страниц — без L-углов. Тонкая золотая полоса */
+/* сверху + лёгкая внутренняя тень.             */
+/* ============================================ */
+.frame-bar {
+  position: relative;
+  background: linear-gradient(180deg, rgba(22, 20, 26, 0.7) 0%, rgba(16, 14, 20, 0.85) 100%);
+  border: 1px solid rgba(157, 127, 255, 0.08);
+  border-radius: 6px;
+  padding: clamp(28px, 3vw, 40px);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: border-color 0.6s var(--ease-premium), transform 0.5s var(--ease-premium), box-shadow 0.6s var(--ease-premium);
+}
+.frame-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-champagne), transparent);
+  opacity: 0.55;
+  transition: opacity 0.6s var(--ease-premium), left 0.6s var(--ease-premium), right 0.6s var(--ease-premium);
+}
+.frame-bar:hover {
+  border-color: rgba(229, 198, 120, 0.28);
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgba(229, 198, 120, 0.12),
+    0 0 28px rgba(229, 198, 120, 0.08);
+}
+.frame-bar:hover::before {
+  opacity: 1;
+  left: 0;
+  right: 0;
+}
+a.frame-bar { color: var(--text-light); text-decoration: none; }
+
+/* Вертикальная вариация — лента слева вместо сверху */
+.frame-side {
+  position: relative;
+  background: linear-gradient(180deg, rgba(22, 20, 26, 0.7) 0%, rgba(16, 14, 20, 0.85) 100%);
+  border: 1px solid rgba(157, 127, 255, 0.08);
+  border-left: 2px solid var(--violet-bright);
+  border-radius: 0 6px 6px 0;
+  padding: clamp(24px, 3vw, 36px);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.6s var(--ease-premium), transform 0.5s var(--ease-premium), box-shadow 0.6s var(--ease-premium);
+}
+.frame-side:hover {
+  border-color: rgba(229, 198, 120, 0.28);
+  border-left-color: var(--gold-champagne);
+  transform: translateX(2px);
+  box-shadow: 0 0 28px rgba(157, 127, 255, 0.08);
+}
+
+/* Дискретная рамка с двойной линией в углах */
+.frame-double {
+  position: relative;
+  background: linear-gradient(180deg, rgba(22, 20, 26, 0.7) 0%, rgba(16, 14, 20, 0.85) 100%);
+  border: 1px solid rgba(157, 127, 255, 0.1);
+  border-radius: 4px;
+  padding: clamp(28px, 3vw, 40px);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.6s var(--ease-premium), transform 0.5s var(--ease-premium);
+}
+.frame-double::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(229, 198, 120, 0.15);
+  border-radius: 2px;
+  pointer-events: none;
+  transition: border-color 0.6s var(--ease-premium);
+}
+.frame-double:hover {
+  border-color: rgba(229, 198, 120, 0.3);
+}
+.frame-double:hover::after {
+  border-color: rgba(229, 198, 120, 0.4);
+}
 .card:hover {
   border-color: rgba(157, 127, 255, 0.22);
   transform: translateY(-3px);

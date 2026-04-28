@@ -4,67 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Калькулятор сопровождения сделки · Эквадор</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..500;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #ffffff;
-  --bg-surface: #f7f5ff;
-  --bg-elevated: #ffffff;
-  --text-primary: #1a1a1a;
-  --text-secondary: #6b6b6b;
-  --text-tertiary: #9a9a9a;
-  --border: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.16);
-  --accent: #7f77dd;
-  --accent-dark: #534ab7;
-  --accent-deep: #3c3489;
-  --accent-light: #eeedfe;
-  --accent-lighter: #f8f7ff;
-  --accent-mid: #cecbf6;
-  --success: #0f6e56;
-  --success-bg: #e1f5ee;
-  --success-border: #5dcaa5;
-  --unavail-bg: #fcebeb;
-  --unavail-bg-strong: #f7c1c1;
-  --unavail-border: #e24b4a;
-  --unavail-text: #a32d2d;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f0f10;
-    --bg-surface: #1a1825;
-    --bg-elevated: #17161e;
-    --text-primary: #f0f0f0;
-    --text-secondary: #a0a0a0;
-    --text-tertiary: #707070;
-    --border: rgba(255, 255, 255, 0.10);
-    --border-strong: rgba(255, 255, 255, 0.22);
-    --accent: #afa9ec;
-    --accent-dark: #7f77dd;
-    --accent-deep: #cecbf6;
-    --accent-light: #26215c;
-    --accent-lighter: #1e1a40;
-    --accent-mid: #534ab7;
-    --success: #5dcaa5;
-    --success-bg: #0a2820;
-    --success-border: #1d9e75;
-    --unavail-bg: #2a1414;
-    --unavail-bg-strong: #3d1a1a;
-    --unavail-border: #a32d2d;
-    --unavail-text: #f09595;
-  }
+  /* Тёмная палитра под основной сайт (HH FARO style) */
+  --bg: #070310;
+  --bg-surface: #0B0518;
+  --bg-elevated: #100822;
+  --text-primary: #F5F0FA;
+  --text-secondary: #D6CCE4;
+  --text-tertiary: #9B8CB8;
+  --border: rgba(157, 127, 255, 0.10);
+  --border-strong: rgba(157, 127, 255, 0.25);
+  --accent: #9D7FFF;
+  --accent-dark: #6A3DE8;
+  --accent-deep: #afa9ec;
+  --accent-light: rgba(157, 127, 255, 0.12);
+  --accent-lighter: rgba(157, 127, 255, 0.06);
+  --accent-mid: rgba(157, 127, 255, 0.3);
+  --gold: #E5C678;
+  --success: #4ADE80;
+  --success-bg: rgba(74, 222, 128, 0.10);
+  --success-border: rgba(74, 222, 128, 0.4);
+  --unavail-bg: rgba(255, 100, 100, 0.08);
+  --unavail-bg-strong: rgba(255, 100, 100, 0.15);
+  --unavail-border: rgba(255, 100, 100, 0.4);
+  --unavail-text: #F09595;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: var(--bg);
   color: var(--text-primary);
   line-height: 1.5;
   min-height: 100vh;
   padding: 2rem 1rem;
+  font-weight: 300;
+  letter-spacing: -0.01em;
 }
+
+h1, h2, .header h1 { font-family: 'Fraunces', Georgia, serif; }
 
 .container {
   max-width: 760px;

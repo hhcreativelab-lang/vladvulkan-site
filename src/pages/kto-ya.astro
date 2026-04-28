@@ -1,14 +1,40 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
+import Icon from '@components/Icon.astro';
 import CTABlock from '@components/CTABlock.astro';
 import DisclaimerBlock from '@components/DisclaimerBlock.astro';
 import { personSchema } from '@lib/schema';
+
+const facts = [
+  { icon: 'globe', label: 'В Латинской Америке', value: '13 лет' },
+  { icon: 'home', label: 'Опыт в недвижимости', value: '8+ лет' },
+  { icon: 'chat', label: 'Языки работы', value: 'RU · ES' },
+  { icon: 'pin', label: 'Городов работы', value: '5' },
+];
+
+const blocks = [
+  {
+    icon: 'compass',
+    title: 'Чем я занимаюсь',
+    text: 'Сопровождаю сделки с недвижимостью в Эквадоре для русскоязычной аудитории. Подбираю объекты по всему рынку, проверяю документы и историю, веду переговоры. Юридическое оформление сделки идёт через лицензированного партнёра-корредора. Сейчас я также на пути получения собственной лицензии.',
+  },
+  {
+    icon: 'shield-check',
+    title: 'Почему модель «эксперт + партнёр»',
+    text: 'Лицензированный риэлтор обычно получает комиссию от продавца. Я работаю напрямую с покупателем — мой гонорар платите только вы. Партнёр-корредор оформляет сделку юридически и подтверждает её чистоту. Так у вас два независимых эксперта на стороне покупки вместо одного с двумя сторонами интересов.',
+  },
+  {
+    icon: 'gem',
+    title: 'У меня нет «своей базы объектов»',
+    text: 'Я подбираю из всего рынка — частные продажи, базы корредоров, застройщики, аукционы, реверсивные предложения. Это позволяет точнее закрыть вашу задачу, а не продать «то, что есть в портфеле».',
+  },
+];
 ---
 
 <BaseLayout
-  title="Влад Вулкан — Consultor Inmobiliario в Эквадоре"
-  description="Влад Вулкан — независимый консультант по недвижимости в Эквадоре. 13 лет в ЛатАм, 8+ лет в недвижимости, билингв ES/RU. Куэнка, Кито, Гуаякиль."
+  title="Влад Вулкан — независимый эксперт по недвижимости в Эквадоре"
+  description="Влад Вулкан — независимый эксперт по недвижимости в Эквадоре. 13 лет в ЛатАм, 8+ лет в недвижимости, билингв ES/RU. Куэнка, Кито, Гуаякиль."
   jsonLd={personSchema()}
 >
   <div class="container-narrow">
@@ -16,53 +42,52 @@ import { personSchema } from '@lib/schema';
 
     <article class="page reveal">
       <span class="eyebrow gold">Об авторе</span>
-      <h1>Влад&nbsp;<em>Вулкан</em><br>Consultor Inmobiliario в&nbsp;Эквадоре</h1>
+      <h1>Влад&nbsp;<em>Вулкан</em></h1>
       <p class="lead">
-        Я — независимый консультант по&nbsp;недвижимости в&nbsp;Эквадоре для&nbsp;русскоязычной аудитории.
-        13&nbsp;лет живу в&nbsp;Латинской Америке, 8+&nbsp;лет работаю в&nbsp;недвижимости. Базируюсь в&nbsp;Эквадоре,
-        веду сделки в&nbsp;Куэнке, Кито, Гуаякиле, Салинасе и&nbsp;Манте.
+        Независимый эксперт по&nbsp;недвижимости в&nbsp;Эквадоре для&nbsp;русскоязычной аудитории.
+        Базируюсь в&nbsp;Куэнке, веду сделки в&nbsp;5&nbsp;городах страны.
       </p>
 
-      <div class="prose">
-        <h2>Опыт</h2>
-        <ul>
-          <li>13 лет в Латинской Америке — Эквадор и соседние страны региона</li>
-          <li>8+ лет опыта в недвижимости — рынки Эквадора, due diligence, инвест-анализ</li>
-          <li>Билингв: испанский + русский — работаю напрямую с местными нотариусами, банками, кооперативами</li>
-          <li>Основатель компании HH&nbsp;Faro — испаноязычный консалтинг по&nbsp;недвижимости (упоминается как факт биографии)</li>
-        </ul>
-
-        <h2>Почему я работаю как consultor inmobiliario, а не риэлтор</h2>
-        <p>
-          Лицензированный риэлтор в Эквадоре получает комиссию от продавца — это создаёт прямой конфликт
-          интересов. Я сознательно не беру лицензию, чтобы оставаться независимым. Мой гонорар платите вы —
-          поэтому я работаю только на вашей стороне. Юридическое оформление сделки идёт через лицензированного
-          партнёра-корредора. Эта модель даёт вам двух независимых экспертов вместо одного, у которого «обе
-          стороны на руках».
-        </p>
-        <p>
-          У меня нет «своей базы объектов». Я подбираю из всего рынка — частные продажи, базы корредоров,
-          застройщики, аукционы, реверсивные предложения. Это позволяет точнее закрыть вашу задачу, а не
-          продать «то, что есть в портфеле».
-        </p>
-
-        <h2>Как со мной работать</h2>
-        <h3>Три формата работы</h3>
-        <ul>
-          <li><strong>Рядом</strong> — вы в Эквадоре, осматриваете объекты сами, я даю экспертизу, проверки и переговоры</li>
-          <li><strong>Гибрид</strong> — я отбираю кандидатов, вы прилетаете на финальный осмотр и сделку</li>
-          <li><strong>Удалённо</strong> — я работаю за вас по нотариальной доверенности от первой консультации до передачи ключей</li>
-        </ul>
-
-        <h3>Пять городов как основная зона</h3>
-        <p>Куэнка, Кито, Гуаякиль, Салинас, Манта. Другие города — обсуждаем индивидуально.</p>
-
-        <h3>Стратегическая консультация — первый шаг</h3>
-        <p>
-          60 минут, $150. Разбираем ситуацию: бюджет, цели, какие города и форматы подходят. Если идём дальше —
-          сумма засчитывается в пакет. Если не идём — у вас остаётся понимание рынка и список конкретных шагов.
-        </p>
+      <!-- Цифры о себе -->
+      <div class="facts-row reveal-stagger">
+        {facts.map((f) => (
+          <div class="fact frame-bar">
+            <div class="fact-icon"><Icon name={f.icon} size={26} stroke={1.25} /></div>
+            <div class="fact-value">{f.value}</div>
+            <div class="fact-label">{f.label}</div>
+          </div>
+        ))}
       </div>
+
+      <!-- Блоки -->
+      <div class="story reveal-stagger">
+        {blocks.map((block) => (
+          <div class="story-block frame-bar">
+            <div class="story-icon"><Icon name={block.icon} size={32} stroke={1.25} /></div>
+            <h2>{block.title}</h2>
+            <p>{block.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Форматы работы -->
+      <section class="formats reveal">
+        <h2 class="block-title">Три формата работы со&nbsp;мной</h2>
+        <div class="formats-grid">
+          <div class="format frame-side">
+            <div class="format-label">Рядом</div>
+            <p>Вы в Эквадоре, осматриваете сами, я даю экспертизу, проверки и переговоры.</p>
+          </div>
+          <div class="format frame-side">
+            <div class="format-label">Гибрид</div>
+            <p>Я отбираю кандидатов, вы прилетаете на финальный осмотр и сделку.</p>
+          </div>
+          <div class="format frame-side">
+            <div class="format-label">Удалённо</div>
+            <p>Полностью по нотариальной доверенности — от первой консультации до получения ключей.</p>
+          </div>
+        </div>
+      </section>
 
       <CTABlock variant="commercial" />
       <DisclaimerBlock />
@@ -75,10 +100,10 @@ import { personSchema } from '@lib/schema';
   .page > .eyebrow { display: block; margin: 16px 0 18px; }
   .page h1 {
     font-family: var(--font-display);
-    font-size: clamp(40px, 6vw, 80px);
+    font-size: clamp(48px, 7vw, 96px);
     line-height: 1;
     margin: 0 0 24px;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
   }
   .page h1 em {
     font-style: italic;
@@ -92,6 +117,93 @@ import { personSchema } from '@lib/schema';
     color: var(--text-dim);
     margin: 0 0 36px;
     font-weight: 300;
-    max-width: 720px;
+  }
+
+  .facts-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 720px) { .facts-row { grid-template-columns: repeat(2, 1fr); } }
+
+  .fact {
+    text-align: center;
+    padding: 22px 16px;
+  }
+  .fact-icon {
+    color: var(--gold-champagne);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .fact-value {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.4vw, 28px);
+    color: var(--text-light);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .fact-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+  }
+
+  .story {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 60px;
+  }
+  .story-block {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .story-icon { color: var(--gold-champagne); }
+  .story-block h2 {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.6vw, 30px);
+    color: var(--text-light);
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .story-block p {
+    color: var(--text-dim);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .formats { margin-bottom: 60px; }
+  .block-title {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3vw, 36px);
+    margin: 0 0 24px;
+    letter-spacing: -0.02em;
+  }
+  .formats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .format-label {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--gold-champagne);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .format p {
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 300;
   }
 </style>
