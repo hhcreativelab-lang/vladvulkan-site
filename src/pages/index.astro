@@ -447,13 +447,13 @@ const schemas = [
     flex: 1;
     display: grid;
     /* левая колонка пустая (фото), правая — фиксированная под текст,
-       чуть сдвинутая вправо для гармонии */
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, clamp(380px, 42vw, 580px));
+       сильнее сдвинута вправо для воздуха слева */
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, clamp(380px, 42vw, 580px));
     gap: clamp(20px, 4vw, 60px);
     align-items: center;
     padding-top: clamp(110px, 16vh, 180px);
     padding-bottom: clamp(40px, 6vw, 80px);
-    padding-right: clamp(20px, 4vw, 60px);
+    padding-right: clamp(40px, 6vw, 100px);
   }
 
   .hero-spacer { /* Левая колонка — фото проступает */ min-width: 0; }
@@ -468,8 +468,8 @@ const schemas = [
   }
 
   .hero-eyebrow {
-    color: var(--gold-champagne);
-    text-shadow: 0 1px 8px rgba(7, 3, 16, 0.85);
+    color: var(--violet-bright);
+    text-shadow: 0 1px 8px rgba(7, 3, 16, 0.85), 0 0 20px rgba(157, 127, 255, 0.35);
   }
 
   .hero-title {
@@ -514,27 +514,30 @@ const schemas = [
     font-size: 11px;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--text-mute);
+    color: var(--violet-bright);
     flex-wrap: wrap;
-    text-shadow: 0 1px 6px rgba(7, 3, 16, 0.75);
+    text-shadow: 0 1px 6px rgba(7, 3, 16, 0.75), 0 0 14px rgba(157, 127, 255, 0.3);
   }
   .city {
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    color: var(--violet-bright);
     transition: color 0.4s;
   }
   .city-dot {
     width: 5px; height: 5px;
     border-radius: 50%;
-    background: var(--text-soft);
+    background: var(--violet-bright);
+    box-shadow: 0 0 8px rgba(157, 127, 255, 0.5);
   }
   .city.active { color: var(--text-light); }
   .city.active .city-dot {
     background: var(--green);
-    box-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.75);
+    animation: pulse 2s ease-in-out infinite;
   }
-  .city-sep { color: var(--text-soft); opacity: 0.5; }
+  .city-sep { color: var(--violet-bright); opacity: 0.45; }
 
   .hero-sub-wrap {
     position: relative;
