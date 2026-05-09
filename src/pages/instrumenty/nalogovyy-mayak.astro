@@ -1,0 +1,270 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CTABlock from '@components/CTABlock.astro';
+import DisclaimerBlock from '@components/DisclaimerBlock.astro';
+---
+
+<BaseLayout
+  title="Налоговый маяк Эквадора 2026 — интерактивный калькулятор"
+  description="Налоговый маяк Эквадора 2026: интерактивный калькулятор всех налогов для резидентов и нерезидентов. IRPF 0–37%, IESS, alcabala, plusvalía, ISD, ретенции. Выбор формы бизнеса (Физлицо, SAS, RIMPE) и города."
+>
+  <div class="container-narrow">
+    <Breadcrumbs items={[
+      { name: 'Инструменты', href: '/instrumenty' },
+      { name: 'Налоговый маяк', href: '/instrumenty/nalogovyy-mayak' },
+    ]} />
+
+    <article class="page reveal">
+      <span class="eyebrow gold">Калькулятор</span>
+      <h1>Налоговый <em>маяк</em><br>Эквадора 2026</h1>
+      <p class="lead">
+        Интерактивный калькулятор всех налогов Эквадора&nbsp;— подоходный, IESS,
+        недвижимость, переводы, ретенции. Выберите свой профиль (резидент, форма бизнеса, город)
+        и&nbsp;получите точную картину под&nbsp;вашу ситуацию.
+      </p>
+
+      <!-- Интерактивный калькулятор через iframe -->
+      <div class="calc-frame">
+        <iframe
+          src="/tax-calculator.html"
+          title="Налоговый маяк Эквадора"
+          loading="lazy"
+          id="tax-mayak-iframe"
+        ></iframe>
+      </div>
+
+      <section class="info reveal">
+        <h2>Что внутри маяка</h2>
+        <div class="info-grid">
+          <div class="info-block frame-bar">
+            <h3>6 разделов налогов</h3>
+            <ul>
+              <li>Доходы — IRPF и корпоративный налог</li>
+              <li>Зарплаты — IESS, décimos, fondo de reserva</li>
+              <li>Недвижимость — alcabala, plusvalía, predios</li>
+              <li>Переводы — ISD 5% за границу</li>
+              <li>Ретенции — удержания у источника 8–25%</li>
+              <li>Скрытые налоги — спец. сборы вашей формы бизнеса</li>
+            </ul>
+          </div>
+          <div class="info-block frame-bar">
+            <h3>4 формы бизнеса</h3>
+            <ul>
+              <li><strong>Физлицо с RUC</strong> — самозанятый, IRPF 0–37%</li>
+              <li><strong>Физлицо без RUC</strong> — зарплата/рента, та же шкала</li>
+              <li><strong>Компания (SAS, Ltda.)</strong> — 25% или 17% при реинвестиции</li>
+              <li><strong>RIMPE</strong> — упрощёнка, 1–2% от оборота до $300K</li>
+            </ul>
+          </div>
+          <div class="info-block frame-bar">
+            <h3>5 городов</h3>
+            <ul>
+              <li>Куэнка — predios от 0,025% от avalúo</li>
+              <li>Кито — alcabala 1% + 10% надбавка провинции</li>
+              <li>Гуаякиль — стандартные ставки</li>
+              <li>Манта — туристический режим</li>
+              <li>Салинас — курортные коэффициенты</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="usecases reveal">
+        <h2>Как использовать</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-num">1</span>
+            <div>
+              <strong>Выберите профиль</strong> — резидент или нерезидент Эквадора.
+              <p>Резидентом становишься после 183&nbsp;дней проживания в&nbsp;стране&nbsp;— тогда платишь налог на&nbsp;мировой доход.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <div>
+              <strong>Выберите форму бизнеса</strong> — кем вы получаете доход.
+              <p>От&nbsp;этого зависит ставка IRPF (физлицо&nbsp;— прогрессив 0–37%, компания&nbsp;— фиксированные 25%/17%, RIMPE&nbsp;— 1–2% от&nbsp;оборота).</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <div>
+              <strong>Выберите город</strong> — где недвижимость или бизнес.
+              <p>Кито добавляет провинциальную надбавку. Туристические зоны (Манта, Салинас) могут иметь сниженные ставки для гостиниц и&nbsp;Airbnb.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <div>
+              <strong>Изучите все 6 разделов</strong> — каждый раскрывается в&nbsp;деталях.
+              <p>Налоговая ситуация полностью видна на&nbsp;одной странице&nbsp;— без&nbsp;похода к&nbsp;контабалю.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <CTABlock variant="commercial" />
+      <DisclaimerBlock />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .page { padding: 12px 0 40px; }
+  .page > .eyebrow { display: block; margin: 16px 0 18px; }
+  .page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1;
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
+  }
+  .page h1 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--gold), var(--gold-champagne));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lead {
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0 0 36px;
+    font-weight: 300;
+  }
+
+  /* Iframe wrapper — высота управляется через postMessage от калькулятора */
+  .calc-frame {
+    position: relative;
+    width: 100%;
+    margin: 0 0 56px;
+    overflow: hidden;
+    background: transparent;
+  }
+  .calc-frame iframe {
+    width: 100%;
+    height: 800px; /* стартовая высота — расширяется динамически через postMessage */
+    border: 0;
+    display: block;
+    background: transparent;
+    transition: height 0.2s ease-out;
+  }
+
+  /* Info grid */
+  section { margin-bottom: 56px; }
+  section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.6vw, 42px);
+    margin: 0 0 24px;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 720px) {
+    .info-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .info-block {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .info-block h3 {
+    font-family: var(--font-display);
+    font-size: 19px;
+    color: var(--text-light);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .info-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+  .info-block li {
+    padding-left: 16px;
+    position: relative;
+  }
+  .info-block li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px;
+    height: 1px;
+    background: var(--gold-champagne);
+  }
+  .info-block strong { color: var(--text-light); font-weight: 500; }
+
+  /* Steps */
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .steps li {
+    display: flex;
+    gap: 18px;
+    padding: 20px 22px;
+    background: linear-gradient(180deg, rgba(22, 20, 26, 0.6) 0%, rgba(16, 14, 20, 0.78) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.1);
+    border-radius: 8px;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(124, 58, 237, 0.18);
+    border: 1px solid rgba(124, 58, 237, 0.45);
+    color: #C4B0FF;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .steps strong {
+    color: var(--text-light);
+    font-size: 16px;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .steps p {
+    color: var(--text-dim);
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0;
+    font-weight: 300;
+  }
+</style>
+
+<script>
+  // Auto-resize iframe in response to mayak postMessage
+  // Calculator inside iframe sends its actual content height via postMessage
+  window.addEventListener('message', (e) => {
+    if (!e.data || typeof e.data !== 'object') return;
+    if (e.data.type === 'mayak-resize' && typeof e.data.height === 'number') {
+      const iframe = document.getElementById('tax-mayak-iframe') as HTMLIFrameElement | null;
+      if (iframe && e.data.height > 200 && e.data.height < 20000) {
+        // Set exact height matching content + small buffer
+        iframe.style.height = e.data.height + 'px';
+      }
+    }
+  });
+</script>

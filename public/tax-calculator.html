@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Налоговый маяк Эквадора — HH FARO</title>
+<style>
+/* ═══ HARD RESET — убиваем ВСЕ верхние отступы и пустоты ═══ */
+*,*::before,*::after{box-sizing:border-box}
+html,body{
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  background:#070310 !important;
+}
+html{min-height:100%;overflow-x:hidden}
+body{min-height:100vh;overflow-x:hidden}
+
+/* Убираем возможный margin первого child через :first-child */
+body > *:first-child{margin-top:0 !important}
+
+/* Убираем дефолтный flex:1 (мусор из прошлого) */
+body{flex:none !important}
+
+/* Сжимаем верхние padding основных контейнеров */
+.hdr{padding-top:16px !important;padding-bottom:10px !important}
+.wrap{padding-top:12px !important}
+
+:root{
+  --bg:#070310;--card:#1F1B2E;--card2:#272238;--card3:#2D2740;--b:#3A3548;--b2:#4A4560;
+  --tx:#FFFFFF;--tx2:#DCDCE4;--mu:#9898A8;--mu2:#6A6A78;
+  --pu: #7230D8;--pu-l: #9560E8;--pu-d:#7230D8;
+  --pu-bg:rgba(114,48,216,.15);--pu-bg2:rgba(114,48,216,.08);--pu-brd:rgba(114,48,216,.32);
+  --gr:#4ADE80;--gr-bg:rgba(74,222,128,.12);--gr-brd:rgba(74,222,128,.30);
+  --rd:#F87171;--rd-bg:rgba(248,113,113,.12);--rd-brd:rgba(248,113,113,.30);
+  --am:#FCD34D;--am-bg:rgba(252,211,77,.12);--am-brd:rgba(252,211,77,.30);
+  --bl:#60A5FA;--bl-bg:rgba(96,165,250,.12);--bl-brd:rgba(96,165,250,.30);
+  --or:#FB923C;--or-bg:rgba(251,146,60,.12);--or-brd:rgba(251,146,60,.30);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#070310;color:var(--tx);min-height:100vh}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.6;overflow-x:hidden;color-scheme:dark}
+
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:center;gap:16px;padding:24px 28px;background:#070310}
+.logo-img{width:48px;height:48px;overflow:visible;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.logo-img img{width:100%;height:100%;object-fit:cover;display:block}
+.brand-t{font-size:19px;font-weight:800;letter-spacing:-.4px}
+.brand-s{font-size:12px;color:var(--mu);margin-top:2px}
+
+/* CHOICE BAR */
+.choice{padding:16px 24px;background:rgba(114,48,216,.04);border-bottom:1px solid var(--b);display:flex;flex-direction:column;align-items:center;gap:11px}
+.ch-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--mu);display:flex;align-items:center;gap:6px}
+.ch-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+.ch-b{padding:9px 16px;font-size:13px;font-weight:700;border:1px solid var(--b);border-radius:20px;background:var(--card);color:var(--mu);cursor:pointer;transition:all .15s;user-select:none;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.ch-b:hover{border-color:var(--pu-l);color:var(--tx2)}
+.ch-b.on{background:var(--pu);border-color:var(--pu);color:#fff;box-shadow:0 4px 16px rgba(114,48,216,.4)}
+.ch-b .ch-ico{font-size:14px}
+
+/* WRAP */
+.wrap{max-width:1200px;margin:0 auto;padding:22px 24px 40px}
+
+.section{margin-bottom:26px}
+.sec-h{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--b)}
+.sec-ico{font-size:32px}
+.sec-t{font-size:24px;font-weight:800;letter-spacing:-.4px;color:#fff;margin-bottom:4px}
+.sec-s{font-size:12.5px;color:var(--pu-l);margin-top:2px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+
+/* HERO BOARD */
+.hero-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:26px}
+.hb-cell{background:var(--card);border:1px solid var(--b);border-radius:13px;padding:22px 20px 20px;transition:all .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:160px;justify-content:center}
+.hb-cell:hover{border-color:var(--pu);transform:translateY(-2px);box-shadow:0 10px 28px rgba(114,48,216,.2)}
+.hb-cell::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent,var(--pu));opacity:.7}
+.hb-ico{font-size:36px;margin-bottom:10px;display:block}
+.hb-l{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin-bottom:6px}
+.hb-v{font-size:22px;font-weight:800;line-height:1.25;margin-bottom:5px;color:var(--tx)}
+.hb-d{font-size:12.5px;color:var(--mu2);line-height:1.5;font-weight:500}
+.hb-cell[data-c="income"]{--accent:#9560E8}
+.hb-cell[data-c="salary"]{--accent:#FCD34D}
+.hb-cell[data-c="realestate"]{--accent:#4ADE80}
+.hb-cell[data-c="transfers"]{--accent:#60A5FA}
+.hb-cell[data-c="retentions"]{--accent:#FB923C}
+.hb-cell[data-c="hidden"]{--accent:#F87171}
+
+.profile-line{font-size:12.5px;color:var(--mu);text-align:center;margin-bottom:14px;padding:8px 14px;background:var(--pu-bg2);border:1px solid var(--pu-brd);border-radius:20px;display:inline-block}
+.pl-wrap{text-align:center;margin-bottom:18px}
+.profile-line strong{color:var(--pu-l);font-weight:700}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--b);border-radius:13px;padding:18px 20px;margin-bottom:12px}
+
+/* 4 FORMS COLUMNS */
+.forms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.fcol{background:var(--card2);border:1.5px solid var(--b);border-radius:11px;padding:13px 14px;transition:all .25s;position:relative}
+.fcol.on{border-color:var(--pu);background:var(--pu-bg2);box-shadow:0 0 0 3px rgba(114,48,216,.12)}
+.fcol.on::after{content:"✨ Твой";position:absolute;top:-9px;right:10px;background:var(--pu);color:#fff;font-size:9px;font-weight:800;padding:2px 8px;border-radius:10px;letter-spacing:.04em}
+.fcol-h{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;margin-bottom:8px;color:var(--tx)}
+.fcol-h-ico{font-size:19px}
+.fcol-sub{font-size:10.5px;color:var(--mu);font-weight:600;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em}
+.fcol-rate{font-size:20px;font-weight:800;color:var(--pu-l);margin-bottom:6px;line-height:1.2}
+.fcol.on .fcol-rate{color:var(--pu-l)}
+.fcol-desc{font-size:12px;color:var(--tx2);line-height:1.55;margin-bottom:10px}
+.fcol-ex{font-size:11.5px;color:var(--mu);line-height:1.5;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)}
+.fcol-ex strong{color:var(--tx2)}
+
+/* IRPF SCALE */
+.scale{margin:14px 0 4px}
+.scale-bars{display:flex;gap:2px;border-radius:8px;height:34px;background:var(--card2);position:relative}
+.scale-seg{position:relative;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff;transition:all .2s}
+.scale-labels{display:flex;justify-content:space-between;margin-top:7px;font-size:9.5px;color:var(--mu);font-weight:600}
+
+/* RULES LIST */
+.rules{list-style:none;padding:0;margin:14px 0 0}
+.rules li{padding:10px 13px 10px 32px;font-size:12.5px;line-height:1.6;position:relative;color:var(--tx2);border-left:2px solid var(--pu);background:var(--pu-bg2);margin-bottom:5px;border-radius:0 7px 7px 0}
+.rules li::before{content:"▸";position:absolute;left:11px;color:var(--pu);font-weight:800}
+.rules li strong{color:var(--tx)}
+
+/* 3 ROLES (real estate) */
+.roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.role-card{background:var(--card2);border:1.5px solid var(--b);border-radius:12px;padding:15px 16px;transition:all .2s}
+.role-card:hover{border-color:var(--b2)}
+.role-h{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:800;margin-bottom:11px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.07)}
+.role-h-ico{font-size:22px}
+.role-list{display:flex;flex-direction:column;gap:8px;margin-bottom:11px}
+.role-item{display:flex;justify-content:space-between;align-items:flex-start;gap:9px;font-size:12.5px;padding:6px 9px;background:rgba(255,255,255,.03);border-radius:6px}
+.role-it-l{color:var(--tx2);line-height:1.4}
+.role-it-r{font-weight:800;color:var(--pu-l);white-space:nowrap;font-variant-numeric:tabular-nums}
+.role-ex{font-size:12px;color:var(--mu);padding-top:10px;border-top:1px solid rgba(255,255,255,.06);line-height:1.55}
+.role-ex strong{color:var(--tx2)}
+
+/* TABLE */
+.tbl-w{overflow-x:auto;margin:6px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{padding:11px 12px;text-align:left;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--mu);background:rgba(114,48,216,.06);border-bottom:1px solid var(--b)}
+.tbl th.r{text-align:right}
+.tbl td{padding:9px 11px;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5}
+.tbl td.r{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.tbl tr:hover td{background:rgba(255,255,255,.025)}
+.tbl tr.on td{background:var(--pu-bg2);border-left:3px solid var(--pu)}
+.tbl tr.on td:first-child{padding-left:8px}
+
+/* TERM DICT */
+.term{border-bottom:1px dotted var(--pu-l);cursor:help;position:relative}
+.term:hover{color:var(--pu-l)}
+.term-pop{display:none;position:absolute;left:0;top:100%;margin-top:6px;background:var(--card3);border:1px solid var(--pu-brd);border-radius:9px;padding:12px 14px;font-size:12.5px;font-weight:400;color:var(--tx2);line-height:1.6;width:280px;z-index:50;box-shadow:0 14px 34px rgba(0,0,0,.55);text-transform:none;letter-spacing:0;white-space:normal}
+.term:hover .term-pop,.term.active .term-pop{display:block}
+.term-pop strong{color:var(--pu-l)}
+
+/* EXAMPLE BOX */
+.ex-box{margin-top:14px;padding:14px 16px;background:var(--pu-bg2);border:1px solid var(--pu-brd);border-radius:9px;font-size:12.5px;line-height:1.7}
+.ex-box-h{font-size:11px;font-weight:800;color:var(--pu-l);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+
+/* INFO BLOCKS */
+.info{padding:14px 16px;border-radius:10px;border:1px solid;margin-bottom:11px;font-size:12.5px;line-height:1.65;display:flex;gap:11px;align-items:flex-start}
+.info-ico{font-size:20px;flex-shrink:0;margin-top:0}
+.info-
+.info-t{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.i-g{background:var(--gr-bg);border-color:var(--gr-brd)}.i-g .info-t{color:var(--gr)}
+.i-r{background:var(--rd-bg);border-color:var(--rd-brd)}.i-r .info-t{color:var(--rd)}
+.i-p{background:var(--pu-bg);border-color:var(--pu-brd)}.i-p .info-t{color:var(--pu-l)}
+.i-a{background:var(--am-bg);border-color:var(--am-brd)}.i-a .info-t{color:var(--am)}
+.i-b{background:var(--bl-bg);border-color:var(--bl-brd)}.i-b .info-t{color:var(--bl)}
+
+/* CALC BTN */
+
+/* FOOTER */
+.foot{padding:24px 24px;border-top:1px solid var(--b);font-size:11.5px;color:var(--mu);text-align:center;line-height:1.75;margin-top:30px}
+.foot strong{color:var(--tx2)}
+.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:14px}
+.foot-links a{color:var(--pu-l);text-decoration:none;font-size:12.5px;font-weight:600;padding:5px 11px;border:1px solid var(--pu-brd);border-radius:18px;background:var(--pu-bg2);transition:all .15s}
+.foot-links a:hover{background:var(--pu-bg);border-color:var(--pu-l)}
+
+/* MOBILE */
+@media(max-width:900px){
+  .hero-board{grid-template-columns:repeat(2,1fr);gap:10px}
+  .forms-grid{grid-template-columns:repeat(2,1fr)}
+  .roles-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .wrap{padding:14px 14px 30px}
+  .hero-board{grid-template-columns:1fr;gap:9px}
+  .forms-grid{grid-template-columns:1fr}
+  .hb-cell{padding:14px 15px}
+  .hb-ico{font-size:22px}
+  .ch-row{gap:5px}
+  .ch-b{padding:7px 11px;font-size:11px}
+  .choice{padding:12px 12px}
+  .sec-t{font-size:19px}.sec-s{font-size:11px}
+  .brand-t{font-size:15px}
+  .hdr{padding:12px 14px 10px;gap:10px}
+  .logo-img{width:48px;height:48px;overflow:visible;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .tbl{font-size:10.5px}
+  .tbl th,.tbl td{padding:7px 8px}
+  .term-pop{width:220px;left:auto;right:0}
+}
+
+/* ═══════════ ГЛЯНЕЦ — ПРЕМИУМ СТИЛЬ ═══════════ */
+
+/* Декоративный градиентный фон для body */
+/* removed body fog */
+
+/* HEADER — глянец */
+.hdr{background:linear-gradient(180deg,rgba(114,48,216,.08),rgba(114,48,216,.02));border-bottom:1px solid rgba(114,48,216,.18);-webkit-backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.logo-img{width:48px;height:48px;overflow:visible;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.brand-t{background:linear-gradient(135deg,#fff 0%,#DCDCE4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text}
+
+/* CHOICE BAR — glassmorphism */
+.choice{background:linear-gradient(180deg,rgba(114,48,216,.06),rgba(114,48,216,.02));border-bottom:1px solid rgba(114,48,216,.15);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 2px 6px rgba(0,0,0,.2);transition:all .25s cubic-bezier(.4,0,.2,1)}
+.ch-b:hover{background:linear-gradient(180deg,rgba(114,48,216,.12),rgba(114,48,216,.04));transform:translateY(-1px);box-shadow:0 4px 14px rgba(114,48,216,.18),0 1px 0 rgba(255,255,255,.08) inset}
+.ch-b.on{background:linear-gradient(135deg,#9560E8 0%,#7230D8 100%);border-color:#7230D8;box-shadow:0 6px 20px rgba(114,48,216,.5),0 1px 0 rgba(255,255,255,.3) inset;transform:translateY(-1px)}
+
+/* PROFILE LINE — glassmorphism pill */
+.profile-line{background:linear-gradient(135deg,rgba(114,48,216,.14),rgba(114,48,216,.06));border:1px solid rgba(114,48,216,.3);-webkit-backdrop-filter:blur(10px);box-shadow:0 4px 16px rgba(114,48,216,.15),0 1px 0 rgba(255,255,255,.06) inset;padding:10px 18px;font-size:13px}
+
+/* SECTION HEADERS — премиум */
+.sec-h{padding-bottom:16px;border-bottom:1px solid rgba(114,48,216,.2);position:relative;margin-bottom:18px}
+.sec-h::after{content:"";position:absolute;bottom:-1px;left:0;width:60px;height:1px;background:linear-gradient(90deg,#9560E8,transparent)}
+.sec-ico{width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(114,48,216,.18),rgba(114,48,216,.04));border:1px solid rgba(114,48,216,.3);border-radius:14px;font-size:28px;box-shadow:0 6px 18px rgba(114,48,216,.2),0 1px 0 rgba(255,255,255,.06) inset;flex-shrink:0}
+.sec-t{background:linear-gradient(135deg,#fff 0%,#9560E8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text;font-weight:800;font-size:24px;letter-spacing:-.5px;line-height:1.2}
+.sec-s{color:#9B91E8;font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:.14em;margin-top:6px}
+
+/* HERO BOARD CELLS — премиум глянцевые */
+.hb-cell{background:linear-gradient(180deg,rgba(114,48,216,.06) 0%,var(--card) 30%,var(--card) 100%);border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 20px rgba(0,0,0,.25),0 1px 0 rgba(255,255,255,.05) inset;overflow:hidden;position:relative}
+.hb-cell::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--pu));opacity:1;box-shadow:0 0 20px var(--accent,var(--pu))}
+.hb-cell::after{content:"";position:absolute;top:4px;left:50%;transform:translateX(-50%);width:70%;height:50px;background:radial-gradient(ellipse,var(--accent,var(--pu)) 0%,transparent 70%);opacity:.15;pointer-events:none;filter:blur(15px)}
+.hb-cell:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(114,48,216,.3),0 1px 0 rgba(255,255,255,.1) inset;border-color:rgba(114,48,216,.4)}
+.hb-ico{filter:drop-shadow(0 4px 12px rgba(114,48,216,.35))}
+.hb-v{background:linear-gradient(135deg,#fff,#DCDCE4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text;font-weight:800}
+
+/* CARDS — глянец */
+.card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.08)),var(--card);border:1px solid rgba(255,255,255,.06);box-shadow:0 8px 24px rgba(0,0,0,.2),0 1px 0 rgba(255,255,255,.04) inset;transition:all .3s}
+.card:hover{border-color:rgba(114,48,216,.22);box-shadow:0 12px 32px rgba(114,48,216,.12),0 1px 0 rgba(255,255,255,.06) inset}
+
+/* FORM COLUMNS */
+.fcol{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.1)),var(--card2);transition:all .3s cubic-bezier(.4,0,.2,1);box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.fcol.on{background:linear-gradient(180deg,rgba(114,48,216,.15),rgba(114,48,216,.04)),var(--card2);border-color:#9560E8;box-shadow:0 0 0 3px rgba(114,48,216,.18),0 12px 32px rgba(114,48,216,.25),0 1px 0 rgba(255,255,255,.1) inset;transform:translateY(-3px)}
+.fcol.on::before{content:"";position:absolute;top:-1px;left:-1px;right:-1px;height:3px;background:linear-gradient(90deg,#7230D8,#9560E8,#9560E8);border-radius:11px 11px 0 0;box-shadow:0 0 16px rgba(114,48,216,.6)}
+.fcol.on::after{content:"✨ Твой";top:-12px;background:linear-gradient(135deg,#9560E8,#7230D8);box-shadow:0 4px 12px rgba(114,48,216,.45),0 1px 0 rgba(255,255,255,.25) inset;letter-spacing:.06em}
+.fcol-rate{background:linear-gradient(135deg,#9560E8,#9560E8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text;font-weight:900}
+.fcol-h-ico{filter:drop-shadow(0 2px 6px rgba(114,48,216,.3))}
+
+/* ROLE CARDS — глянцевые */
+.role-card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.08)),var(--card2);box-shadow:0 6px 18px rgba(0,0,0,.18),0 1px 0 rgba(255,255,255,.04) inset}
+.role-card:hover{border-color:rgba(114,48,216,.3);box-shadow:0 10px 28px rgba(114,48,216,.15),0 1px 0 rgba(255,255,255,.06) inset;transform:translateY(-2px)}
+.role-h{background:linear-gradient(135deg,#fff,#C8BFF8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text}
+.role-h-ico{-webkit-text-fill-color:initial;filter:drop-shadow(0 3px 8px rgba(114,48,216,.3))}
+.role-it-r{background:linear-gradient(135deg,#9560E8,#9560E8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text;font-weight:800}
+
+/* SCALE (IRPF) — премиум */
+.scale-bars{border-radius:10px;overflow:visible;height:36px;box-shadow:0 4px 14px rgba(0,0,0,.25),0 1px 0 rgba(255,255,255,.08) inset;position:relative}
+.scale-seg{position:relative;font-weight:800}
+.scale-seg::after{content:"";position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.2),transparent);pointer-events:none}
+
+/* TABLES — глянец */
+.tbl-w{border-radius:11px;overflow:hidden;border:1px solid rgba(255,255,255,.06);box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.tbl th{background:linear-gradient(180deg,rgba(114,48,216,.1),rgba(114,48,216,.04));border-bottom:1px solid rgba(114,48,216,.25)}
+.tbl tr:hover td{background:linear-gradient(90deg,rgba(114,48,216,.04),transparent)}
+
+/* INFO BLOCKS — глянец */
+.info{-webkit-backdrop-filter:blur(10px);box-shadow:0 4px 16px rgba(0,0,0,.15),0 1px 0 rgba(255,255,255,.05) inset}
+
+/* RULES — премиум */
+.rules li{background:linear-gradient(135deg,rgba(114,48,216,.1),rgba(114,48,216,.03));border-left:3px solid transparent;border-image:linear-gradient(180deg,#9560E8,#7230D8) 1;box-shadow:0 2px 8px rgba(0,0,0,.1),0 1px 0 rgba(255,255,255,.04) inset;transition:all .2s}
+.rules li:hover{transform:translateX(4px);background:linear-gradient(135deg,rgba(114,48,216,.16),rgba(114,48,216,.05))}
+
+/* EXAMPLE BOX — премиум */
+.ex-box{background:linear-gradient(135deg,rgba(114,48,216,.14),rgba(114,48,216,.04));box-shadow:0 6px 20px rgba(114,48,216,.12),0 1px 0 rgba(255,255,255,.06) inset;-webkit-backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(114,48,216,.1),0 1px 0 rgba(255,255,255,.06) inset;-webkit-backdrop-filter:blur(8px);transition:all .25s cubic-bezier(.4,0,.2,1)}
+.foot-links a:hover{background:linear-gradient(135deg,rgba(114,48,216,.25),rgba(114,48,216,.1));transform:translateY(-2px);box-shadow:0 8px 20px rgba(114,48,216,.3),0 1px 0 rgba(255,255,255,.12) inset;border-color:#9560E8}
+
+/* TERM — премиум подчёркивание */
+.term{background:linear-gradient(90deg,transparent calc(100% - 4px),var(--pu-l) calc(100% - 4px));transition:all .2s}
+.term:hover{color:#9560E8;text-shadow:0 0 8px rgba(149,96,232,.4)}
+.term-pop{box-shadow:0 20px 48px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.08) inset;-webkit-backdrop-filter:blur(14px);background:linear-gradient(180deg,rgba(45,39,64,.95),rgba(39,34,56,.95))}
+
+/* CALC BTN (link) inside sections — premium gradient glow */
+a[style*="background:var(--pu)"][target="_blank"]{background:linear-gradient(135deg,#9560E8 0%,#9560E8 50%,#7230D8 100%)!important;box-shadow:0 8px 28px rgba(114,48,216,.45),0 1px 0 rgba(255,255,255,.2) inset!important;transition:all .3s cubic-bezier(.4,0,.2,1)!important;position:relative;overflow:hidden}
+a[style*="background:var(--pu)"][target="_blank"]:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 36px rgba(114,48,216,.6),0 1px 0 rgba(255,255,255,.3) inset!important}
+
+/* FOOTER main */
+.foot{background:linear-gradient(180deg,rgba(114,48,216,.04),transparent);border-top:1px solid rgba(114,48,216,.15)}
+
+/* Smoother transitions globally */
+.card,.fcol,.role-card,.hb-cell,.ch-b,.tab{transition:all .3s cubic-bezier(.4,0,.2,1)}
+
+/* Tooltip для сегментов шкалы IRPF */
+.scale-seg{position:relative;cursor:help}
+.scale-seg-pop{display:none;position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);background:linear-gradient(180deg,rgba(45,39,64,.97),rgba(39,34,56,.97));border:1px solid rgba(114,48,216,.35);border-radius:10px;padding:11px 13px;font-size:11.5px;color:var(--tx2);width:220px;z-index:60;box-shadow:0 16px 38px rgba(0,0,0,.65),0 1px 0 rgba(255,255,255,.08) inset;-webkit-backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-weight:400;text-transform:none;letter-spacing:0;line-height:1.5;text-align:left;pointer-events:none}
+.scale-seg-pop::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(114,48,216,.35)}
+.scale-seg:hover .scale-seg-pop,.scale-seg.active .scale-seg-pop{display:block;animation:fadeInPop .2s ease}
+@keyframes fadeInPop{from{opacity:0;transform:translateX(-50%) translateY(4px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.ssp-h{font-size:10.5px;font-weight:800;color:var(--pu-l);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid rgba(114,48,216,.2)}
+.ssp-r{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px;font-variant-numeric:tabular-nums}
+.ssp-d{font-size:11px;color:var(--tx2);line-height:1.55}
+.ssp-d b{color:var(--pu-l);font-weight:800}
+
+/* Edge cases — крайние сегменты не должны вылезать за экран */
+.scale-bars > .scale-seg:first-child .scale-seg-pop{left:0;transform:translateX(0)}
+.scale-bars > .scale-seg:first-child .scale-seg-pop::after{left:20px;transform:translateX(0)}
+.scale-bars > .scale-seg:last-child .scale-seg-pop{left:auto;right:0;transform:translateX(0)}
+.scale-bars > .scale-seg:last-child .scale-seg-pop::after{left:auto;right:20px;transform:translateX(0)}
+
+/* Mobile - tooltip шире и адаптивнее */
+@media(max-width:560px){
+  .scale-seg-pop{width:180px;font-size:10.5px;padding:9px 11px}
+  .ssp-r{font-size:12px}
+}
+
+
+/* Fix edges after removing overflow:hidden */
+.scale-bars > .scale-seg:first-child{border-radius:10px 0 0 10px}
+.scale-bars > .scale-seg:last-child{border-radius:0 10px 10px 0}
+
+/* Контейнер scale — нужно position:relative для корректного позиционирования tooltip */
+.scale{position:relative;padding-top:8px}
+
+/* Усиливаю видимость tooltip */
+.scale-seg-pop{z-index:100!important}
+
+/* Также убедиться что при hover сегмент поднят над соседями */
+.scale-seg:hover{z-index:50}
+
+/* ═══ BUGFIX: term tooltip внутри gradient text containers ═══ */
+.term-pop{
+  -webkit-text-fill-color: initial !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+}
+.term-pop,.term-pop *{
+  color: var(--tx2) !important;
+  -webkit-text-fill-color: var(--tx2) !important;
+  background: unset !important;
+}
+.term-pop{
+  background: linear-gradient(180deg, rgba(45,39,64,.98), rgba(39,34,56,.98)) !important;
+  z-index: 200 !important;
+}
+.term-pop strong{
+  color: #9560E8 !important;
+  -webkit-text-fill-color: #9560E8 !important;
+}
+/* z-index hierarchy for tooltips */
+.term{position:relative;z-index:2}
+.term:hover{z-index:150}
+.term.active{z-index:150}
+.fcol{overflow:visible!important}
+.fcol-rate{overflow:visible;position:relative}
+
+/* ═══════════════════════════════════════════════
+   LUXURY LAYER — премиум полировка v2
+═══════════════════════════════════════════════ */
+
+/* Глубокий чёрный фон + тонкая текстура */
+body{background:#070310;color:var(--tx);min-height:100vh}
+
+/* Rose gold + платина акценты */
+:root{
+  --gold: #E8C789;
+  --gold-2: #C9A770;
+  --platinum: #DCE4EA;
+}
+
+/* HEADER — фон совпадает с сайтом */
+.hdr{
+  background:#070310 !important;
+  -webkit-backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  border-bottom:none !important;
+  position:relative;
+  justify-content:center !important;
+  padding:28px !important;
+}
+.brand-t{
+  font-weight:800 !important;
+  letter-spacing:-.3px;
+  background:linear-gradient(135deg, #fff 0%, #DCE4EA 50%, #9560E8 100%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  text-shadow:0 0 40px rgba(114,48,216,.2);
+}
+
+/* PROFILE PILL — платиновая рамка */
+.profile-line{
+  background: linear-gradient(135deg, rgba(114,48,216,.18), rgba(114,48,216,.04)) !important;
+  border:1px solid transparent !important;
+  background-image:
+    linear-gradient(180deg, rgba(20,15,35,.9), rgba(20,15,35,.7)),
+    linear-gradient(135deg, rgba(232,199,137,.4), rgba(114,48,216,.6), rgba(232,199,137,.4));
+  background-origin:border-box;
+  background-clip:padding-box, border-box;
+  box-shadow:
+    0 8px 30px rgba(114,48,216,.2),
+    0 1px 0 rgba(255,255,255,.08) inset,
+    0 0 0 3px rgba(114,48,216,.04);
+  padding:12px 22px !important;
+}
+.profile-line strong{
+  background:linear-gradient(135deg, #fff, #9560E8);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* HERO BOARD — премиум карточки как Apple Pro */
+.hero-board{gap:14px !important}
+.hb-cell{
+  background:
+    linear-gradient(180deg, rgba(30,22,50,.7) 0%, rgba(15,11,30,.95) 80%) !important;
+  border:1px solid rgba(255,255,255,.06) !important;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.5),
+    0 6px 20px rgba(0,0,0,.3),
+    0 1px 0 rgba(255,255,255,.06) inset,
+    0 0 0 1px rgba(255,255,255,.02) inset !important;
+  min-height:170px !important;
+  padding:24px 20px !important;
+  
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .4s !important;
+}
+.hb-cell::before{
+  content:"";position:absolute;inset:0 0 auto 0;height:2px;
+  background:linear-gradient(90deg, transparent, var(--accent,#9560E8), transparent) !important;
+  opacity:.9 !important;
+  box-shadow:0 0 30px var(--accent,#9560E8), 0 0 10px var(--accent,#9560E8) !important;
+}
+.hb-cell::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 120% 60% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 50%) !important;
+  opacity:1 !important;filter:none !important;
+  width:auto !important;height:auto !important;left:0 !important;top:0 !important;transform:none !important;
+}
+.hb-cell:hover{
+  transform:translateY(-6px) !important;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.7),
+    0 10px 30px var(--accent-shadow, rgba(114,48,216,.35)),
+    0 1px 0 rgba(255,255,255,.12) inset,
+    0 0 0 1px rgba(255,255,255,.04) inset !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+.hb-cell[data-c="income"]{--accent-shadow:rgba(114,48,216,.4)}
+.hb-cell[data-c="salary"]{--accent-shadow:rgba(252,211,77,.35)}
+.hb-cell[data-c="realestate"]{--accent-shadow:rgba(74,222,128,.35)}
+.hb-cell[data-c="transfers"]{--accent-shadow:rgba(96,165,250,.35)}
+.hb-cell[data-c="retentions"]{--accent-shadow:rgba(251,146,60,.35)}
+.hb-cell[data-c="hidden"]{--accent-shadow:rgba(248,113,113,.35)}
+.hb-ico{
+  font-size:40px !important;
+  margin-bottom:14px !important;
+  filter:drop-shadow(0 6px 20px rgba(255,255,255,.12)) drop-shadow(0 2px 8px var(--accent,#9560E8)) !important;
+}
+.hb-l{
+  font-size:10.5px !important;
+  letter-spacing:.18em !important;
+  color:rgba(255,255,255,.45) !important;
+  font-weight:700 !important;
+  margin-bottom:10px !important;
+}
+.hb-v{
+  font-size:26px !important;
+  font-weight:800 !important;
+  letter-spacing:-.5px;
+  background:linear-gradient(135deg, #fff 0%, #DCE4EA 100%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  line-height:1.15 !important;
+  margin-bottom:8px !important;
+}
+.hb-d{
+  font-size:12px !important;
+  color:rgba(255,255,255,.5) !important;
+  font-weight:500 !important;
+  letter-spacing:.01em;
+}
+
+/* CHOICE BAR — кнопки-жемчужины */
+.ch-b{
+  padding:8px 16px !important;
+  font-weight:600 !important;
+  letter-spacing:.01em;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)) !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  transition:all .35s cubic-bezier(.2,.8,.2,1) !important;
+  position:relative;
+  overflow:hidden;
+}
+.ch-b::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg, rgba(255,255,255,.12) 0%, transparent 50%);
+  opacity:0;transition:opacity .4s;
+  pointer-events:none;
+}
+.ch-b:hover::before{opacity:1}
+.ch-b.on{
+  background:
+    linear-gradient(180deg, rgba(114,48,216,.3), rgba(114,48,216,.15)),
+    linear-gradient(135deg, #9560E8, #7230D8) !important;
+  border-color:rgba(149,96,232,.6) !important;
+  color:#fff !important;
+  box-shadow:
+    0 8px 24px rgba(114,48,216,.45),
+    0 1px 0 rgba(255,255,255,.25) inset,
+    0 0 0 1px rgba(114,48,216,.4) !important;
+}
+
+/* SECTION HEADER — как в Vogue/Apple Pro page */
+.sec-h{
+  padding-bottom:20px !important;
+  margin-bottom:24px !important;
+  border-bottom:none !important;
+  position:relative;
+}
+.sec-h::after{
+  content:"" !important;
+  position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,
+    rgba(232,199,137,.5) 0%,
+    rgba(114,48,216,.5) 30%,
+    transparent 100%) !important;
+  width:auto !important;
+}
+.sec-ico{
+  width:58px !important;height:58px !important;
+  font-size:30px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.1)),
+    linear-gradient(135deg, rgba(114,48,216,.25), rgba(114,48,216,.08)) !important;
+  border:1px solid transparent !important;
+  background-image:
+    linear-gradient(180deg, rgba(30,22,50,.95), rgba(15,11,30,.95)),
+    linear-gradient(135deg, rgba(232,199,137,.5), rgba(114,48,216,.7), rgba(232,199,137,.3));
+  background-origin:border-box;
+  background-clip:padding-box, border-box;
+  border-radius:16px !important;
+  box-shadow:
+    0 12px 28px rgba(114,48,216,.3),
+    0 3px 10px rgba(0,0,0,.4),
+    0 1px 0 rgba(255,255,255,.1) inset,
+    0 0 40px rgba(114,48,216,.15) inset !important;
+  position:relative;
+}
+.sec-ico::before{
+  content:"";position:absolute;inset:0;border-radius:16px;
+  background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.15) 0%, transparent 50%);
+  pointer-events:none;
+}
+.sec-t{
+  font-size:26px !important;
+  font-weight:800 !important;
+  letter-spacing:-.7px !important;
+  background:linear-gradient(135deg, #fff 0%, #DCE4EA 40%, #9560E8 100%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  -webkit-background-clip:text;background-clip:text;
+  text-shadow:0 0 60px rgba(114,48,216,.15);
+  line-height:1.15;
+}
+.sec-s{
+  font-size:11px !important;
+  font-weight:800 !important;
+  letter-spacing:.16em !important;
+  color:#9560E8 !important;
+  margin-top:8px !important;
+}
+
+/* FORM COLUMN selected — royal treatment */
+.fcol{
+  transition:all .5s cubic-bezier(.2,.8,.2,1) !important;
+  background:
+    linear-gradient(180deg, rgba(20,15,35,.7), rgba(15,11,30,.95)) !important;
+  border:1px solid rgba(255,255,255,.06) !important;
+}
+.fcol:hover{
+  transform:translateY(-2px);
+  border-color:rgba(114,48,216,.25) !important;
+  box-shadow:0 16px 40px rgba(0,0,0,.4);
+}
+.fcol.on{
+  background:
+    linear-gradient(180deg, rgba(114,48,216,.18) 0%, rgba(114,48,216,.05) 100%),
+    linear-gradient(180deg, rgba(20,15,35,.95), rgba(15,11,30,.95)) !important;
+  transform:translateY(-4px) !important;
+  box-shadow:
+    0 30px 70px rgba(114,48,216,.25),
+    0 12px 32px rgba(0,0,0,.5),
+    0 0 0 1px rgba(149,96,232,.4),
+    0 1px 0 rgba(255,255,255,.14) inset !important;
+}
+.fcol.on::before{
+  content:"" !important;
+  position:absolute;top:-1px;left:-1px;right:-1px;height:3px;
+  background:linear-gradient(90deg, #E8C789, #9560E8, #9560E8, #9560E8, #E8C789) !important;
+  border-radius:11px 11px 0 0;
+  box-shadow:
+    0 0 20px rgba(232,199,137,.6),
+    0 0 30px rgba(114,48,216,.5) !important;
+}
+.fcol.on::after{
+  top:-14px !important;
+  background:linear-gradient(135deg, #E8C789 0%, #9560E8 100%) !important;
+  color:#fff;
+  box-shadow:
+    0 6px 16px rgba(114,48,216,.5),
+    0 2px 4px rgba(232,199,137,.3),
+    0 1px 0 rgba(255,255,255,.3) inset !important;
+  font-weight:800;
+  letter-spacing:.08em;
+  padding:4px 14px !important;
+}
+.fcol-rate{
+  font-size:22px !important;
+  font-weight:900 !important;
+}
+
+/* CARD — премиум глубина */
+.card{
+  background:
+    linear-gradient(180deg, rgba(20,15,35,.7) 0%, rgba(15,11,30,.95) 100%) !important;
+  border:1px solid rgba(255,255,255,.05) !important;
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.45),
+    0 4px 12px rgba(0,0,0,.3),
+    0 1px 0 rgba(255,255,255,.04) inset !important;
+  padding:22px !important;
+}
+
+/* INFO blocks — более чеканные */
+.info{
+  padding:14px 18px !important;
+  border-radius:12px !important;
+  background:
+    linear-gradient(135deg, var(--info-bg, rgba(114,48,216,.08)) 0%, rgba(15,11,30,.8) 100%) !important;
+  border:1px solid var(--info-brd, rgba(114,48,216,.2)) !important;
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.2),
+    0 1px 0 rgba(255,255,255,.04) inset !important;
+  -webkit-backdrop-filter:blur(10px);
+}
+
+/* TABLES — чуть премиальнее */
+.tbl th{
+  background:linear-gradient(180deg, rgba(114,48,216,.12), rgba(114,48,216,.04)) !important;
+  color:rgba(255,255,255,.85) !important;
+  font-size:11px !important;
+  letter-spacing:.04em;
+  font-weight:700;
+  padding:10px 12px !important;
+}
+.tbl td{padding:10px 12px !important}
+.tbl tr:hover td{background:rgba(114,48,216,.05) !important}
+
+/* CTA buttons gold accent */
+a[href*="hhfaro.com"][target="_blank"]:not([class*="foot"]){
+  background:
+    linear-gradient(135deg, #9560E8 0%, #9560E8 50%, #7230D8 100%) !important;
+  box-shadow:
+    0 14px 36px rgba(114,48,216,.45),
+    0 4px 12px rgba(232,199,137,.15),
+    0 1px 0 rgba(255,255,255,.25) inset !important;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(232,199,137,.2) !important;
+}
+a[href*="hhfaro.com"][target="_blank"]:hover{
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:
+    0 20px 48px rgba(114,48,216,.6),
+    0 6px 20px rgba(232,199,137,.25),
+    0 1px 0 rgba(255,255,255,.35) inset !important;
+}
+
+/* Ex-box — лучшее выделение */
+.ex-box{
+  background:
+    linear-gradient(135deg, rgba(232,199,137,.08), rgba(114,48,216,.06)) !important;
+  border:1px solid rgba(232,199,137,.15) !important;
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.2),
+    0 1px 0 rgba(255,255,255,.05) inset !important;
+  padding:16px 18px !important;
+  border-radius:12px !important;
+}
+.ex-box-h{
+  color:#E8C789 !important;
+  font-weight:800 !important;
+  letter-spacing:.04em;
+  margin-bottom:8px !important;
+}
+
+/* Тонкая анимация появления при смене формы (для карточек альтерн.визуализаций) */
+#corp-rate-card,#rimpe-rate-card,#nonres-rate-card,#irpf-scale-card,
+.ret-card,.hid-card,.isd-card,.sal-card{
+  animation:lux-reveal .6s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes lux-reveal{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Scale segment hover — subtle lift */
+.scale-seg:hover{
+  transform:scaleY(1.15) translateY(-1px);
+  box-shadow:0 0 0 2px rgba(255,255,255,.4) inset, 0 4px 12px rgba(0,0,0,.3);
+}
+
+/* Role cards на недвижимости */
+.role-card{
+  background:
+    linear-gradient(180deg, rgba(20,15,35,.7), rgba(15,11,30,.95)) !important;
+  border:1px solid rgba(255,255,255,.05) !important;
+  box-shadow:
+    0 12px 32px rgba(0,0,0,.4),
+    0 1px 0 rgba(255,255,255,.04) inset !important;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s !important;
+}
+.role-card:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 20px 48px rgba(114,48,216,.2),
+    0 6px 16px rgba(0,0,0,.4) !important;
+  border-color:rgba(114,48,216,.2) !important;
+}
+.role-h{
+  font-size:15px !important;
+  background:linear-gradient(135deg, #fff, #DCE4EA 60%, #9560E8 120%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+}
+
+/* Убрать dashed underline у терминов в rate (не нужно) */
+.fcol-rate .term{
+  background:transparent !important;
+  border-bottom:none !important;
+  text-decoration:none !important;
+  border:none !important;
+}
+.fcol-rate .term::after,.fcol-rate .term::before{display:none !important}
+
+/* Premium rose-gold framed containers */
+.luxury-frame{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(15,11,30,.92), rgba(8,6,18,.96)) padding-box,
+    linear-gradient(135deg, rgba(232,199,137,.5) 0%, rgba(149,96,232,.35) 50%, rgba(232,199,137,.5) 100%) border-box;
+  border:1.5px solid transparent;
+  border-radius:20px;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.5),
+    0 6px 18px rgba(114,48,216,.15),
+    0 1px 0 rgba(255,255,255,.05) inset;
+}
+/* no top shimmer line */
+.luxury-frame-sm{
+  border-radius:14px;
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.25),
+    0 1px 0 rgba(255,255,255,.05) inset;
+}
+
+/* ═══════════ MOBILE OPTIMIZATIONS ═══════════ */
+@media(max-width:760px){
+  .hdr{padding:20px 16px !important;gap:12px !important}
+  .logo-img img{width:44px !important;height:44px !important;border-radius:11px !important}
+  .brand-t{font-size:18px !important}
+  .wrap{padding:16px !important}
+  
+  /* Choice bar — wrap into rows */
+  .choice{padding:14px 12px !important;gap:8px !important}
+  .ch-row{gap:6px !important;flex-wrap:wrap !important;justify-content:center}
+  .ch-b{padding:7px 12px !important;font-size:11.5px !important}
+  
+  /* Profile pill */
+  .profile-line{padding:10px 16px !important;font-size:11.5px !important;line-height:1.5}
+  
+  /* Hero Board — 2 columns on phone */
+  .hero-board{grid-template-columns:1fr 1fr !important;gap:10px !important}
+  .hb-cell{min-height:130px !important;padding:16px 12px !important}
+  .hb-ico{font-size:28px !important;margin-bottom:8px !important}
+  .hb-l{font-size:9px !important;letter-spacing:.14em !important;margin-bottom:6px !important}
+  .hb-v{font-size:17px !important;margin-bottom:4px !important}
+  .hb-d{font-size:10.5px !important;line-height:1.35}
+  
+  /* Section headers */
+  .sec-h{margin-bottom:18px !important;padding-bottom:14px !important}
+  .sec-ico{width:44px !important;height:44px !important;font-size:22px !important;border-radius:12px !important}
+  .sec-t{font-size:19px !important;letter-spacing:-.3px !important}
+  .sec-s{font-size:10px !important;letter-spacing:.12em !important;margin-top:4px !important}
+  
+  /* Form grid — 1 column */
+  .forms-grid{grid-template-columns:1fr !important;gap:10px !important}
+  .fcol{padding:14px !important}
+  .fcol.on{transform:none !important}
+  .fcol-rate{font-size:18px !important}
+  .fcol-desc{font-size:12px}
+  .fcol-ex{font-size:11.5px}
+  
+  /* Roles grid — 1 column */
+  .roles-grid{grid-template-columns:1fr !important;gap:10px !important}
+  .role-card{padding:16px !important}
+  .role-h{font-size:14px !important}
+  .role-item{font-size:12px !important;padding:7px 10px !important;gap:6px !important}
+  
+  /* Base facts grids — 2 cols on phone */
+  .card > div[style*="grid-template-columns:repeat(auto-fit"]{
+    grid-template-columns:1fr 1fr !important;gap:8px !important;
+  }
+  
+  /* Tables — horizontal scroll */
+  .tbl-w{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tbl{min-width:380px;font-size:11.5px}
+  .tbl th,.tbl td{padding:8px 8px !important;font-size:11px !important}
+  
+  /* Cards padding smaller */
+  .card{padding:16px !important}
+  
+  /* Scale IRPF — smaller segments */
+  .scale-bars{height:32px !important}
+  .scale-seg{font-size:9.5px !important}
+  .scale-labels{font-size:9.5px !important}
+  
+  /* Info blocks */
+  .info{padding:11px 13px !important;font-size:12px !important}
+  .info-t{font-size:11px !important}
+  
+  /* Ex box */
+  .ex-box{padding:12px 14px !important;font-size:12px !important}
+  
+  /* Footer blocks */
+  .luxury-frame{padding:18px 16px !important;border-radius:14px !important}
+  .luxury-frame-sm{padding:14px 16px !important;border-radius:12px !important}
+  
+  /* Tooltips adjusted */
+  .term-pop{width:220px !important;font-size:11px !important}
+  .scale-seg-pop{width:170px !important;font-size:10px !important}
+  
+  /* Choice buttons gap reduced */
+  .ch-b .ch-ico{font-size:13px !important}
+}
+
+/* Особо малые экраны < 400px */
+@media(max-width:400px){
+  .hero-board{grid-template-columns:1fr !important}
+  .hb-cell{min-height:100px !important;padding:14px 16px !important;flex-direction:row !important;text-align:left !important;gap:14px}
+  .hb-ico{margin-bottom:0 !important;font-size:32px !important}
+  .hb-cell > div:not(.hb-ico){flex:1}
+  .brand-t{font-size:16px !important}
+  .logo-img img{width:40px !important;height:40px !important}
+  
+  /* Base facts grid — 1 column */
+  .card > div[style*="grid-template-columns:repeat(auto-fit"]{
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* ═══ ЕДИНЫЙ ФУТЕР — одна тёмная премиум-рамка ═══ */
+.footer-frame{
+  margin-top:32px;
+  padding:32px 28px;
+  max-width:720px;
+  margin-left:auto;
+  margin-right:auto;
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(8,5,20,.92), rgba(5,3,15,.96)) padding-box,
+    linear-gradient(135deg, rgba(232,199,137,.6) 0%, rgba(149,96,232,.45) 50%, rgba(232,199,137,.6) 100%) border-box;
+  border:1.5px solid transparent;
+  border-radius:20px;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.5),
+    0 6px 20px rgba(114,48,216,.15),
+    0 1px 0 rgba(255,255,255,.06) inset;
+  text-align:center;
+}
+.ff-eyebrow{
+  font-size:10.5px;
+  font-weight:800;
+  color:#E8C789;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  margin-bottom:16px;
+}
+.ff-title{
+  font-size:26px;
+  font-weight:800;
+  background:linear-gradient(135deg,#fff 0%,#E8C789 55%,#9560E8 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;background-clip:text;
+  line-height:1.25;
+  letter-spacing:-.4px;
+  margin-bottom:14px;
+}
+.ff-sub{
+  font-size:13.5px;
+  color:rgba(255,255,255,.65);
+  max-width:480px;
+  margin:0 auto;
+  line-height:1.65;
+}
+.ff-divider{
+  height:1px;
+  margin:24px auto;
+  max-width:320px;
+  background:linear-gradient(90deg,transparent,rgba(232,199,137,.35),transparent);
+}
+.ff-meta{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  max-width:540px;
+  margin:0 auto;
+  text-align:left;
+}
+.ff-row{
+  display:flex;
+  gap:10px;
+  font-size:11.5px;
+  color:rgba(255,255,255,.55);
+  line-height:1.55;
+  align-items:flex-start;
+}
+.ff-row strong{color:#E8C789;font-weight:700}
+.ff-brand{
+  margin-top:22px;
+  padding-top:18px;
+  border-top:1px solid rgba(232,199,137,.15);
+  font-size:10px;
+  font-weight:800;
+  color:#E8C789;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+}
+
+/* Mobile */
+@media(max-width:760px){
+  .footer-frame{padding:24px 20px;margin:20px 16px 0}
+  .ff-title{font-size:20px}
+  .ff-sub{font-size:12.5px}
+  .ff-row{font-size:11px}
+}
+
+/* ═══ FIX 2.0: заливаем iframe тёмным фоном — любая пустота невидима ═══ */
+html{min-height:100vh;background:#070310 !important;overflow-x:hidden;margin:0;padding:0}
+body{min-height:100vh !important;background:#070310 !important;margin:0 !important;padding:0}
+
+/* Accordion behavior для Hero Board кликов (Wix iframe fix) */
+.section.collapsed > *:not(.sec-h){display:none !important}
+.section .sec-h{cursor:pointer;position:relative}
+.section .sec-h::before{
+  content:"▾";position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  color:#9560E8;font-size:18px;transition:transform .3s;opacity:.6;pointer-events:none;
+}
+.section.collapsed .sec-h::before{transform:translateY(-50%) rotate(-90deg)}
+
+
+/* ═══ TOOLTIPS FIX — гарантированно тёмный фон + контрастный текст ═══ */
+.term-pop,.scale-seg-pop{
+  background:#15102B !important;
+  border:1px solid #7230D8 !important;
+  color:#F5F3FF !important;
+  box-shadow:0 20px 50px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.12) inset !important;
+  -webkit-backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  opacity:1 !important;
+}
+.term-pop *,.scale-seg-pop *{
+  color:#F5F3FF !important;
+  -webkit-text-fill-color:#F5F3FF !important;
+}
+.term-pop strong,.scale-seg-pop strong,.term-pop b,.scale-seg-pop b,.ssp-h,.ssp-r{
+  color:#9560E8 !important;
+  -webkit-text-fill-color:#9560E8 !important;
+}
+.ssp-d b{color:#E8C789 !important;-webkit-text-fill-color:#E8C789 !important}
+.ssp-r{color:#fff !important;-webkit-text-fill-color:#fff !important}
+
+/* ═══════════════════════════════════════════
+   HH FARO BRAND SYSTEM — подгонка под сайт
+═══════════════════════════════════════════ */
+
+/* Шрифт — Montserrat как на сайте */
+*{font-family:-apple-system,BlinkMacSystemFont,sans-serif !important}
+
+/* Главный бренд-цвет — чистый фиолет как в хедере HH FARO */
+:root{
+  --faro-purple:#8B5CF6;
+  --faro-purple-light:#A78BFA;
+  --faro-purple-dark:#7C3AED;
+}
+
+/* Убираю rose-gold, заменяю на фиолет HH FARO */
+.brand-t,.sec-t,[style*="#E8C789"],[style*="rose"]{
+  /* keep gradients but swap gold to white/purple */
+}
+
+/* Заголовки — UPPERCASE как у тебя */
+.sec-t{
+  text-transform:uppercase !important;
+  letter-spacing:.04em !important;
+  font-weight:800 !important;
+  background:linear-gradient(135deg,#fff 0%,#E5E5F0 40%,var(--faro-purple-light) 100%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+}
+
+.brand-t{
+  font-weight:800 !important;
+  letter-spacing:-.2px !important;
+  background:linear-gradient(135deg,#fff 0%,#E5E5F0 50%,var(--faro-purple-light) 100%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  font-family:sans-serif !important;
+}
+
+/* Choice buttons — пилюли как на сайте HH FARO */
+.ch-b{
+  border-radius:9999px !important;
+  padding:9px 18px !important;
+  font-weight:500 !important;
+  font-size:12.5px !important;
+  background:rgba(40,40,55,.5) !important;
+  border:1px solid rgba(255,255,255,.1) !important;
+  transition:all .3s ease !important;
+  color:rgba(255,255,255,.85) !important;
+}
+.ch-b:hover{
+  background:rgba(60,50,90,.6) !important;
+  border-color:rgba(139,92,246,.4) !important;
+}
+.ch-b.on{
+  background:var(--faro-purple) !important;
+  border-color:var(--faro-purple) !important;
+  color:#fff !important;
+  box-shadow:0 8px 20px rgba(139,92,246,.4) !important;
+  font-weight:600 !important;
+}
+
+/* Hero Board cells — темнее, с фиолетовыми акцентами вместо радуги */
+.hb-cell{
+  background:linear-gradient(180deg,rgba(30,28,50,.85),rgba(18,16,32,.95)) !important;
+  border:1px solid rgba(255,255,255,.06) !important;
+  border-radius:14px !important;
+}
+.hb-cell::before{
+  background:linear-gradient(90deg,transparent,var(--faro-purple),transparent) !important;
+  box-shadow:0 0 20px var(--faro-purple) !important;
+}
+.hb-cell:hover{
+  border-color:rgba(139,92,246,.3) !important;
+  box-shadow:0 15px 40px rgba(139,92,246,.25) !important;
+}
+.hb-v{
+  background:linear-gradient(135deg,#fff 0%,#E5E5F0 100%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  letter-spacing:-.3px !important;
+}
+
+/* Убираем rose-gold оттенки с плиток hero board */
+.hb-cell[data-c="income"]{--accent:#8B5CF6;--accent-shadow:rgba(139,92,246,.4)}
+.hb-cell[data-c="salary"]{--accent:#A78BFA;--accent-shadow:rgba(167,139,250,.4)}
+.hb-cell[data-c="realestate"]{--accent:#C084FC;--accent-shadow:rgba(192,132,252,.4)}
+.hb-cell[data-c="transfers"]{--accent:#8B5CF6;--accent-shadow:rgba(139,92,246,.4)}
+.hb-cell[data-c="retentions"]{--accent:#A78BFA;--accent-shadow:rgba(167,139,250,.4)}
+.hb-cell[data-c="hidden"]{--accent:#C084FC;--accent-shadow:rgba(192,132,252,.4)}
+
+/* Profile pill — в стиле сайта */
+.profile-line{
+  border-radius:9999px !important;
+  background:rgba(25,22,40,.7) !important;
+  border:1px solid rgba(139,92,246,.3) !important;
+  padding:10px 22px !important;
+  font-family:sans-serif !important;
+  font-weight:500 !important;
+}
+.profile-line strong{
+  background:linear-gradient(135deg,#fff,var(--faro-purple-light)) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  font-weight:700 !important;
+}
+
+/* Section icon — фиолет вместо rose-gold */
+.sec-ico{
+  background:
+    linear-gradient(180deg,rgba(30,28,50,.95),rgba(18,16,32,.95)) padding-box,
+    linear-gradient(135deg,var(--faro-purple),var(--faro-purple-light)) border-box !important;
+  border:1.5px solid transparent !important;
+  border-radius:12px !important;
+  box-shadow:0 10px 28px rgba(139,92,246,.35) !important;
+}
+
+/* Form columns — чище, в стиле сайта */
+.fcol{
+  background:linear-gradient(180deg,rgba(25,22,40,.85),rgba(18,16,32,.95)) !important;
+  border:1px solid rgba(255,255,255,.06) !important;
+  border-radius:14px !important;
+}
+.fcol.on{
+  background:
+    linear-gradient(180deg,rgba(139,92,246,.12),rgba(124,58,237,.04)),
+    linear-gradient(180deg,rgba(25,22,40,.95),rgba(18,16,32,.95)) !important;
+  box-shadow:
+    0 20px 40px rgba(139,92,246,.25),
+    0 0 0 1px rgba(139,92,246,.4) !important;
+}
+.fcol.on::before{
+  background:linear-gradient(90deg,var(--faro-purple-light),var(--faro-purple),var(--faro-purple-light)) !important;
+  box-shadow:0 0 20px rgba(139,92,246,.6) !important;
+}
+.fcol.on::after{
+  background:var(--faro-purple) !important;
+  color:#fff !important;
+  border-radius:9999px !important;
+  box-shadow:0 6px 14px rgba(139,92,246,.5) !important;
+}
+
+/* Cards — подогнать под дизайн */
+.card{
+  background:linear-gradient(180deg,rgba(25,22,40,.75),rgba(18,16,32,.95)) !important;
+  border:1px solid rgba(255,255,255,.05) !important;
+  border-radius:14px !important;
+}
+
+/* Кнопка "← Показать все разделы" — убрать rose-gold, добавить фиолет */
+#mayak-back-all{
+  background:
+    linear-gradient(180deg,rgba(25,22,40,.85),rgba(18,16,32,.95)) padding-box,
+    linear-gradient(135deg,var(--faro-purple),var(--faro-purple-light)) border-box !important;
+  border:1.5px solid transparent !important;
+  color:#fff !important;
+  border-radius:9999px !important;
+  font-family:sans-serif !important;
+  font-weight:600 !important;
+  box-shadow:0 8px 24px rgba(139,92,246,.3) !important;
+}
+#mayak-back-all:hover{
+  box-shadow:0 12px 32px rgba(139,92,246,.5) !important;
+  color:#fff !important;
+}
+
+/* Луксури-frame футер — фиолет вместо gold */
+.luxury-frame{
+  background:
+    linear-gradient(180deg,rgba(25,22,40,.85),rgba(15,13,28,.95)) padding-box,
+    linear-gradient(135deg,rgba(139,92,246,.5) 0%,rgba(167,139,250,.35) 50%,rgba(139,92,246,.5) 100%) border-box !important;
+  border-radius:18px !important;
+}
+
+/* Заголовок футера "Будем рады видеть" */
+div[style*="Будем рады"]{
+  background:linear-gradient(135deg,#fff 0%,#E5E5F0 50%,var(--faro-purple-light) 100%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  text-transform:uppercase !important;
+  letter-spacing:.02em !important;
+}
+
+/* Заменяем все rose-gold (#E8C789) на фиолет */
+[style*="#E8C789"]{color:var(--faro-purple-light) !important}
+*[style*="color:#E8C789"]{color:var(--faro-purple-light) !important}
+
+/* Tooltips — оставить солидный тёмный но с фиолетовой обводкой */
+.term-pop,.scale-seg-pop{
+  border-color:var(--faro-purple) !important;
+  box-shadow:0 20px 50px rgba(0,0,0,.8),0 0 0 1px rgba(139,92,246,.3) inset !important;
+}
+.term-pop strong,.scale-seg-pop strong,.ssp-h,.ssp-r{
+  color:var(--faro-purple-light) !important;
+  -webkit-text-fill-color:var(--faro-purple-light) !important;
+}
+
+/* Info блоки */
+.info{
+  border-radius:12px !important;
+}
+
+/* Links и акценты */
+.term{
+  color:var(--faro-purple-light) !important;
+  border-bottom-color:rgba(139,92,246,.4) !important;
+}
+
+
+/* ═══ FONT: Inter как на hhfaro.com ═══ */
+html,body,.hdr,.brand-t,.sec-t,.sec-s,.hb-v,.hb-l,.hb-d,.fcol-h,.fcol-rate,.fcol-desc,.fcol-ex,.ch-b,.profile-line,.tbl,.info,.info-t,.info-body,.ex-box,.ex-box-h,.role-h,.role-item,.term-pop,.scale-seg-pop,input,button,.sec-h,.card,.luxury-frame,.ch-lbl{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif !important;
+}
+
+/* ═══ HEADINGS: ПРОПИСНЫЕ + tracking как на hhfaro.com ═══ */
+.sec-t{
+  text-transform:uppercase !important;
+  letter-spacing:.05em !important;
+  font-weight:800 !important;
+  font-size:28px !important;
+}
+.brand-t{
+  text-transform:none !important;
+  font-weight:800 !important;
+}
+.sec-s{
+  text-transform:uppercase !important;
+  letter-spacing:.12em !important;
+  color:rgba(255,255,255,.5) !important;
+}
+@media(max-width:760px){
+  .sec-t{font-size:20px !important}
+}
+
+/* ═══ BUTTONS: pill-shape как на hhfaro.com ═══ */
+.ch-b{
+  border-radius:30px !important;
+  padding:10px 20px !important;
+  font-weight:500 !important;
+  background:rgba(255,255,255,.04) !important;
+  border:1px solid rgba(255,255,255,.1) !important;
+  transition:all .3s cubic-bezier(.2,.8,.2,1) !important;
+  font-size:13px !important;
+  letter-spacing:.01em;
+}
+.ch-b:hover{
+  background:rgba(255,255,255,.08) !important;
+  border-color:rgba(114,48,216,.4) !important;
+  transform:translateY(-1px);
+}
+.ch-b.on{
+  background:linear-gradient(135deg, #9560E8, #7230D8) !important;
+  border-color:rgba(149,96,232,.5) !important;
+  color:#fff !important;
+  box-shadow:0 6px 20px rgba(114,48,216,.45),0 1px 0 rgba(255,255,255,.25) inset !important;
+}
+.ch-b.on:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(114,48,216,.55),0 1px 0 rgba(255,255,255,.3) inset !important;
+}
+.profile-line{
+  border-radius:30px !important;
+  padding:12px 24px !important;
+  font-weight:500;
+  background:rgba(255,255,255,.04) !important;
+  border:1px solid rgba(114,48,216,.3) !important;
+  box-shadow:0 8px 24px rgba(114,48,216,.15) !important;
+  backdrop-filter:none !important;
+}
+
+/* ═══ REMOVE ROSE GOLD, use violet consistent with hhfaro.com ═══ */
+/* Luxury frames: violet border instead of gold */
+.luxury-frame{
+  background:
+    linear-gradient(180deg, rgba(20,15,35,.8), rgba(12,8,24,.92)) padding-box,
+    linear-gradient(135deg, rgba(114,48,216,.5), rgba(114,48,216,.35), rgba(114,48,216,.5)) border-box !important;
+}
+/* Gradient text — без золота, только белый→фиолет */
+.sec-t,.brand-t{
+  background:linear-gradient(135deg, #fff 0%, #DCE4EA 50%, #9560E8 100%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  background-clip:text !important;
+}
+/* Section icons — фиолетовая рамка вместо золотой */
+.sec-ico{
+  background:
+    linear-gradient(180deg, rgba(30,22,50,.95), rgba(15,11,30,.95)) padding-box,
+    linear-gradient(135deg, #9560E8, #7230D8) border-box !important;
+  box-shadow:0 10px 24px rgba(114,48,216,.35),0 1px 0 rgba(255,255,255,.08) inset !important;
+}
+/* Form col ".on" — чистый фиолет без золота */
+.fcol.on::before{
+  background:linear-gradient(90deg, #9560E8, #7230D8, #9560E8) !important;
+}
+.fcol.on::after{
+  background:linear-gradient(135deg, #9560E8, #7230D8) !important;
+}
+
+/* ═══ HERO BOARD: flatter style like "О проекте" cards ═══ */
+.hb-cell{
+  background:linear-gradient(180deg, rgba(42,40,48,.55), rgba(25,22,34,.75)) !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  box-shadow:0 8px 24px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.04) inset !important;
+  border-radius:14px !important;
+}
+.hb-cell:hover{
+  border-color:rgba(114,48,216,.3) !important;
+  background:linear-gradient(180deg, rgba(48,44,60,.7), rgba(30,25,40,.85)) !important;
+}
+.hb-cell::before{
+  height:2px !important;
+  opacity:.5 !important;
+}
+
+/* Плавное раскрытие/сворачивание секций */
+.section{transition:max-height .5s cubic-bezier(.2,.8,.2,1),opacity .3s ease}
+.section.collapsed > *:not(.sec-h){display:none !important}
+/* Во время анимации мы инлайн ставим maxHeight, collapsed снимаем/добавляем по окончанию */
+</style></head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="logo-img"><img style="width:56px;height:56px;border-radius:14px;display:block;box-shadow:0 8px 28px rgba(114,48,216,.55),0 3px 10px rgba(114,48,216,.3),0 0 0 1px rgba(149,96,232,.18)" src="data:image/webp;base64,UklGRm4GAABXRUJQVlA4IGIGAADQHQCdASpgAFoAPlEmj0UjoiGUC414OAUEoDsB3jsw+A707SYuCNzbs9FXLQfpn7pfMB+vP7M+8l+AHui9AD+4dRV6AH6O+mj7Jf7W/uL7WN4XfXOic8aJF/sH+V8E3wl9Mf4we4t/O/71vfIAPxH+P/3n80v7xzk/Ltrqcg3n6f8PmG/L/8b/3/cH/lf9W/4v90LlSFNDyCLj9/RYmqCUvpYD7M2Cgkmfpkne+bRJKVDolO/G2QFlGSIV/8cQ6Ik5m7m06jJvIFt/P7NJXP7/UaTdN/cqMNhYJcQJumUVJi/VQruwQQ/30vNfTFeNvSlPFjUYOXaAAP725gf/2i5/1Fz/qLn7N//gYC45rGqNIz1rzdknmReRHigrzevCrQLrj6uYFGx0hjvCGKA7GhVztrD9uxer+YzObgTDaRLwj6CneuljJKz90EjZWMzBtzub3iFDPzvvujXV2BCWvTjAH4RtznJ6pv2OObnNceIO1UX7WTukUsA7TKTGE6/+bj0cpnu0H+Oqwh4Q2zIwNZxA3XKA2B7p/GiYiQMUur89HusA439Ry68+VU9o/OqUKqOCEtCUd7mF3t61H1TmYrs983lzopOnyh7ydUiPe5jFa5eDVD7BROnmC6v5BFhQy0FAr/UTlKFUFTb7pHwqElpw90xc9wF4I528d7GyFw23Eli8Dd23A4b1+HdvGitcfDnnH8t5X6MCKWjEAmJ4iwhuDo2BerB05mqFbBfqxtg49LHW6OvyrnQdeUhydxR4BaHaTfA/XRaq68vxYIHTP5o3J8JohAnZNWr1uco+qQLj7atyraB+GBxfFQSf0y96BLwohJslEyL/JN9V7Bglb/pPc7+xv0ojTKFkznpu64XNR48il+UfLYLxv+IuWmeZwZn8IbO8M7bM5xTnONIz9jRVbZSCgobb/Q2q1Z3Y5eivKX8MZv9prVAmVSvAm9+Q7q0YgSQHtnh0PPCv14Fp7171Fp/mxty6y2jWzdjEd0gFdKVicNz5lTSgF7wJP06a/qXl/tKuAC5+yaoMie6bf/TdYzXv7K+bc+91M8TTzqMn6/JP/8Dojyjx78uLkTm8KhNnZESyPg1N9Nr4NDIvN+zOyDxsR5b6OzJ/7IkXVpRQy06kQUdHpf2e2H6tl789kvvHOAtS0XuXHdLMfTGAgnYd7SDPQELFOhxueRwoGRmnCNMJ/TYtY/P4JdPeZpNx8E0PjOBVo81PvuOckBwXPN5jjVgv1HFh7usPJuG6G3imOFT8ZnZEfC5XtHAQGRryD3EZ91P+7TAFuLV3t03gwJlIuJ0aadtaJu9ymkyq0J8PrLdJMF9+jlK/CVruJd55CKwbhn5/Yr+9KUy0h2eBd07mdIdmuLNUJOAeONpuW69Bxa7W23xPawmsMrHq8HYtVxZND6ruw8Pq8Bl7yFZbTOWiiPBEJ9NXWBTvS+kSI/n2ynf9/SBMNad3y/cpc5zCpMu5AL3/iA7kVH3CtyV+7/sRpMuSv3ji7T2GsHWP/Ed/QArDrbdzyrph1OYL/zcD+jE0YFeogLkbH9sZFqHd3AVtPsyREKUgHpcVZd0VO2r61KFGYc2+W/5/NhGf+gdU6lZXqrCiETkhUy0s7tE1H0fHOvRrYIbl5kjEh0yb+pV9tpBGrwlUqSwZ3G6lv9Wy1EbXh0D1iE6Zk08RD6YSJyXuJA2c98mTQKhr6WRGycwQ3Dn6nJZD/92FsDQ1VYIbK6YJtgdVcMH52VlF+tfBg2X3xCWFOnZFGGt+JD3/5+BlDYLDVA+f6fG4Yeugy8Lqw79CcrHhzRoXxKavhfwX6sjX9Aog0fjC2NRu8jjx3ORagACM88ieqIQx0aIN1d4LiSfiAP+fFIXXgod3yqWSw2sBPxIRG4vfRU2cupu7+6vDRTRL3Sp0bZ47n4eBEuSfyIYEoP5ck2NrHvHPlOOYOadSR+MpWRe+ivARDRvoH/TLDBpPtKfjz9fJWYP5VWAlFuhpB1I0BXM3+xWARN9E1Xdv0/uwTNWTm70OYUy16d48hCJKZuQ6g7cUs9SAY9+a/oAUh6PbkcPsmnGzOrBGfmxWSi3xCwpKJWUmH8OfO2vMw/1/dMiBX1kRTdF/OgBhL1QFoWq7dARlBBI3Aa9unLDdxfo71S8DJEqZkoKTPxID9ZKDT4YyZPv1QzOQNucTAsKIAA==" alt="HH FARO"></div>
+  <div>
+    <div class="brand-t">Налоговый маяк Эквадора</div>
+  </div>
+</div>
+
+<!-- CHOICE BAR -->
+<div class="choice">
+  <div class="ch-label">🧭 Я это:</div>
+  <div class="ch-row" id="res-row">
+    <div class="ch-b on" data-v="resident" onclick="setRes(this)"><span class="ch-ico">🏠</span>Резидент</div>
+    <div class="ch-b" data-v="nonresident" onclick="setRes(this)"><span class="ch-ico">✈️</span>Нерезидент</div>
+  </div>
+  <div class="ch-row" id="form-row">
+    <div class="ch-b on" data-v="individual" onclick="setForm(this)"><span class="ch-ico">👤</span>Физлицо с RUC</div>
+    <div class="ch-b" data-v="person" onclick="setForm(this)"><span class="ch-ico">💼</span>Физлицо без RUC</div>
+    <div class="ch-b" data-v="company" onclick="setForm(this)"><span class="ch-ico">🏢</span>Компания</div>
+    <div class="ch-b" data-v="rimpe" onclick="setForm(this)"><span class="ch-ico">🏪</span>RIMPE</div>
+  </div>
+  <div class="ch-row" id="city-row">
+    <div class="ch-b on" data-v="cuenca" onclick="setCity(this)">📍 Куэнка</div>
+    <div class="ch-b" data-v="quito" onclick="setCity(this)">📍 Кито</div>
+    <div class="ch-b" data-v="guayaquil" onclick="setCity(this)">📍 Гуаякиль</div>
+    <div class="ch-b" data-v="manta" onclick="setCity(this)">📍 Манта</div>
+    <div class="ch-b" data-v="salinas" onclick="setCity(this)">📍 Салинас</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- PROFILE LINE -->
+<div class="pl-wrap">
+  <div class="profile-line" id="prof-line">Твой профиль: <strong id="pr-res">Резидент</strong> · <strong id="pr-form">Физлицо с RUC</strong> · <strong id="pr-city">Куэнка</strong></div>
+</div>
+
+<!-- HERO BOARD -->
+<div class="hero-board">
+  <div class="hb-cell" data-c="income">
+    <div class="hb-ico">💼</div>
+    <div class="hb-l">Доходы</div>
+    <div class="hb-v" id="hb-income">IRPF 0-37%</div>
+    <div class="hb-d" id="hb-income-d">прогрессивная шкала</div>
+  </div>
+  <div class="hb-cell" data-c="salary">
+    <div class="hb-ico">👔</div>
+    <div class="hb-l">Зарплаты</div>
+    <div class="hb-v" id="hb-salary">IESS 11.15% +</div>
+    <div class="hb-d" id="hb-salary-d">13-я, 14-я, ФР</div>
+  </div>
+  <div class="hb-cell" data-c="realestate">
+    <div class="hb-ico">🏠</div>
+    <div class="hb-l">Недвижимость</div>
+    <div class="hb-v" id="hb-re">~2-3% покупка</div>
+    <div class="hb-d" id="hb-re-d">10-25% продажа</div>
+  </div>
+  <div class="hb-cell" data-c="transfers">
+    <div class="hb-ico">💸</div>
+    <div class="hb-l">Переводы</div>
+    <div class="hb-v">ISD 5%</div>
+    <div class="hb-d">за границу</div>
+  </div>
+  <div class="hb-cell" data-c="retentions">
+    <div class="hb-ico">📋</div>
+    <div class="hb-l">Ретенции</div>
+    <div class="hb-v" id="hb-ret">8-25%</div>
+    <div class="hb-d" id="hb-ret-d">удержания у источника</div>
+  </div>
+  <div class="hb-cell" data-c="hidden">
+    <div class="hb-ico">⚠️</div>
+    <div class="hb-l">Скрытые</div>
+    <div class="hb-v" id="hb-hid">спец.</div>
+    <div class="hb-d" id="hb-hid-d">о которых забывают</div>
+  </div>
+</div>
+
+<!-- SECTION 1: INCOME -->
+<div class="section" id="sec-income">
+  <div class="sec-h" data-toggle="sec-income">
+    <div class="sec-ico">💼</div>
+    <div>
+      <div class="sec-t">Доходы — налог на прибыль</div>
+      <div class="sec-s">Ставки для каждой формы бизнеса</div>
+    </div>
+  </div>
+
+  <div style="font-size:13px;color:var(--tx2);text-align:center;margin-bottom:16px;padding:12px 16px;background:var(--pu-bg2);border:1px solid var(--pu-brd);border-radius:10px;line-height:1.55">📊 Сравни 4 формы — ставки IRPF / корпоративного налога по каждой.<br><strong style="color:var(--pu-l)">Твоя форма подсвечена фиолетовым</strong>.</div>
+  <div class="forms-grid" id="forms-grid">
+    <div class="fcol on" data-form="individual">
+      <div class="fcol-h"><span class="fcol-h-ico">👤</span>Физлицо с RUC</div>
+      <div class="fcol-sub">Самозанятый</div>
+      <div class="fcol-rate"><span class="term">IRPF<span class="term-pop"><strong>Impuesto a la Renta de Personas Físicas</strong> — подоходный налог физлиц. Прогрессивная шкала 0-37% от годового дохода за вычетом расходов.</span></span> 0-37%</div>
+      <div class="fcol-desc">Прогрессивная шкала. Чем выше доход, тем выше ставка. <strong>10 скобок</strong> в 2026 (новая 35%).</div>
+      <div class="fcol-ex">Пример: при $50K/год → IRPF <strong>$5 821</strong> (эфф. 11.6%)</div>
+    </div>
+    <div class="fcol" data-form="person">
+      <div class="fcol-h"><span class="fcol-h-ico">💼</span>Физлицо без RUC</div>
+      <div class="fcol-sub">Зарплата / рента / без бизнеса</div>
+      <div class="fcol-rate"><span class="term">IRPF<span class="term-pop">Подоходный налог. Та же шкала 0-37%, но удерживается работодателем у источника — декларация обычно не нужна.</span></span> 0-37%</div>
+      <div class="fcol-desc">Та же шкала что у Физлица с RUC. Налог удерживает работодатель или источник дохода. Нельзя вычитать расходы бизнеса.</div>
+      <div class="fcol-ex">При зарплате $2K/мес ($24K/год) → <strong>$1 088</strong> IRPF удержит работодатель</div>
+    </div>
+    <div class="fcol" data-form="company">
+      <div class="fcol-h"><span class="fcol-h-ico">🏢</span>Компания</div>
+      <div class="fcol-sub">SAS / Ltda.</div>
+      <div class="fcol-rate">25% или 17%</div>
+      <div class="fcol-desc">Стандарт 25%, можно снизить до 17% если реинвестировать прибыль в активы.</div>
+      <div class="fcol-ex">Пример: прибыль $50K → <strong>$12 500</strong> (или $8 500 с реинвестицией)</div>
+    </div>
+    <div class="fcol" data-form="rimpe">
+      <div class="fcol-h"><span class="fcol-h-ico">🏪</span>RIMPE</div>
+      <div class="fcol-sub">Упрощёнка до $300K</div>
+      <div class="fcol-rate">1-2% <span style="font-size:11px;color:var(--mu);font-weight:600">оборота</span></div>
+      <div class="fcol-desc"><span class="term">RIMPE<span class="term-pop"><strong>Régimen Simplificado para Emprendedores y Negocios Populares</strong> — упрощённый режим для малого бизнеса с оборотом до $300K/год. Вместо IVA+IRPF платишь фиксированный % с выручки.</span></span> — фиксированная ставка от выручки. Заменяет IRPF. Микробизнес до $20K — без IVA.</div>
+      <div class="fcol-ex">Пример: при $50K оборота → <strong>~$300-$500</strong> налог за год</div>
+    </div>
+  </div>
+
+  <!-- IRPF Scale -->
+  <div class="card" id="irpf-scale-card">
+    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--pu-l);margin-bottom:12px">🎨 Визуальная шкала IRPF <span style="color:var(--mu);font-weight:600;text-transform:none;letter-spacing:0">— применима только для физлица</span></div>
+    <div class="scale">
+      <div class="scale-bars">
+        <div class="scale-seg" style="background:#4ADE80;flex:12.2">0%<div class="scale-seg-pop"><div class="ssp-h">Скобка 1 · 0%</div><div class="ssp-r">$0 — $12 208</div><div class="ssp-d">Доход освобождён от налога</div></div></div>
+        <div class="scale-seg" style="background:#7ED97A;flex:3.3">5%<div class="scale-seg-pop"><div class="ssp-h">Скобка 2 · 5%</div><div class="ssp-r">$12 208 — $15 549</div><div class="ssp-d">Базовый налог: <b>$0</b><br>+ 5% от превышения</div></div></div>
+        <div class="scale-seg" style="background:#A3D97F;flex:4.6">10%<div class="scale-seg-pop"><div class="ssp-h">Скобка 3 · 10%</div><div class="ssp-r">$15 549 — $20 188</div><div class="ssp-d">Базовый налог: <b>$167</b><br>+ 10% от превышения</div></div></div>
+        <div class="scale-seg" style="background:#CED97F;flex:6.5">12%<div class="scale-seg-pop"><div class="ssp-h">Скобка 4 · 12%</div><div class="ssp-r">$20 188 — $26 700</div><div class="ssp-d">Базовый налог: <b>$631</b><br>+ 12% от превышения</div></div></div>
+        <div class="scale-seg" style="background:#E5D97F;flex:8.4">15%<div class="scale-seg-pop"><div class="ssp-h">Скобка 5 · 15%</div><div class="ssp-r">$26 700 — $35 136</div><div class="ssp-d">Базовый налог: <b>$1 412</b><br>+ 15% от превышения</div></div></div>
+        <div class="scale-seg" style="background:#FCD34D;flex:11.4">20%<div class="scale-seg-pop"><div class="ssp-h">Скобка 6 · 20%</div><div class="ssp-r">$35 136 — $46 575</div><div class="ssp-d">Базовый налог: <b>$2 678</b><br>+ 20% от превышения</div></div></div>
+        <div class="scale-seg" style="background:#FB923C;flex:15.4">25%<div class="scale-seg-pop"><div class="ssp-h">Скобка 7 · 25%</div><div class="ssp-r">$46 575 — $62 005</div><div class="ssp-d">Базовый налог: <b>$4 965</b><br>+ 25% от превышения</div></div></div>
+        <div class="scale-seg" style="background:#F87171;flex:20.7">30%<div class="scale-seg-pop"><div class="ssp-h">Скобка 8 · 30%</div><div class="ssp-r">$62 005 — $82 679</div><div class="ssp-d">Базовый налог: <b>$8 823</b><br>+ 30% от превышения</div></div></div>
+        <div class="scale-seg" style="background:#E4465F;flex:27.3">35%<div class="scale-seg-pop"><div class="ssp-h">Скобка 9 · 35% <span style="color:var(--am)">⭐ новая</span></div><div class="ssp-r">$82 679 — $109 956</div><div class="ssp-d">Базовый налог: <b>$15 025</b><br>+ 35% от превышения</div></div></div>
+        <div class="scale-seg" style="background:#C23856;flex:14">37%<div class="scale-seg-pop"><div class="ssp-h">Скобка 10 · 37% (макс)</div><div class="ssp-r">$109 956 и выше</div><div class="ssp-d">Базовый налог: <b>$24 572</b><br>+ 37% от превышения</div></div></div>
+      </div>
+      <div class="scale-labels">
+        <span>$0</span><span>$27K</span><span>$47K</span><span>$83K</span><span>$110K+</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ АЛЬТЕРНАТИВНЫЕ ВИЗУАЛИЗАЦИИ: для не-физлица ═══ -->
+
+  <!-- Компания: корпоративный налог 25% / 17% -->
+  <div class="card alt-rate-card" id="corp-rate-card" style="display:none">
+    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--pu-l);margin-bottom:14px">🏢 Корпоративный налог <span style="color:var(--mu);font-weight:600;text-transform:none;letter-spacing:0">— для Компании (SAS/Ltda)</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:linear-gradient(180deg,rgba(248,113,113,.12),rgba(248,113,113,.04));border:1px solid rgba(248,113,113,.3);border-radius:13px;padding:18px;position:relative;overflow:hidden">
+        <div style="font-size:10.5px;font-weight:800;color:var(--rd);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Стандарт</div>
+        <div style="font-size:44px;font-weight:900;background:linear-gradient(135deg,#FF8A80,#F87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:8px">25%</div>
+        <div style="font-size:12px;color:var(--tx2);line-height:1.6">С чистой прибыли компании. Платится ежегодно до апреля за предыдущий год.</div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:var(--mu)">💡 При прибыли <strong style="color:var(--tx2)">$100K</strong> → налог <strong style="color:var(--rd)">$25 000</strong></div>
+      </div>
+      <div style="background:linear-gradient(180deg,rgba(74,222,128,.12),rgba(74,222,128,.04));border:1px solid rgba(74,222,128,.3);border-radius:13px;padding:18px;position:relative;overflow:hidden">
+        <div style="font-size:10.5px;font-weight:800;color:var(--gr);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">С реинвестицией</div>
+        <div style="font-size:44px;font-weight:900;background:linear-gradient(135deg,#6EE89F,#4ADE80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:8px">17%</div>
+        <div style="font-size:12px;color:var(--tx2);line-height:1.6">Если реинвестируешь прибыль в основные средства (оборудование, недвижимость, транспорт).</div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:var(--mu)">💡 При прибыли <strong style="color:var(--tx2)">$100K</strong> → налог <strong style="color:var(--gr)">$17 000</strong> (<span style="color:var(--gr)">экономия $8K</span>)</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:12px 14px;background:var(--am-bg);border:1px solid var(--am-brd);border-radius:9px;font-size:11.5px;line-height:1.6;color:var(--tx2)">
+      ⚠️ Дополнительно для компаний: <strong style="color:var(--am)">1.5‰ (0.15%) на активы</strong> ежегодно — платится независимо от прибыли.
+    </div>
+  </div>
+
+  <!-- RIMPE: прогрессивная шкала оборота -->
+  <div class="card alt-rate-card" id="rimpe-rate-card" style="display:none">
+    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--pu-l);margin-bottom:14px">🏪 Ставки RIMPE 2026 <span style="color:var(--mu);font-weight:600;text-transform:none;letter-spacing:0">— прогрессивная шкала по годовому обороту</span></div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr>
+        <th>Годовой оборот</th>
+        <th class="r">Ставка</th>
+        <th class="r">Пример налога</th>
+      </tr>
+      <tr><td>$0 — $20 000 <span style="color:var(--mu);font-size:10.5px">(Negocios Populares)</span></td><td class="r">$60 фикс</td><td class="r">$60 / год</td></tr>
+      <tr><td>$20 000 — $50 000</td><td class="r">1%</td><td class="r">При $40K → <strong>$200</strong></td></tr>
+      <tr><td>$50 000 — $75 000</td><td class="r">1.25%</td><td class="r">При $60K → <strong>$438</strong></td></tr>
+      <tr><td>$75 000 — $100 000</td><td class="r">1.5%</td><td class="r">При $90K → <strong>$600</strong></td></tr>
+      <tr><td>$100 000 — $200 000</td><td class="r">1.75%</td><td class="r">При $150K → <strong>$1 500</strong></td></tr>
+      <tr><td>$200 000 — $300 000</td><td class="r">2%</td><td class="r">При $250K → <strong>$3 500</strong></td></tr>
+      <tr style="background:var(--rd-bg)"><td><strong>Больше $300 000</strong></td><td class="r" colspan="2">⚠️ Переход в общий режим (IRPF + IVA)</td></tr>
+    </table>
+    </div>
+    <div style="margin-top:14px;padding:12px 14px;background:var(--gr-bg);border:1px solid var(--gr-brd);border-radius:9px;font-size:11.5px;line-height:1.6;color:var(--tx2)">
+      ✅ <strong style="color:var(--gr)">Преимущество RIMPE:</strong> ставка от оборота (не от прибыли), освобождает от IVA и IRPF. Идеально для малого бизнеса с понятной маржой.
+    </div>
+  </div>
+
+  <!-- Нерезидент: 25% flat -->
+  <div class="card alt-rate-card" id="nonres-rate-card" style="display:none">
+    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--pu-l);margin-bottom:14px">✈️ Удержание для нерезидента <span style="color:var(--mu);font-weight:600;text-transform:none;letter-spacing:0">— flat ставка без шкалы</span></div>
+    <div style="background:linear-gradient(180deg,rgba(248,113,113,.12),rgba(248,113,113,.04));border:1px solid rgba(248,113,113,.35);border-radius:14px;padding:24px;text-align:center">
+      <div style="font-size:10.5px;font-weight:800;color:var(--rd);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Retención en la fuente</div>
+      <div style="font-size:72px;font-weight:900;background:linear-gradient(135deg,#FF8A80,#F87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:10px">25%</div>
+      <div style="font-size:14px;color:var(--tx2);line-height:1.6;max-width:500px;margin:0 auto">С <strong style="color:var(--rd)">валовой выручки</strong> из Эквадора. Расходы не учитываются. Удерживает плательщик.</div>
+    </div>
+    <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:var(--rd-bg);border:1px solid var(--rd-brd);border-radius:10px;padding:14px;font-size:11.5px;line-height:1.6">
+        <div style="font-size:10.5px;font-weight:800;color:var(--rd);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">❌ Минус</div>
+        Расходы бизнеса не уменьшают налоговую базу. Это ставка с <strong>валового</strong> дохода, не с прибыли.
+      </div>
+      <div style="background:var(--bl-bg);border:1px solid var(--bl-brd);border-radius:10px;padding:14px;font-size:11.5px;line-height:1.6">
+        <div style="font-size:10.5px;font-weight:800;color:var(--bl);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">💡 Альтернатива</div>
+        Получи <strong>резидентство</strong> (ВНЖ по инвестиции $48.2K) → перейдёшь на IRPF 0-37% со значительной экономией.
+      </div>
+    </div>
+  </div>
+
+<!-- === Правила динамически по форме === -->
+  <ul class="rules" id="rules-individual" style="display:none">
+    <li><strong>Обязательна декларация</strong> — ежегодно в марте (по 9 цифре RUC)</li>
+    <li>Можешь вычесть <span class="term">Gastos personales<span class="term-pop">Личные расходы (медицина, образование, еда, одежда, жильё) до 50% налоговой базы или $15 238 — в декларации.</span></span> до <strong>$15 238</strong> в год</li>
+    <li>Если оборот больше <strong>$300K/год</strong> — обязателен <span class="term">IVA<span class="term-pop">Impuesto al Valor Agregado — НДС 15%. Для физлиц с RUC — обязателен только при превышении $300K/год.</span></span> 15%</li>
+    <li>Можешь нанимать <strong>подрядчиков без IESS</strong> — но не штатных работников</li>
+    <li><strong>Резидент</strong> декларирует всемирный доход (не только эквадорский)</li>
+  </ul>
+
+  <ul class="rules" id="rules-person" style="display:none">
+    <li>Налог IRPF удерживает работодатель <strong>автоматически</strong> (форма 107)</li>
+    <li>Декларация <strong>обязательна</strong> если годовой доход превышает <strong>$12 208</strong></li>
+    <li>Можешь вычесть <span class="term">Gastos personales<span class="term-pop">Личные расходы до 50% налоговой базы или $15 238 — применяется в декларации.</span></span> до <strong>$15 238</strong> в декларации</li>
+    <li>Нельзя вычитать расходы бизнеса — <strong>только личные</strong> (нет RUC)</li>
+    <li>Если несколько источников дохода — нужна <strong>сводная декларация</strong></li>
+  </ul>
+
+  <ul class="rules" id="rules-rimpe" style="display:none">
+    <li>Только для оборота <strong>до $300K/год</strong> — выше обязательно в общий режим</li>
+    <li>Ставка считается <strong>от выручки</strong>, а не от прибыли — плюс при хорошей марже</li>
+    <li>Освобождает от <span class="term">IVA<span class="term-pop">RIMPE заменяет IVA — не нужно декларировать и платить отдельно.</span></span> и IRPF — платишь один налог</li>
+    <li>Декларация <strong>полугодовая</strong> — до июля и января</li>
+    <li><span class="term">Negocios Populares<span class="term-pop">Sub-категория RIMPE для оборота до $20K/год — фиксированный налог $60/год.</span></span> (до $20K) — всего <strong>$60 фикс в год</strong></li>
+  </ul>
+
+  <ul class="rules" id="rules-company" style="display:none">
+    <li><strong>Минимум 17%</strong> — только при правильной реинвестиции прибыли в активы</li>
+    <li><strong>1.5‰ (0.15%) на активы</strong> ежегодно — независимо от прибыли</li>
+    <li>Ежегодная декларация до <strong>апреля</strong> (по 9 цифре RUC компании)</li>
+    <li><span class="term">Utilidades<span class="term-pop">15% прибыли ежегодно распределяется среди работников до 15 апреля.</span></span> — <strong>15% прибыли</strong> распределяется работникам</li>
+    <li>Компанию нельзя «бросить» — нужна формальная <strong>ликвидация</strong></li>
+  </ul>
+
+  <ul class="rules" id="rules-nonresident" style="display:none">
+    <li><strong>25% удержание</strong> с валовой выручки — расходы не уменьшают</li>
+    <li>Удерживает <strong>плательщик</strong> у источника — ты получаешь уже «чистыми»</li>
+    <li>При продаже недвижимости — <strong>25% удерживает нотариус</strong> до выдачи денег</li>
+    <li><strong>180+ дней</strong> в Эквадоре → становишься резидентом → IRPF 0-37%</li>
+    <li>Альтернатива: получи <strong>ВНЖ</strong> по инвестиции <strong>$48 200</strong> → перейдёшь на резидентский режим</li>
+  </ul>
+</div>
+
+<!-- SECTION 2: SALARY -->
+<div class="section" id="sec-salary">
+  <div class="sec-h" data-toggle="sec-salary">
+    <div class="sec-ico">👔</div>
+    <div>
+      <div class="sec-t">Зарплаты и работники</div>
+      <div class="sec-s">Обязательства при найме — зависят от твоей формы</div>
+    </div>
+  </div>
+
+  <!-- ═══ БАЗОВЫЕ ФАКТЫ 2026 — общие для всех форм ═══ -->
+  <div class="card">
+    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--pu-l);margin-bottom:12px">📌 Базовые ставки 2026 <span style="color:var(--mu);font-weight:600;text-transform:none;letter-spacing:0">— универсальны для любого работника в Эквадоре</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px">
+      <div style="background:var(--pu-bg);border:1px solid var(--pu-brd);border-radius:9px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">SBU 2026</div>
+        <div style="font-size:28px;font-weight:900;background:linear-gradient(135deg,#9560E8,#9560E8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1">$482</div>
+        <div style="font-size:10.5px;color:var(--tx2)">минимальный оклад/мес</div>
+      </div>
+      <div style="background:var(--am-bg);border:1px solid var(--am-brd);border-radius:9px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">IESS работник</div>
+        <div style="font-size:28px;font-weight:900;color:var(--am);line-height:1.1">9.45%</div>
+        <div style="font-size:10.5px;color:var(--tx2)">удерж. из зарплаты</div>
+      </div>
+      <div style="background:var(--rd-bg);border:1px solid var(--rd-brd);border-radius:9px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">IESS работодатель</div>
+        <div style="font-size:28px;font-weight:900;color:var(--rd);line-height:1.1">11.15%</div>
+        <div style="font-size:10.5px;color:var(--tx2)">сверху оклада</div>
+      </div>
+      <div style="background:var(--gr-bg);border:1px solid var(--gr-brd);border-radius:9px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">14-я зарплата</div>
+        <div style="font-size:28px;font-weight:900;color:var(--gr);line-height:1.1">$482</div>
+        <div style="font-size:10.5px;color:var(--tx2)">в год = 1 SBU</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ФИЗЛИЦО С RUC ═══ -->
+  <div class="card sal-card" id="sal-individual" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">👤 Ты физлицо с RUC — можешь только подрядчиков, не штатных работников</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Тип работника</th><th class="r">IESS</th><th class="r">13-я / 14-я</th><th>Как работает</th></tr>
+      <tr style="background:var(--gr-bg)"><td><strong>Подрядчик с RUC</strong></td><td class="r" style="color:var(--gr)">НЕТ</td><td class="r" style="color:var(--gr)">НЕТ</td><td>Выставляет тебе фактуру, сам декларирует</td></tr>
+      <tr><td>Ты удерживаешь IR с оплаты</td><td class="r">10%</td><td class="r">—</td><td>+ 100% IVA retention</td></tr>
+      <tr style="background:var(--rd-bg)"><td>Штатный работник</td><td class="r" style="color:var(--rd)">⚠️ нельзя</td><td class="r">—</td><td>Физлицо не может быть работодателем штатных</td></tr>
+    </table>
+    </div>
+    <div class="info i-g" style="margin-top:12px">
+      <div class="info-ico">💡</div>
+      <div class="info-body"><div class="info-t">Как правильно оформить подрядчика</div>Оформи <strong>contrato de servicios profesionales</strong>. Подрядчик должен быть с RUC. Ежемесячно удерживай 10% IR + 100% IVA и перечисляй в SRI через Форму 103.</div>
+    </div>
+  </div>
+
+  <!-- ═══ ФИЗЛИЦО БЕЗ RUC ═══ -->
+  <div class="card sal-card" id="sal-person" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">💼 Ты работник без RUC — что работодатель должен тебе</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Что получаешь</th><th class="r">Сколько</th><th>Когда</th></tr>
+      <tr><td>Оклад (нетто после удержаний)</td><td class="r">оклад − 9.45% IESS − IRPF</td><td>ежемесячно</td></tr>
+      <tr><td>13-я зарплата</td><td class="r">1 оклад</td><td>декабрь</td></tr>
+      <tr><td>14-я зарплата</td><td class="r">$482 (= SBU)</td><td>апрель (Коста) или август (Сьерра)</td></tr>
+      <tr><td><span class="term">Фонд резерва<span class="term-pop">8.33% от зарплаты, начинается после 12 месяцев непрерывной работы у того же работодателя.</span></span></td><td class="r">8.33% от оклада</td><td>после 1 года работы</td></tr>
+      <tr><td>Отпуск оплачиваемый</td><td class="r">15 дней/год</td><td>после 1 года</td></tr>
+      <tr><td>IESS аффилиация</td><td class="r">9.45% удерж.</td><td>автоматически</td></tr>
+    </table>
+    </div>
+    <div class="info i-b" style="margin-top:12px">
+      <div class="info-ico">📊</div>
+      <div class="info-body"><div class="info-t">Пример: оклад $1 000</div>Ты получаешь на руки: <strong>$1 000 − $94.5 (IESS) − $IRPF ≈ $905</strong><br>Компания тратит на тебя: $1 000 + $111.5 (IESS) + $83 (13-я) + $40 (14-я) + $83 (ФР) = <strong>~$1 318/мес</strong></div>
+    </div>
+  </div>
+
+  <!-- ═══ RIMPE ═══ -->
+  <div class="card sal-card" id="sal-rimpe" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">🏪 Ты в RIMPE — можешь подрядчиков, штатных работников нанимать осторожно</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Тип работника</th><th class="r">IESS / 13 / 14</th><th>Особенность</th></tr>
+      <tr style="background:var(--gr-bg)"><td><strong>Подрядчик с RUC</strong></td><td class="r" style="color:var(--gr)">НЕТ</td><td>Как у Физлица с RUC, 10% IR retention</td></tr>
+      <tr><td>1-2 штатных работника</td><td class="r">полный пакет</td><td>Можно, но становишься обычным работодателем</td></tr>
+      <tr style="background:var(--am-bg)"><td>Большой штат (&gt;5 работников)</td><td class="r">полный пакет</td><td>⚠️ Обычно требует выхода из RIMPE в общий режим</td></tr>
+    </table>
+    </div>
+    <div class="info i-a" style="margin-top:12px">
+      <div class="info-ico">⚠️</div>
+      <div class="info-body"><div class="info-t">Баланс RIMPE и штата</div>RIMPE — для малого бизнеса. Если нанимаешь много людей — проверь что оборот <strong>не превысит $300K</strong>. При превышении вылетишь из RIMPE и попадёшь в общий режим с IVA+IRPF.</div>
+    </div>
+  </div>
+
+  <!-- ═══ КОМПАНИЯ ═══ -->
+  <div class="card sal-card" id="sal-company" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">🏢 Ты компания — полный пакет обязательств работодателя</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Начисление</th><th class="r">Ставка</th><th>Кто платит</th><th>Когда</th></tr>
+      <tr><td>IESS работник</td><td class="r">9.45%</td><td>работник (удерж.)</td><td>ежемесячно</td></tr>
+      <tr><td>IESS работодатель</td><td class="r">11.15%</td><td>компания</td><td>ежемесячно</td></tr>
+      <tr><td><span class="term">Décimo Tercero<span class="term-pop">13-я зарплата — дополнительная месячная выплата в декабре, равна 1/12 годовой зарплаты.</span></span> (13-я)</td><td class="r">1 оклад</td><td>компания</td><td>декабрь</td></tr>
+      <tr><td><span class="term">Décimo Cuarto<span class="term-pop">14-я зарплата — равна SBU ($482 на 2026). Коста — апрель, Сьерра — август.</span></span> (14-я)</td><td class="r">$482/год</td><td>компания</td><td>апрель / август</td></tr>
+      <tr><td>Фонд резерва</td><td class="r">8.33%</td><td>компания</td><td>после 1 года</td></tr>
+      <tr><td><span class="term">Utilidades<span class="term-pop">Распределение 15% прибыли между работниками, до 15 апреля.</span></span></td><td class="r">15% прибыли</td><td>компания</td><td>до 15 апреля</td></tr>
+      <tr><td>Vacaciones (отпуск)</td><td class="r">15 дней/год</td><td>компания</td><td>после года</td></tr>
+      <tr><td>IECE + SECAP</td><td class="r">+1% (к IESS)</td><td>компания</td><td>ежемесячно</td></tr>
+    </table>
+    </div>
+    <div class="ex-box" style="margin-top:14px">
+      <div class="ex-box-h">💡 Пример: оклад работника $600</div>
+      <div class="ex-body">
+        • Работник получает на руки: <strong>$543.3</strong> (−9.45% IESS)<br>
+        • Компания тратит всего: <strong>~$807/мес</strong> (+35% сверху: IESS 11.15%, 13-я, 14-я, ФР)<br>
+        • За год: работник $6 520 нетто, компания тратит <strong>$9 685</strong>
+      </div>
+    </div>
+    <div class="info i-r" style="margin-top:12px">
+      <div class="info-ico">⚠️</div>
+      <div class="info-body"><div class="info-t">Штрафы за нарушения</div>Неуплата IESS, 13-й, 14-й = штраф до 20 SBU (<strong>$9 640</strong>). Серая зарплата при проверке <span class="term">SRI<span class="term-pop">Servicio de Rentas Internas — налоговая служба Эквадора.</span></span>/<span class="term">MRL<span class="term-pop">Ministerio de Relaciones Laborales — министерство труда.</span></span> — уголовная статья.</div>
+    </div>
+  </div>
+
+  <!-- ═══ НЕРЕЗИДЕНТ ═══ -->
+  <div class="card sal-card" id="sal-nonresident" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">✈️ Ты нерезидент — нанимать работников напрямую нельзя</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Ситуация</th><th>Что делать</th></tr>
+      <tr style="background:var(--rd-bg)"><td><strong>Хочешь нанять штатного работника</strong></td><td>🚫 Напрямую нельзя — у тебя нет эквадорского RUC работодателя</td></tr>
+      <tr style="background:var(--gr-bg)"><td><strong>Решение 1: открыть компанию в EC</strong></td><td>✅ SAS/Ltda станет работодателем. Тогда ты — иностранный акционер</td></tr>
+      <tr style="background:var(--gr-bg)"><td><strong>Решение 2: Payroll service</strong></td><td>✅ EOR сервис оформляет работника от своего имени ($50-150/мес комиссия)</td></tr>
+      <tr style="background:var(--gr-bg)"><td><strong>Решение 3: подрядчик с RUC</strong></td><td>✅ Физлицо с RUC оказывает услуги, сам декларирует</td></tr>
+      <tr style="background:var(--am-bg)"><td><strong>Если ты получаешь ВНЖ</strong></td><td>Через 183+ дней → станешь резидентом → сможешь быть работодателем напрямую</td></tr>
+    </table>
+    </div>
+    <div class="info i-b" style="margin-top:12px">
+      <div class="info-ico">💡</div>
+      <div class="info-body"><div class="info-t">Альтернатива — ВНЖ за $48 200</div>Если планируешь активный бизнес с штатом — получи <strong>ВНЖ</strong> (инвестиция $48 200 в недвижимость или депозит). Станешь резидентом, сможешь нанимать напрямую, плюс выгоднее по IRPF (0-37% вместо 25% flat).</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: REAL ESTATE -->
+<div class="section" id="sec-realestate">
+  <div class="sec-h" data-toggle="sec-realestate">
+    <div class="sec-ico">🏠</div>
+    <div>
+      <div class="sec-t">Недвижимость — 3 роли</div>
+      <div class="sec-s">Налоги при покупке, владении и продаже</div>
+    </div>
+  </div>
+
+<div class="roles-grid">
+    <!-- BUYER -->
+    <div class="role-card">
+      <div class="role-h"><span class="role-h-ico">🛒</span>Покупатель</div>
+      <div class="role-list">
+        <div class="role-item" data-show="all"><div class="role-it-l"><span class="term">Alcabala<span class="term-pop"><strong>Алькабала</strong> — муниципальный налог на передачу недвижимости. Платит покупатель при регистрации сделки в муниципалитете.</span></span></div><div class="role-it-r">1%</div></div>
+        <div class="role-item" data-show="all"><div class="role-it-l"><span class="term">Registro de la Propiedad<span class="term-pop"><strong>Регистрация</strong> права собственности в государственном реестре. Один раз при покупке.</span></span></div><div class="role-it-r">~0.5%</div></div>
+        <div class="role-item" data-show="all"><div class="role-it-l"><span class="term">Escritura pública<span class="term-pop"><strong>Нотариальное оформление</strong> договора купли-продажи. Обязательно.</span></span> (нотариус)</div><div class="role-it-r">~0.4%</div></div>
+        <div class="role-item" data-show="all"><div class="role-it-l">IVA 15% (только новостройка)</div><div class="role-it-r">15%</div></div>
+        <div class="role-item" data-show="company" style="background:rgba(74,222,128,.08);border-left:3px solid var(--gr);padding-left:8px"><div class="role-it-l">💡 IVA на новостройку → <span class="term">Crédito Fiscal<span class="term-pop"><strong>Crédito Fiscal</strong> — налоговый кредит. Компания может зачесть IVA уплаченный при покупке новостройки против IVA полученного с продаж. Эффективно — IVA возвратный.</span></span></div><div class="role-it-r" style="color:var(--gr)">возвратный</div></div>
+        <div class="role-item" data-show="nonresident" style="background:rgba(96,165,250,.08);border-left:3px solid var(--bl);padding-left:8px"><div class="role-it-l">ℹ️ Вход валюты из-за границы — без <span class="term">ISD<span class="term-pop">ISD — Impuesto a la Salida de Divisas. Применяется только к исходящим переводам. Входящие переводы свободны от налога.</span></span></div><div class="role-it-r" style="color:var(--bl)">0%</div></div>
+        <div class="role-item" data-show="all"><div class="role-it-l">Юрист (проверка чистоты)</div><div class="role-it-r">$500-2K</div></div>
+      </div>
+      <div class="role-ex" data-show="individual,person,rimpe"><strong>Пример $100K (вторичка):</strong> +$2 900 к цене<br><strong>Новостройка $100K:</strong> +$17 900 (IVA не возвратный)</div>
+      <div class="role-ex" data-show="company"><strong>Пример $100K (вторичка):</strong> +$2 900<br><strong>Новостройка $100K:</strong> +$2 900 эффективно <span style="color:var(--gr)">(IVA возвратный через Crédito Fiscal)</span></div>
+      <div class="role-ex" data-show="nonresident"><strong>Пример $100K (вторичка):</strong> +$2 900<br><strong>Новостройка:</strong> +$17 900 IVA (не возвратный)<br><strong>Важно:</strong> перевод сохраняй SWIFT для истории</div>
+    </div>
+
+    <!-- OWNER -->
+    <div class="role-card">
+      <div class="role-h"><span class="role-h-ico">🏠</span>Владелец</div>
+      <div class="role-list">
+        <div class="role-item" data-show="all"><div class="role-it-l"><span class="term">Predial<span class="term-pop"><strong>Налог на недвижимость</strong> — годовой муниципальный налог. Ставка от кадастровой стоимости, зависит от города.</span></span> (годовой)</div><div class="role-it-r" id="pred-v">0.25%</div></div>
+        <div class="role-item" data-show="company" style="background:rgba(252,211,77,.08);border-left:3px solid var(--am);padding-left:8px"><div class="role-it-l">⚠️ <span class="term">1.5‰ на активы<span class="term-pop"><strong>Налог на активы юрлиц</strong> — 0.15% в год от стоимости актива. Недвижимость компании — это актив, облагается.</span></span> (недвижка — актив)</div><div class="role-it-r" style="color:var(--am)">0.15%/год</div></div>
+        <div class="role-item" data-show="all"><div class="role-it-l">Коммунальные</div><div class="role-it-r">~$100/мес</div></div>
+        <div class="role-item" data-show="all"><div class="role-it-l">HOA / Alícuota (ЖК)</div><div class="role-it-r">$50-200/мес</div></div>
+        <div class="role-item" data-show="all"><div class="role-it-l">Страхование (опц.)</div><div class="role-it-r">0.1-0.3%</div></div>
+        <div class="role-item" data-show="nonresident" style="background:rgba(248,113,113,.08);border-left:3px solid var(--rd);padding-left:8px"><div class="role-it-l">⚠️ Налог на пустующее жильё (Кито, Куэнка)</div><div class="role-it-r" style="color:var(--rd)">~1-3%</div></div>
+      </div>
+      <div class="role-ex" data-show="individual,person,rimpe"><strong>Пример $80K кадастр в Куэнке:</strong><br>Predial ~$200/год + коммун. ~$2 880/год</div>
+      <div class="role-ex" data-show="company"><strong>Пример $80K кадастр в Куэнке:</strong><br>Predial $200 + 1.5‰ ($120) + коммун. $2 880<br>= <strong>~$3 200/год</strong></div>
+      <div class="role-ex" data-show="nonresident"><strong>Пример $80K в Куэнке:</strong><br>Predial $200 + коммун. $2 880/год<br><strong>Если пустует:</strong> +$800-2 400/год (налог на простой)</div>
+    </div>
+
+    <!-- SELLER -->
+    <div class="role-card">
+      <div class="role-h"><span class="role-h-ico">💸</span>Продавец</div>
+      <div class="role-list">
+        <div class="role-item" data-show="all"><div class="role-it-l"><span class="term">Plusvalía<span class="term-pop"><strong>Plusvalía Municipal</strong> (COOTAD Art. 556) — муниципальный налог на прирост стоимости. 10% с чистой прибыли (можно вычесть 5% за каждый год владения).</span></span> (муниципальный)</div><div class="role-it-r">10%</div></div>
+        <div class="role-item" data-show="individual,person,rimpe"><div class="role-it-l"><span class="term">CGT<span class="term-pop"><strong>Capital Gains Tax</strong>. Резидент >2 лет: 10%. Резидент <2 лет: попадает в IRPF прогрессив. Нерезидент: 25% flat.</span></span> резидент >2 лет</div><div class="role-it-r">10%</div></div>
+        <div class="role-item" data-show="individual,person,rimpe"><div class="role-it-l">CGT резидент <2 лет</div><div class="role-it-r">IRPF до 37%</div></div>
+        <div class="role-item" data-show="company" style="background:rgba(74,222,128,.1);border-left:3px solid var(--gr);padding-left:8px"><div class="role-it-l">✨ <span class="term">Occasional<span class="term-pop"><strong>Occasional sale</strong> — случайная (не регулярная) продажа недвижимости. По LRTI занята Art. 8 и Chambers/PwC — ОСВОБОЖДЕНО от IR, если компания не занимается недвижимостью как основным бизнесом.</span></span> продажа (не бизнес) → освобождено от IR</div><div class="role-it-r" style="color:var(--gr)">0% IR</div></div>
+        <div class="role-item" data-show="company"><div class="role-it-l">Если занимаешься недвижкой (застройщик, флиппер)</div><div class="role-it-r">IR 25%</div></div>
+        <div class="role-item" data-show="nonresident" style="background:rgba(248,113,113,.1);border-left:3px solid var(--rd);padding-left:8px"><div class="role-it-l">🚨 <strong>Удержание нотариусом</strong> с прибыли</div><div class="role-it-r" style="color:var(--rd)">25%</div></div>
+        <div class="role-item" data-show="nonresident"><div class="role-it-l">ISD при переводе выручки за границу</div><div class="role-it-r" style="color:var(--rd)">5%</div></div>
+        <div class="role-item" data-show="all"><div class="role-it-l">Нотариус (продавец)</div><div class="role-it-r">~0.2%</div></div>
+      </div>
+      <div class="role-ex" data-show="individual,person,rimpe"><strong>Пример $50K→$80K (прирост $30K):</strong><br>Резидент &gt;2 лет: Plusvalía $3K + CGT $3K = <strong>$6K</strong><br>Резидент &lt;2 лет: Plusvalía $3K + IRPF ~$3-8K</div>
+      <div class="role-ex" data-show="company"><strong>Пример $50K→$80K (прибыль $30K):</strong><br>Occasional: Plusvalía $3K = <strong>$3K всего</strong><br>Regular бизнес: Plusvalía $3K + IR 25% $7.5K = <strong>$10.5K</strong></div>
+      <div class="role-ex" data-show="nonresident"><strong>Пример $50K→$80K (прирост $30K):</strong><br>Plusvalía $3K + 25% $7.5K + ISD $3.6K (на $72.5K)<br>= <strong>~$14K налогов</strong>, чистыми ~$16K</div>
+    </div>
+  </div>
+
+  <!-- Контекстное предупреждение — тоже динамическое -->
+  <div class="info i-a" style="margin-top:14px" data-show="individual,person,rimpe">
+    <div class="info-ico">⚠️</div>
+    <div class="info-body"><div class="info-t">Совет резидента</div>Держи объект <strong>больше 2 лет</strong>, чтобы попасть под 10% CGT вместо прогрессивного IRPF до 37%. Это может сэкономить тысячи.</div>
+  </div>
+
+  <div class="info i-g" style="margin-top:14px" data-show="company">
+    <div class="info-ico">✨</div>
+    <div class="info-body"><div class="info-t">Преимущество компании</div><strong>Occasional продажа</strong> недвижимости компанией освобождена от IR (LRTI, Chambers/PwC 2026). Но если ты застройщик или регулярно перепродаёшь — это уже регулярный бизнес, 25% IR применяется. Консультируйся с бухгалтером о квалификации.</div>
+  </div>
+
+  <div class="info i-r" style="margin-top:14px" data-show="nonresident">
+    <div class="info-ico">🚨</div>
+    <div class="info-body"><div class="info-t">Важно для нерезидента</div>Нотариус обязан удержать <strong>25% с прибыли ДО</strong> выдачи денег продавцу. Альтернатив нет. Плюс ISD 5% при переводе выручки обратно за границу. Альтернатива: получи ВНЖ за $48.2K — переходишь на резидентский режим с 10% CGT.</div>
+  </div>
+</div>
+
+<!-- SECTION 4: TRANSFERS -->
+<div class="section" id="sec-transfers">
+  <div class="sec-h" data-toggle="sec-transfers">
+    <div class="sec-ico">💸</div>
+    <div>
+      <div class="sec-t">Переводы и движения денег</div>
+      <div class="sec-s">ISD — налог на вывоз валюты, 5% базовая для всех форм</div>
+    </div>
+  </div>
+
+  <!-- ОБЩИЕ ФАКТЫ — для всех -->
+  <div class="card">
+    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--pu-l);margin-bottom:12px">📌 Базовые факты ISD 2026 <span style="color:var(--mu);font-weight:600;text-transform:none;letter-spacing:0">— одинаковы для всех форм</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
+      <div style="background:var(--rd-bg);border:1px solid var(--rd-brd);border-radius:9px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">Ставка</div>
+        <div style="font-size:32px;font-weight:900;background:linear-gradient(135deg,#FF8A80,#F87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1">5%</div>
+        <div style="font-size:10.5px;color:var(--tx2)">с исходящих за границу</div>
+      </div>
+      <div style="background:var(--gr-bg);border:1px solid var(--gr-brd);border-radius:9px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">Налично с собой</div>
+        <div style="font-size:24px;font-weight:900;color:var(--gr);line-height:1.1">$1 446/год</div>
+        <div style="font-size:10.5px;color:var(--tx2)">без налога (3×SBU 2026)</div>
+      </div>
+      <div style="background:var(--gr-bg);border:1px solid var(--gr-brd);border-radius:9px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">Карта за рубежом</div>
+        <div style="font-size:24px;font-weight:900;color:var(--gr);line-height:1.1">$5 188/год</div>
+        <div style="font-size:10.5px;color:var(--tx2)">без налога (2025-2027)</div>
+      </div>
+      <div style="background:var(--bl-bg);border:1px solid var(--bl-brd);border-radius:9px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">Входящий перевод</div>
+        <div style="font-size:24px;font-weight:900;color:var(--bl);line-height:1.1">0%</div>
+        <div style="font-size:10.5px;color:var(--tx2)">всегда без налога</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ФИЗЛИЦО С RUC -->
+  <div class="card isd-card" id="isd-individual" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">👤 Сценарии ISD для тебя как физлица с RUC</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Операция</th><th class="r">ISD</th><th class="r">Пример на $10K</th></tr>
+      <tr><td>Перевод личных денег за границу</td><td class="r">5%</td><td class="r">−$500</td></tr>
+      <tr><td>Оплата Meta/Google ads (для бизнеса)</td><td class="r">5%</td><td class="r">−$500</td></tr>
+      <tr><td>Подписки (Netflix, Spotify, AWS)</td><td class="r">5%</td><td class="r">накручивается</td></tr>
+      <tr><td>Карта за границей до $5 188/год</td><td class="r" style="color:var(--gr)">0%</td><td class="r">$0 — льгота</td></tr>
+      <tr><td>Карта за границей сверх $5 188/год</td><td class="r">5% на превышение</td><td class="r">пример</td></tr>
+      <tr><td>Налично в багаже до $1 446</td><td class="r" style="color:var(--gr)">0%</td><td class="r">$0 — льгота</td></tr>
+      <tr><td>Входящие из-за границы (от клиентов)</td><td class="r" style="color:var(--gr)">0%</td><td class="r">$0</td></tr>
+    </table>
+    </div>
+    <div class="info i-a" style="margin-top:12px">
+      <div class="info-ico">⚠️</div>
+      <div class="info-body"><div class="info-t">С 2025 ISD НЕ возвратен</div>Раньше можно было зачесть в IRPF (cредит). С 2025 — это безвозвратный расход. Если работаешь с иностранцами — закладывай 5% в стоимость.</div>
+    </div>
+  </div>
+
+  <!-- ФИЗЛИЦО БЕЗ RUC -->
+  <div class="card isd-card" id="isd-person" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">💼 Сценарии ISD для тебя как физлица без RUC</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Операция</th><th class="r">ISD</th><th class="r">Пример</th></tr>
+      <tr><td>Перевод родственникам за границу</td><td class="r">5%</td><td class="r">$1K → $50</td></tr>
+      <tr><td>Оплата подписок (Netflix, Spotify)</td><td class="r">5%</td><td class="r">$10/мес → $0.5</td></tr>
+      <tr><td>Покупки на Amazon, AliExpress</td><td class="r">5%</td><td class="r">накручивается</td></tr>
+      <tr><td>Карта за границей до $5 188/год</td><td class="r" style="color:var(--gr)">0%</td><td class="r">$0 — льгота</td></tr>
+      <tr><td>Карта сверх $5 188 → пример $7K</td><td class="r">5% × $1 812</td><td class="r">−$91</td></tr>
+      <tr><td>Налично с собой до $1 446</td><td class="r" style="color:var(--gr)">0%</td><td class="r">$0 — льгота</td></tr>
+      <tr><td>Лечение за границей (катастрофическое)</td><td class="r" style="color:var(--gr)">0%</td><td class="r">льгота при справке</td></tr>
+    </table>
+    </div>
+    <div class="info i-b" style="margin-top:12px">
+      <div class="info-ico">💡</div>
+      <div class="info-body"><div class="info-t">Совет</div>Большинство физлиц без RUC не превышают лимиты $5 188/год по карте и $1 446 налично. Если ты в этих рамках — фактически ISD не платишь.</div>
+    </div>
+  </div>
+
+  <!-- RIMPE -->
+  <div class="card isd-card" id="isd-rimpe" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">🏪 Сценарии ISD для тебя как RIMPE</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Операция</th><th class="r">ISD</th><th class="r">Пример</th></tr>
+      <tr><td>Импорт товара мелкими партиями</td><td class="r">5%</td><td class="r">$5K → $250</td></tr>
+      <tr><td>Оплата софта/SaaS (Shopify и т.д.)</td><td class="r">5%</td><td class="r">$100/мес → $5</td></tr>
+      <tr><td>Реклама в Meta/Google для бизнеса</td><td class="r">5%</td><td class="r">$1K → $50</td></tr>
+      <tr><td>Карта до $5 188/год</td><td class="r" style="color:var(--gr)">0%</td><td class="r">$0</td></tr>
+      <tr><td>Налично с собой до $1 446</td><td class="r" style="color:var(--gr)">0%</td><td class="r">$0</td></tr>
+      <tr><td>Входящие платежи от клиентов</td><td class="r" style="color:var(--gr)">0%</td><td class="r">$0</td></tr>
+    </table>
+    </div>
+    <div class="info i-a" style="margin-top:12px">
+      <div class="info-ico">📌</div>
+      <div class="info-body"><div class="info-t">Особенность RIMPE</div>RIMPE — это малый бизнес, обычно ISD за границу относительно мал. Но <strong>ISD — это расход, не вычет</strong>. Учитывай его в маржинальности при импорте.</div>
+    </div>
+  </div>
+
+  <!-- КОМПАНИЯ -->
+  <div class="card isd-card" id="isd-company" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">🏢 Сценарии ISD для тебя как компании <span style="color:var(--gr);font-weight:600">— есть секторальные льготы</span></div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Операция</th><th class="r">ISD</th><th class="r">Комментарий</th></tr>
+      <tr><td>Импорт обычных товаров</td><td class="r">5%</td><td class="r">базовая</td></tr>
+      <tr><td>Оплата иностранным поставщикам (услуги, IT, marketing)</td><td class="r">5%</td><td class="r">базовая</td></tr>
+      <tr><td>Дивиденды иностранному акционеру</td><td class="r">5%</td><td class="r">после уплаты IR</td></tr>
+      <tr><td><strong>Импорт фарм. товаров</strong> (subpartidas 0%)</td><td class="r" style="color:var(--gr)">0%</td><td class="r">льготный сектор</td></tr>
+      <tr><td><strong>Импорт стратегических секторов</strong></td><td class="r" style="color:var(--am)">2.5%</td><td class="r">сниженная ставка</td></tr>
+      <tr><td><strong>Импорт капитальных товаров</strong> по контракту инвестиций</td><td class="r" style="color:var(--gr)">0%</td><td class="r">контракт с COPCI</td></tr>
+      <tr><td><strong>Кредиты 360+ дней</strong> от междунар. банков</td><td class="r" style="color:var(--gr)">0%</td><td class="r">погашение и %</td></tr>
+      <tr><td>Возврат экспортной выручки в EC</td><td class="r" style="color:var(--gr)">0%</td><td class="r">входящие</td></tr>
+    </table>
+    </div>
+    <div class="info i-r" style="margin-top:12px">
+      <div class="info-ico">⚠️</div>
+      <div class="info-body"><div class="info-t">Презумпция ISD при экспорте</div>Если экспортируешь товар, но валюта <strong>не вернулась в Эквадор</strong> — SRI презюмирует ISD! Поэтому экспортёру важно сразу заводить валюту назад в EC через банк.</div>
+    </div>
+  </div>
+
+  <!-- НЕРЕЗИДЕНТ -->
+  <div class="card isd-card" id="isd-nonresident" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">✈️ Сценарии ISD для тебя как нерезидента</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Операция</th><th class="r">ISD</th><th class="r">Комментарий</th></tr>
+      <tr><td>Вывод выручки от продажи недвижимости</td><td class="r" style="color:var(--rd)">5%</td><td class="r">после 25% удержания нотариусом</td></tr>
+      <tr><td>Вывод дивидендов от эквад. компании</td><td class="r" style="color:var(--rd)">5%</td><td class="r">после уплаты IR</td></tr>
+      <tr><td>Вывод процентов по депозиту в EC</td><td class="r" style="color:var(--rd)">5%</td><td class="r">базовая</td></tr>
+      <tr><td><strong>Возврат изначального капитала</strong> инвестора</td><td class="r" style="color:var(--gr)">0%</td><td class="r">Art. 11 — productive investments</td></tr>
+      <tr><td>Ввод валюты в EC (на покупку и т.д.)</td><td class="r" style="color:var(--gr)">0%</td><td class="r">входящие свободны</td></tr>
+      <tr><td>Карта за границей (используется иностранцем в EC)</td><td class="r">5% сверх $5 188</td><td class="r">базовый порог</td></tr>
+    </table>
+    </div>
+    <div class="info i-g" style="margin-top:12px">
+      <div class="info-ico">✨</div>
+      <div class="info-body"><div class="info-t">Льгота для инвесторов: возврат капитала</div>Если ты <strong>иностранный инвестор</strong> и вкладывал капитал в Эквадор → возврат изначального капитала <strong>освобождён от ISD</strong> (LRTI Art. 11). Облагается только прибыль/проценты.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: RETENTIONS -->
+<div class="section" id="sec-retentions">
+  <div class="sec-h" data-toggle="sec-retentions">
+    <div class="sec-ico">📋</div>
+    <div>
+      <div class="sec-t">Ретенции — удержания у источника</div>
+      <div class="sec-s">Кто удерживает твой налог и перечисляет в SRI</div>
+    </div>
+  </div>
+
+  <!-- Физлицо с RUC — получатель ретенций -->
+  <div class="card ret-card" id="ret-individual" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">👤 Ты физлицо с RUC — клиенты удерживают часть оплаты</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>За что тебе платят</th><th class="r">IR удерж.</th><th class="r">IVA удерж.</th><th>Кто удерживает</th></tr>
+      <tr><td>Профессиональные услуги</td><td class="r">10%</td><td class="r">100% IVA</td><td>Клиент-компания</td></tr>
+      <tr><td>Аренда твоей недвижимости</td><td class="r">8%</td><td class="r">70% IVA</td><td>Арендатор</td></tr>
+      <tr><td>Продажа товара клиенту-ЮЛ</td><td class="r">1-1.75%</td><td class="r">30% IVA</td><td>Покупатель</td></tr>
+      <tr><td>Дивиденды от эквадорской компании</td><td class="r">10%</td><td class="r">—</td><td>Компания</td></tr>
+    </table>
+    </div>
+    <div class="info i-b" style="margin-top:12px">
+      <div class="info-ico">💡</div>
+      <div class="info-body"><div class="info-t">Comprobante de retención</div>Клиент обязан выдать тебе <span class="term">справку об удержании<span class="term-pop">Документ подтверждающий что часть налога уже уплачена государству клиентом. Обязательно храни для декларации.</span></span> — храни её. В декларации засчитаешь как уже уплаченный налог.</div>
+    </div>
+  </div>
+
+  <!-- Физлицо без RUC -->
+  <div class="card ret-card" id="ret-person" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">💼 Ты физлицо без RUC — зарплата удерживается автоматически</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Источник дохода</th><th class="r">Удержание</th><th>Кто удерживает</th></tr>
+      <tr><td>Зарплата (штатный работник)</td><td class="r">IRPF прогрессив</td><td>Работодатель</td></tr>
+      <tr><td>IESS работника</td><td class="r">9.45%</td><td>Работодатель</td></tr>
+      <tr><td>Проценты по депозиту (с марта 2026)</td><td class="r">3% (только &lt;180 дней)</td><td>Банк</td></tr>
+      <tr><td>Дивиденды от эквадорской компании</td><td class="r">10%</td><td>Компания</td></tr>
+    </table>
+    </div>
+    <div class="info i-a" style="margin-top:12px">
+      <div class="info-ico">📄</div>
+      <div class="info-body"><div class="info-t">Форма 107</div>Ежегодно в январе работодатель выдаёт <strong>Форма 107</strong> — сводка удержаний. Если доход &gt;$12 208 — подаёшь декларацию, используешь справки как credit.</div>
+    </div>
+  </div>
+
+  <!-- RIMPE -->
+  <div class="card ret-card" id="ret-rimpe" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">🏪 Ты в RIMPE — особый упрощённый режим ретенций</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Операция</th><th class="r">Удержание</th><th>Комментарий</th></tr>
+      <tr><td>Ты получаешь оплату (продажи)</td><td class="r" style="color:var(--gr)">НЕТ</td><td>RIMPE освобождён от удержаний</td></tr>
+      <tr><td>Ты платишь поставщику-RIMPE</td><td class="r" style="color:var(--gr)">НЕТ</td><td>RIMPE с RIMPE без удержаний</td></tr>
+      <tr><td>Ты платишь поставщику-не RIMPE</td><td class="r">Стандартные ставки</td><td>10% услуги, 1.75% товары</td></tr>
+      <tr><td>Ты платишь нерезиденту</td><td class="r" style="color:var(--rd)">25%</td><td>Обязательно удерживаешь</td></tr>
+    </table>
+    </div>
+    <div class="info i-g" style="margin-top:12px">
+      <div class="info-ico">✅</div>
+      <div class="info-body"><div class="info-t">Преимущество RIMPE</div>Когда ты продаёшь — клиент <strong>не удерживает</strong> с тебя (если оформил статус RIMPE правильно). Получаешь полную сумму сразу.</div>
+    </div>
+  </div>
+
+  <!-- Компания -->
+  <div class="card ret-card" id="ret-company" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">🏢 Ты компания — ДВЕ стороны: что платишь ТЫ и что удерживают У ТЕБЯ</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Что ты ПЛАТИШЬ (ты удерживаешь)</th><th class="r">IR</th><th class="r">IVA</th></tr>
+      <tr><td>Профессиональные услуги</td><td class="r">10%</td><td class="r">100%</td></tr>
+      <tr><td>Аренда офиса</td><td class="r">8%</td><td class="r">70%</td></tr>
+      <tr><td>Покупка товара от ЮЛ</td><td class="r">1-1.75%</td><td class="r">30%</td></tr>
+      <tr><td>Оплата нерезиденту</td><td class="r" style="color:var(--rd)">25%</td><td class="r">—</td></tr>
+      <tr><td>Дивиденды резиденту</td><td class="r">10%</td><td class="r">—</td></tr>
+    </table>
+    </div>
+    <div class="info i-r" style="margin-top:12px">
+      <div class="info-ico">⚠️</div>
+      <div class="info-body"><div class="info-t">Обязательства компании</div>Компания обязана подавать ежемесячную <strong>Форму 103</strong> в SRI с перечнем всех удержаний. Нарушение = штрафы до $10K и закрытие RUC. <strong>Нанимай нормального бухгалтера</strong>.</div>
+    </div>
+  </div>
+
+  <!-- Нерезидент -->
+  <div class="card ret-card" id="ret-nonresident" style="display:none">
+    <div style="font-size:12px;font-weight:700;color:var(--pu-l);margin-bottom:12px">✈️ Ты нерезидент — с тебя всегда удерживают</div>
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Твой доход в Эквадоре</th><th class="r">Удержание</th><th>Когда</th></tr>
+      <tr><td>Любой доход (услуги, аренда, гонорар)</td><td class="r" style="color:var(--rd)">25%</td><td>При каждой выплате</td></tr>
+      <tr><td>Продажа недвижимости</td><td class="r" style="color:var(--rd)">25%</td><td>У нотариуса</td></tr>
+      <tr><td>Проценты по депозиту</td><td class="r" style="color:var(--rd)">25%</td><td>Банк</td></tr>
+      <tr><td>Дивиденды от эквад. компании</td><td class="r">10%</td><td>Компания при выплате</td></tr>
+    </table>
+    </div>
+    <div class="info i-b" style="margin-top:12px">
+      <div class="info-ico">💡</div>
+      <div class="info-body"><div class="info-t">Как снизить</div>Получи <strong>ВНЖ</strong> (от $48 200 инвестиций в недвижимость/депозиты) → станешь резидентом → доход попадёт в <span class="term">IRPF<span class="term-pop">Для резидента: прогрессивная шкала 0-37% с возможностью вычетов. Практически всегда выгоднее 25% flat.</span></span> 0-37% (вместо 25% flat) + вычеты.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: HIDDEN -->
+<div class="section" id="sec-hidden">
+  <div class="sec-h" data-toggle="sec-hidden">
+    <div class="sec-ico">⚠️</div>
+    <div>
+      <div class="sec-t">Специфичные налоги твоей формы</div>
+      <div class="sec-s">О чём часто забывают в твоём конкретном режиме</div>
+    </div>
+  </div>
+
+  <!-- Физлицо с RUC -->
+  <div class="card hid-card" id="hid-individual" style="display:none">
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Налог / обязательство</th><th class="r">Сумма</th><th>Детали</th></tr>
+      <tr><td><strong><span class="term">Gastos personales<span class="term-pop">Личные расходы: медицина, образование, жильё, еда, одежда, туризм. Документируются фактурами.</span></span> (вычет)</strong></td><td class="r" style="color:var(--gr)">до $15 238/год</td><td>50% налог. базы или $15 238 (меньшее)</td></tr>
+      <tr><td><strong>Anexo de Gastos Personales</strong></td><td class="r">до 28 февраля</td><td>Обязателен если вычет &gt;$5 800</td></tr>
+      <tr><td><strong>ISD 5% на карте</strong></td><td class="r">5%</td><td>Только если оплаты за границей &gt;$5 000/год</td></tr>
+      <tr><td><strong>Обновление RUC</strong></td><td class="r">Ежегодно</td><td>Данные должны быть актуальны</td></tr>
+      <tr><td><strong>Проценты по депозитам &lt;180 дней</strong></td><td class="r">3% удерж.</td><td>С марта 2026 (новое)</td></tr>
+    </table>
+    </div>
+    <div class="info i-g" style="margin-top:12px">
+      <div class="info-ico">💡</div>
+      <div class="info-body"><div class="info-t">Главная льгота</div>Большинство не знают — можно вычесть <strong>до $15 238/год</strong> личных расходов через Gastos personales. Собирай ВСЕ фактуры медицины, образования, еды, жилья за год.</div>
+    </div>
+  </div>
+
+  <!-- Физлицо без RUC -->
+  <div class="card hid-card" id="hid-person" style="display:none">
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Что нужно знать</th><th class="r">Порог</th><th>Детали</th></tr>
+      <tr><td><strong><span class="term">Gastos personales<span class="term-pop">Вычет до $15 238 личных расходов. Применяется в декларации.</span></span></strong></td><td class="r" style="color:var(--gr)">до $15 238</td><td>Применяешь в декларации</td></tr>
+      <tr><td><strong>Декларация обязательна</strong></td><td class="r">&gt;$12 208/год</td><td>Даже если работодатель удержал налог</td></tr>
+      <tr><td><strong>Несколько источников дохода</strong></td><td class="r">—</td><td>Нужна сводная декларация</td></tr>
+      <tr><td><strong>Форма 107 от работодателя</strong></td><td class="r">До 31 января</td><td>Храни для декларации</td></tr>
+      <tr><td><strong>ISD на карточных платежах за рубеж</strong></td><td class="r">5%</td><td>Если лимит &gt;$5K/год превышен</td></tr>
+    </table>
+    </div>
+    <div class="info i-a" style="margin-top:12px">
+      <div class="info-ico">⚠️</div>
+      <div class="info-body"><div class="info-t">Частая ошибка</div>Люди думают "работодатель удержал — достаточно". Нет — если доход &gt;$12 208, <strong>декларация обязательна</strong>. Её отсутствие = штраф.</div>
+    </div>
+  </div>
+
+  <!-- RIMPE -->
+  <div class="card hid-card" id="hid-rimpe" style="display:none">
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Обязательство</th><th class="r">Детали</th><th>Когда</th></tr>
+      <tr><td><strong>Порог $300K</strong></td><td class="r" style="color:var(--rd)">Выход из RIMPE</td><td>При превышении — обязательный переход в общий режим</td></tr>
+      <tr><td><strong>Декларация полугодовая F104A</strong></td><td class="r">—</td><td>До июля и января</td></tr>
+      <tr><td><strong>Регистрация как RIMPE</strong></td><td class="r">—</td><td>Обязательна до 31 марта каждого года</td></tr>
+      <tr><td><strong>Не может быть одновременно</strong></td><td class="r">—</td><td>Не совмещай общий режим и RIMPE</td></tr>
+      <tr><td><strong>Упрощённый учёт</strong></td><td class="r">—</td><td>Но обязателен — выписки продаж и расходов</td></tr>
+      <tr><td><strong>Patente Municipal</strong></td><td class="r">Ежегодно</td><td>Даже RIMPE обязан платить</td></tr>
+    </table>
+    </div>
+    <div class="info i-r" style="margin-top:12px">
+      <div class="info-ico">🚨</div>
+      <div class="info-body"><div class="info-t">Критично</div>Если пересёк $300K за год — <strong>в следующем году автоматически</strong> переходишь в общий режим с IVA 15% и IRPF 0-37%. Планируй заранее бухгалтерию.</div>
+    </div>
+  </div>
+
+  <!-- Компания -->
+  <div class="card hid-card" id="hid-company" style="display:none">
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Налог / обязательство</th><th class="r">Ставка</th><th>Когда</th></tr>
+      <tr><td><strong>1.5‰ на активы</strong></td><td class="r">0.15%/год</td><td>Независимо от прибыли</td></tr>
+      <tr><td><strong><span class="term">Utilidades<span class="term-pop">15% прибыли распределяется работникам пропорционально отработанному времени. До 15 апреля.</span></span> работникам</strong></td><td class="r">15% прибыли</td><td>До 15 апреля</td></tr>
+      <tr><td><strong>Patente Municipal</strong></td><td class="r">0.1-0.15%</td><td>Ежегодно</td></tr>
+      <tr><td><strong>IECE + SECAP</strong></td><td class="r">+1% (к IESS)</td><td>Ежемесячно к зарплатам</td></tr>
+      <tr><td><strong>Anticipo IR</strong></td><td class="r">50% налога пред.года</td><td>Ежегодно в июле</td></tr>
+      <tr><td><strong>Ликвидационный налог</strong></td><td class="r">10-25%</td><td>При закрытии компании</td></tr>
+      <tr><td><strong>Pago en cuenta</strong></td><td class="r">0-2.5%</td><td>На нераспределённую прибыль (до 31 июля)</td></tr>
+      <tr><td><strong>Impuesto Vehicular</strong></td><td class="r">0.5-6%</td><td>На авто компании</td></tr>
+    </table>
+    </div>
+    <div class="info i-r" style="margin-top:12px">
+      <div class="info-ico">⚠️</div>
+      <div class="info-body"><div class="info-t">Компанию нельзя «бросить»</div>Если компания не нужна — нужна официальная <strong>ликвидация</strong> через Superintendencia de Compañías + SRI. Занимает 6-12 месяцев + финальные налоги. Заранее планируй выход.</div>
+    </div>
+  </div>
+
+  <!-- Нерезидент -->
+  <div class="card hid-card" id="hid-nonresident" style="display:none">
+    <div class="tbl-w">
+    <table class="tbl">
+      <tr><th>Что применимо</th><th class="r">Ставка</th><th>Детали</th></tr>
+      <tr><td><strong><span class="term">ISD<span class="term-pop">Impuesto a la Salida de Divisas — налог на вывоз валюты. С 2025 невозвратен.</span></span> на вывод</strong></td><td class="r" style="color:var(--rd)">5%</td><td>При любом переводе денег за границу</td></tr>
+      <tr><td><strong>ISD невозвратен</strong></td><td class="r">—</td><td>С 2025 нельзя зачесть в IRPF</td></tr>
+      <tr><td><strong>Нет Gastos personales</strong></td><td class="r">—</td><td>Вычеты только для резидентов</td></tr>
+      <tr><td><strong>Депозиты &lt;180 дней</strong></td><td class="r" style="color:var(--rd)">25%</td><td>Удерживает банк всегда</td></tr>
+      <tr><td><strong>Депозиты ≥180 дней</strong></td><td class="r" style="color:var(--gr)">0%</td><td>Освобождение применяется к нерезидентам тоже</td></tr>
+      <tr><td><strong>Дивиденды</strong></td><td class="r">10-14%</td><td>10% если структура раскрыта, 14% если нет</td></tr>
+    </table>
+    </div>
+    <div class="info i-b" style="margin-top:12px">
+      <div class="info-ico">🎯</div>
+      <div class="info-body"><div class="info-t">Главная альтернатива</div>Получи <strong>ВНЖ по инвестиции $48 200</strong> (недвижимость или депозит) → через 183+ дня в году становишься резидентом → доход попадает в IRPF 0-37% + все вычеты. При доходе &gt;$30K/год резидентство экономит тысячи в год.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<!-- Футер удалён — встроен в обёртку Astro-страницы /instrumenty/nalogovyy-mayak -->
+
+<script>
+
+// ═══ Toggle секции с плавной анимацией раскрытия ═══
+function toggleSec(id){
+  var sec = document.getElementById(id);
+  if(!sec) return;
+  var isCollapsed = sec.classList.contains('collapsed');
+  
+  if(isCollapsed){
+    // РАСКРЫВАЕМ: сначала снимаем collapsed, потом измеряем и анимируем
+    sec.classList.remove('collapsed');
+    // Получаем конечную высоту контента
+    var finalHeight = sec.scrollHeight;
+    // Устанавливаем 0 как старт, потом плавно к finalHeight
+    sec.style.maxHeight = '0px';
+    sec.style.overflow = 'hidden';
+    // Force reflow — чтобы браузер увидел старт
+    void sec.offsetHeight;
+    // Анимируем к полной высоте
+    sec.style.maxHeight = finalHeight + 'px';
+    // По окончанию анимации убираем inline maxHeight чтобы размер был авто
+    setTimeout(function(){
+      sec.style.maxHeight = '';
+      sec.style.overflow = '';
+    }, 500);
+  } else {
+    // СВОРАЧИВАЕМ: фиксируем текущую высоту, потом анимируем к 0
+    sec.style.maxHeight = sec.scrollHeight + 'px';
+    sec.style.overflow = 'hidden';
+    void sec.offsetHeight;
+    sec.style.maxHeight = '0px';
+    setTimeout(function(){
+      sec.classList.add('collapsed');
+      sec.style.maxHeight = '';
+      sec.style.overflow = '';
+    }, 450);
+  }
+  
+  if(navigator.vibrate) try{navigator.vibrate(10);}catch(e){}
+}
+// Event delegation — работает даже если inline onclick заблокирован CSP
+document.addEventListener('click', function(e){
+  var h = e.target.closest && e.target.closest('.sec-h[data-toggle]');
+  if(!h) return;
+  // Не реагировать на клики по tooltip внутри заголовка
+  if(e.target.closest && e.target.closest('.term-pop')) return;
+  var id = h.getAttribute('data-toggle');
+  if(id) toggleSec(id);
+});
+const $=id=>document.getElementById(id);
+
+const S={res:'resident',form:'individual',city:'cuenca'};
+const NAMES={
+  resident:'Резидент',nonresident:'Нерезидент',
+  individual:'Физлицо с RUC',rimpe:'RIMPE',company:'Компания',person:'Физлицо без RUC',
+  cuenca:'Куэнка',quito:'Кито',guayaquil:'Гуаякиль',manta:'Манта',salinas:'Салинас'
+};
+const CITY_PRED={cuenca:'0.25%',quito:'0.35%',guayaquil:'0.30%',manta:'0.20%',salinas:'0.20%'};
+
+function setRes(el){
+  document.querySelectorAll('#res-row .ch-b').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  S.res=el.dataset.v;
+  render();
+}
+function setForm(el){
+  document.querySelectorAll('#form-row .ch-b').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  S.form=el.dataset.v;
+  render();
+}
+function setCity(el){
+  document.querySelectorAll('#city-row .ch-b').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  S.city=el.dataset.v;
+  render();
+}
+
+function scrollToSec(id){/* disabled — tiles are static */}
+
+// Показать все секции
+function mayakShowAll(){/* disabled */}
+
+document.addEventListener('click',function(e){
+  const term=e.target.closest('.term');
+  const seg=e.target.closest('.scale-seg');
+  // close all active tooltips except current
+  document.querySelectorAll('.term.active, .scale-seg.active').forEach(t=>{
+    if(t!==term && t!==seg) t.classList.remove('active');
+  });
+  if(term){
+    e.stopPropagation();
+    term.classList.toggle('active');
+  } else if(seg){
+    e.stopPropagation();
+    seg.classList.toggle('active');
+  }
+});
+
+function render(){
+  $('pr-res').textContent=NAMES[S.res];
+  // Выбор правильной визуализации налогов по форме:
+  // Физлицо с/без RUC → шкала IRPF
+  // Компания → карточка корпоративного налога (25%/17%)
+  // RIMPE → прогрессивная шкала RIMPE
+  // Нерезидент → flat 25%
+  const irpfCard=$('irpf-scale-card');
+  const corpCard=$('corp-rate-card');
+  const rimpeCard=$('rimpe-rate-card');
+  const nonresCard=$('nonres-rate-card');
+  // Сначала скрываем все
+  if(irpfCard) irpfCard.style.display='none';
+  if(corpCard) corpCard.style.display='none';
+  if(rimpeCard) rimpeCard.style.display='none';
+  if(nonresCard) nonresCard.style.display='none';
+  // Потом показываем нужную
+  if(S.res==='nonresident'){
+    if(nonresCard) nonresCard.style.display='block';
+  } else if(S.form==='company'){
+    if(corpCard) corpCard.style.display='block';
+  } else if(S.form==='rimpe'){
+    if(rimpeCard) rimpeCard.style.display='block';
+  } else {
+    // Физлицо с/без RUC
+    if(irpfCard) irpfCard.style.display='block';
+  }
+
+  // ═══ Правила — показать только релевантные для выбранной формы ═══
+  ['individual','person','rimpe','company','nonresident'].forEach(key=>{
+    const el=$('rules-'+key);
+    if(el) el.style.display='none';
+  });
+  let rulesKey;
+  if(S.res==='nonresident'){
+    rulesKey='nonresident';  // Для нерезидента — особые правила независимо от формы
+  } else {
+    rulesKey=S.form;  // individual / person / rimpe / company
+  }
+  const rulesEl=$('rules-'+rulesKey);
+  if(rulesEl) rulesEl.style.display='block';
+
+  // ═══ Ретенции и Скрытые — показать карточку для выбранной формы ═══
+  const retKey = S.res==='nonresident' ? 'nonresident' : S.form;
+  ['individual','person','rimpe','company','nonresident'].forEach(k=>{
+    const retEl=$('ret-'+k);
+    if(retEl) retEl.style.display='none';
+    const hidEl=$('hid-'+k);
+    if(hidEl) hidEl.style.display='none';
+    const isdEl=$('isd-'+k);
+    if(isdEl) isdEl.style.display='none';
+    const salEl=$('sal-'+k);
+    if(salEl) salEl.style.display='none';
+  });
+  const retActive=$('ret-'+retKey);
+  if(retActive) retActive.style.display='block';
+  const hidActive=$('hid-'+retKey);
+  if(hidActive) hidActive.style.display='block';
+  const isdActive=$('isd-'+retKey);
+  if(isdActive) isdActive.style.display='block';
+  const salActive=$('sal-'+retKey);
+  if(salActive) salActive.style.display='block';
+
+  // ═══ Hero Board Недвижимость / Ретенции / Скрытые — по форме ═══
+  const HB_RE = {
+    individual: {v:'~3% покупка', d:'10-37% продажа'},
+    person:     {v:'~3% покупка', d:'10-37% продажа'},
+    rimpe:      {v:'~3% покупка', d:'10-37% продажа'},
+    company:    {v:'~3% + 1.5‰', d:'0% occasional · 25% bизнес'},
+    nonresident:{v:'~3% покупка', d:'25% удерж. нотариусом'}
+  };
+  const HB_RET = {
+    individual: {v:'8-10% получ.', d:'клиент удерживает тебе'},
+    person:     {v:'IRPF удерж.',  d:'работодатель автоматом'},
+    rimpe:      {v:'НЕТ с тебя',   d:'RIMPE освобождён'},
+    company:    {v:'1-25% платишь',d:'двустор.: ты и тебе'},
+    nonresident:{v:'25% с тебя',   d:'всегда у источника'}
+  };
+  const HB_HID = {
+    individual: {v:'$15K вычет',    d:'Gastos personales'},
+    person:     {v:'$15K вычет',    d:'Gastos personales в декл.'},
+    rimpe:      {v:'порог $300K',   d:'выход → общий режим'},
+    company:    {v:'1.5‰ · 15% · ликв.',d:'активы, Utilidades и др.'},
+    nonresident:{v:'ISD невозвр.',  d:'льгота ВНЖ за $48K'}
+  };
+  if($('hb-re')){$('hb-re').textContent=HB_RE[retKey].v;$('hb-re-d').textContent=HB_RE[retKey].d;}
+  if($('hb-ret')){$('hb-ret').textContent=HB_RET[retKey].v;$('hb-ret-d').textContent=HB_RET[retKey].d;}
+  if($('hb-hid')){$('hb-hid').textContent=HB_HID[retKey].v;$('hb-hid-d').textContent=HB_HID[retKey].d;}
+  // Hero Board Зарплаты — динамически
+  const HB_SAL = {
+    individual: {v:'Подрядчики', d:'без IESS · 10% IR retention'},
+    person:     {v:'9.45% IESS', d:'удерж. работодатель'},
+    rimpe:      {v:'Подрядчики', d:'+штат до 5 работ.'},
+    company:    {v:'IESS 11.15% +', d:'13-я, 14-я, ФР, Utilidades'},
+    nonresident:{v:'Нельзя напрямую', d:'через EOR или SAS'}
+  };
+  if($('hb-salary')){$('hb-salary').textContent=HB_SAL[retKey].v;$('hb-salary-d').textContent=HB_SAL[retKey].d;}
+
+  // ═══ Недвижимость — фильтр role-items по выбранной форме ═══
+  const realestateKey = S.res==='nonresident' ? 'nonresident' : S.form;
+  document.querySelectorAll('[data-show]').forEach(el=>{
+    const show = el.dataset.show;
+    if(!show) return;
+    if(show === 'all'){
+      el.style.display = ''; // default
+      return;
+    }
+    const keys = show.split(',').map(s=>s.trim());
+    el.style.display = keys.includes(realestateKey) ? '' : 'none';
+  });
+  $('pr-form').textContent=NAMES[S.form];
+  $('pr-city').textContent=NAMES[S.city];
+
+  // Highlight form column - подсвечиваем всегда выбранную форму
+  document.querySelectorAll('.fcol').forEach(col=>{
+    col.classList.toggle('on', col.dataset.form===S.form);
+  });
+
+  // Hero Board updates
+  if(S.res==='nonresident'){
+    $('hb-income').textContent='25% удержание';
+    $('hb-income-d').textContent='с валовой выручки';
+  } else if(S.form==='company'){
+    $('hb-income').textContent='25% или 17%';
+    $('hb-income-d').textContent='корпоративный';
+  } else if(S.form==='rimpe'){
+    $('hb-income').textContent='1-2% оборота';
+    $('hb-income-d').textContent='упрощёнка до $300K';
+  } else if(S.form==='person'){
+    $('hb-income').textContent='IRPF 0-37%';
+    $('hb-income-d').textContent='удержание у источника';
+  } else {
+    $('hb-income').textContent='IRPF 0-37%';
+    $('hb-income-d').textContent='прогрессивная шкала';
+  }
+
+  if(S.form==='company'){
+    // hb-salary now updated via HB_SAL dict below
+  } else if(S.form==='person'){
+    // hb-salary now updated via HB_SAL dict below
+  } else {
+    // hb-salary now updated via HB_SAL dict below
+  }
+
+  // Predial by city
+  $('pred-v').textContent=CITY_PRED[S.city]||'0.25%';
+  if($('pred-base')){
+    $('pred-base').textContent='~'+(CITY_PRED[S.city]||'0.25%');
+    $('pred-base-d').textContent='годовой налог · '+NAMES[S.city];
+  }
+
+
+}
+
+render();
+
+
+// ═══ Auto-resize iframe в Wix: сообщаем родительскому окну высоту контента ═══
+(function(){
+  function reportHeight(){
+    try{
+      const h = Math.ceil(Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+        document.documentElement.offsetHeight,
+        document.body.offsetHeight
+      ));
+      // Формат, который понимают Wix и большинство iframe resizer'ов
+      window.parent.postMessage({
+        type:'mayak-resize',
+        height:h,
+        iframeHeight:h,
+        contentHeight:h
+      },'*');
+    }catch(e){}
+  }
+  // Сообщить сразу
+  if(document.readyState==='complete') reportHeight();
+  else window.addEventListener('load',reportHeight);
+  // При изменении DOM (аккордеон, смена формы/города)
+  if(typeof ResizeObserver!=='undefined'){
+    new ResizeObserver(reportHeight).observe(document.body);
+  }
+  // Запасной вариант — интервал
+  setInterval(reportHeight, 1000);
+  // При ресайзе окна
+  window.addEventListener('resize', reportHeight);
+})();
+</script>
+</body>
+</html>
