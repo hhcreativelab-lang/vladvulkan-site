@@ -1,5 +1,7 @@
 ---
-import { SITE, DISCLAIMER, CATEGORIES } from '@lib/constants';
+import { SITE, CATEGORIES } from '@lib/constants';
+// Footer YouTube-полоса убрана: видео уже есть на главной + /kto-ya + /telegram
+// Telegram-promo блок убран по запросу — Telegram CTA уже в шапке/Hero/контактах
 
 const year = new Date().getFullYear();
 ---
@@ -9,12 +11,20 @@ const year = new Date().getFullYear();
   <div class="container">
     <div class="footer-top">
       <div class="brand-col">
-        <a href="/" class="brand">Влад&nbsp;<em>Вулкан</em></a>
+        <a href="/" class="brand" aria-label="Vlad Vulkan — главная">
+          <img src="/footer-key.webp" alt="Vlad Vulkan" width="140" height="140" class="brand-key" loading="lazy" decoding="async" />
+        </a>
         <p class="brand-desc">
           Независимая консультация по&nbsp;недвижимости в&nbsp;Эквадоре. Куэнка, Кито, Гуаякиль, Салинас, Манта.
         </p>
         <div class="brand-meta">
           <span class="eyebrow gold">Cuenca · Ecuador</span>
+        </div>
+        <div class="live-badge" aria-label="Сейчас в Куэнке" data-live-cuenca>
+          <span class="live-dot" aria-hidden="true"></span>
+          <span class="live-flag" aria-hidden="true">🇪🇨</span>
+          <span class="live-text">Сейчас в&nbsp;Куэнке</span>
+          <span class="live-time" data-live-time>—:—</span>
         </div>
       </div>
 
@@ -25,14 +35,25 @@ const year = new Date().getFullYear();
             <li><a href="/uslugi/soprovozhdenie-sdelki">Сопровождение сделки</a></li>
             <li><a href="/uslugi/konsultatsiya">Стратегическая консультация</a></li>
             <li><a href="/uslugi/proverka-objekta">Проверка объекта</a></li>
+            <li><a href="/uslugi/yuridicheskaya-konsultatsiya">Юр./бух. консультация</a></li>
+            <li><a href="/uslugi/legalizatsiya">Легализация (ВНЖ)</a></li>
+            <li><a href="/uslugi/investitsii">Инвестиции</a></li>
             <li><a href="/tseny">Цены</a></li>
+          </ul>
+        </div>
+
+        <div class="col">
+          <h4 class="col-title">Партнёрам</h4>
+          <ul>
+            <li><a href="/partneram">Партнёрская программа</a></li>
+            <li><a href="/partneram/uslovia">Условия</a></li>
           </ul>
         </div>
 
         <div class="col">
           <h4 class="col-title">Знания</h4>
           <ul>
-            {Object.values(CATEGORIES).slice(0, 5).map((cat) => (
+            {Object.values(CATEGORIES).slice(0, 4).map((cat) => (
               <li><a href={`/znaniya/${cat.slug}`}>{cat.name}</a></li>
             ))}
             <li><a href="/znaniya">Все категории →</a></li>
@@ -40,22 +61,23 @@ const year = new Date().getFullYear();
         </div>
 
         <div class="col">
-          <h4 class="col-title">Связь</h4>
+          <h4 class="col-title">Связь с&nbsp;Владом</h4>
           <ul>
-            <li><a href={SITE.telegramUrl} rel="noopener">Telegram</a></li>
-            <li><a href={SITE.youtubeUrl} rel="noopener">YouTube</a></li>
-            <li><a href={`mailto:${SITE.email}`}>Email</a></li>
-            <li><a href="/kontakty">Все контакты</a></li>
-          </ul>
-        </div>
-
-        <div class="col">
-          <h4 class="col-title">Сайт</h4>
-          <ul>
-            <li><a href="/kto-ya">О Владе</a></li>
-            <li><a href="/kak-rabotaem">Как работаем</a></li>
-            <li><a href="/instrumenty">Инструменты</a></li>
-            <li><a href="/rss.xml">RSS</a></li>
+            <li><a href={`tel:${SITE.phone}`} class="col-contact-link">📞&nbsp;{SITE.phoneDisplay}</a></li>
+            <li><a href={`mailto:${SITE.email}`} class="col-contact-link">📧&nbsp;{SITE.email}</a></li>
+            <li><a href={SITE.telegramUrl} rel="noopener">💬&nbsp;Telegram&nbsp;Влада</a></li>
+            <li><a href={SITE.telegramBotUrl} rel="noopener">🤖&nbsp;Бот&nbsp;@VladVulkan_Bot</a></li>
+            <li><a href={SITE.telegramChannelUrl} rel="noopener">📰&nbsp;Telegram-канал</a></li>
+            <li><a href={SITE.telegramChatUrl} rel="noopener">💬&nbsp;Чат&nbsp;подписчиков</a></li>
+            <li>
+              <a
+                href={SITE.youtubeUrl}
+                rel="noopener"
+                target="_blank"
+                aria-label="YouTube канал @VladVulkan — видео про Эквадор"
+              >📺&nbsp;YouTube&nbsp;канал</a>
+            </li>
+            <li><a href="/kontakty">📇&nbsp;Все&nbsp;контакты</a></li>
           </ul>
         </div>
       </div>
@@ -63,22 +85,39 @@ const year = new Date().getFullYear();
 
     <hr class="hairline" />
 
-    <div class="disclaimer-block">
-      <div class="dsc-mark">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <path d="M12 22s-8-4-8-10V5l8-3 8 3v7c0 6-8 10-8 10z"/><path d="m9 12 2 2 4-4"/>
-        </svg>
-      </div>
-      <p>
-        <strong>Независимый эксперт.</strong>
-        {DISCLAIMER.ru.replace('Независимый эксперт. ', '')}
-      </p>
+    <div class="footer-bottom">
+      <span>
+        © {year} {SITE.brandName}. Все права защищены. Сайт основан в&nbsp;2026&nbsp;году.
+        <br class="legal-br" />
+        <span class="legal-line">
+          Легально зарегистрирован в&nbsp;Эквадоре как&nbsp;индивидуальный коммерсант (RUC).
+        </span>
+      </span>
+      <span class="footer-bottom-links">
+        <span class="ssl-badge" aria-label="Соединение защищено SSL/TLS">
+          <svg class="ssl-lock" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="11" width="16" height="10" rx="2" ry="2"></rect>
+            <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+          </svg>
+          <span class="ssl-text">SSL&nbsp;защищено</span>
+        </span>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <a href="/privacy/" class="footer-privacy-link">Политика&nbsp;конфиденциальности</a>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <a href="/znaniya/publikatsii/" class="footer-privacy-link footer-pub-link">Публикации</a>
+      </span>
     </div>
 
-    <div class="footer-bottom">
-      <span>© {year} {SITE.brandName}. Все права защищены.</span>
-      <a href="/politika-konfidentsialnosti">Политика конфиденциальности</a>
-    </div>
+    <style>
+      .legal-line {
+        display: block;
+        margin-top: 4px;
+        opacity: 0.78;
+        line-height: 1.6;
+      }
+      .legal-line a { color: var(--gold-champagne); text-decoration: none; }
+      .legal-line a:hover { color: var(--text-light); }
+    </style>
   </div>
 </footer>
 
@@ -86,10 +125,10 @@ const year = new Date().getFullYear();
   .site-footer {
     position: relative;
     background: var(--midnight);
-    padding: clamp(80px, 10vw, 140px) 0 36px;
-    margin-top: clamp(80px, 10vw, 140px);
+    padding: 48px 0 28px;
+    margin-top: 0;
     overflow: hidden;
-    border-top: 1px solid rgba(157, 127, 255, 0.08);
+    border-top: 1px solid rgba(168, 85, 247, 0.08);
   }
 
   .footer-glow {
@@ -104,8 +143,8 @@ const year = new Date().getFullYear();
 
   .footer-top {
     display: grid;
-    grid-template-columns: 1.4fr 3fr;
-    gap: 60px;
+    grid-template-columns: 1.2fr 3.4fr;
+    gap: 48px;
     margin-bottom: 60px;
   }
   @media (max-width: 880px) {
@@ -113,21 +152,39 @@ const year = new Date().getFullYear();
   }
 
   .brand {
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 400;
-    color: var(--text-light);
+    display: block;
+    width: max-content;
+    margin: 0 auto 22px;
+    /* Смещение чуть правее от центра колонки */
+    margin-left: 22%;
     text-decoration: none;
     line-height: 1;
-    margin-bottom: 18px;
-    display: inline-block;
+    transition: transform 0.5s var(--ease-premium);
+    transform-origin: center;
   }
-  .brand:hover { color: var(--text-light); opacity: 0.85; }
-  .brand em {
-    font-style: italic;
-    background: linear-gradient(180deg, var(--violet-bright), var(--violet));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .brand:hover { transform: scale(1.05) rotate(-2deg); }
+  .brand-key {
+    display: block;
+    width: auto;
+    height: 140px;
+    filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.55))
+            drop-shadow(0 0 16px rgba(107, 33, 168, 0.25));
+    animation: keyFloat 4.5s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes keyFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-5px) rotate(1.5deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .brand-key { animation: none; }
+  }
+  @media (max-width: 880px) {
+    /* На планшете/мобиле колонка одна — возвращаем ключ ближе к левому краю */
+    .brand { margin-left: 0; margin-right: auto; }
+  }
+  @media (max-width: 540px) {
+    .brand-key { height: 110px; }
   }
 
   .brand-desc {
@@ -139,13 +196,111 @@ const year = new Date().getFullYear();
     font-weight: 300;
   }
 
+  /* Живая плашка «сейчас в Куэнке» — пульсирующая зелёная точка + локальное время */
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 7px 14px 7px 12px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.08), rgba(229, 198, 120, 0.04));
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+  }
+  .live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #4ADE80;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.8);
+    animation: livePulse 2s ease-in-out infinite;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.55; transform: scale(0.85); }
+  }
+  .live-flag { font-size: 13px; line-height: 1; }
+  .live-text { color: var(--text-dim); font-weight: 400; }
+  .live-time {
+    color: var(--gold-champagne);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 768px) {
+    .live-badge { margin-left: auto; margin-right: auto; }
+  }
+
+  /* Компактные контакты под "Cuenca · Ecuador" */
+  .brand-contacts {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .brand-contacts a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.4;
+    transition: color 0.3s var(--ease-premium);
+  }
+  .brand-contacts a:hover { color: var(--gold-champagne); }
+  .brand-contacts svg {
+    color: var(--gold-champagne);
+    opacity: 0.8;
+    flex-shrink: 0;
+  }
+  @media (max-width: 768px) {
+    .brand-contacts { align-items: center; }
+  }
+
   .cols {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 36px;
+    gap: 28px;
   }
-  @media (max-width: 720px) { .cols { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 460px) { .cols { grid-template-columns: 1fr; } }
+  /* На планшете — 2×2, на мобиле — 2×2 с уменьшенным шрифтом */
+  @media (max-width: 720px) {
+    .cols { grid-template-columns: repeat(2, 1fr); gap: 24px 18px; }
+  }
+  @media (max-width: 460px) {
+    .cols { gap: 18px 12px; }
+    .col-title { font-size: 9px; letter-spacing: 0.22em; margin-bottom: 12px; }
+    .col a { font-size: 12px; }
+    .col ul { gap: 7px; }
+  }
+  @media (max-width: 380px) {
+    .cols { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  @media (max-width: 768px) {
+    .site-footer { padding: 28px 0 20px; }
+    .footer-top { margin-bottom: 28px; gap: 28px; }
+    .brand-col { text-align: center; }
+    .brand-key { height: 90px; }
+    .brand { margin: 0 auto 14px; }
+    .brand-desc { font-size: 13.5px; margin: 0 auto 14px; max-width: 100%; }
+    .brand-meta { display: flex; justify-content: center; }
+    .hairline { margin: 0 0 18px; }
+    .footer-bottom { font-size: 10px; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+  }
+
+  /* На мобиле — порядок колонок: Услуги, Знания, Связь и сайт, Партнёрам */
+  @media (max-width: 720px) {
+    .col:nth-child(1) { order: 1; } /* Услуги */
+    .col:nth-child(3) { order: 2; } /* Знания */
+    .col:nth-child(4) { order: 3; } /* Связь и сайт */
+    .col:nth-child(2) { order: 4; } /* Партнёрам — вниз */
+  }
 
   .col-title {
     font-family: var(--font-mono);
@@ -172,40 +327,22 @@ const year = new Date().getFullYear();
     transition: color 0.3s var(--ease-premium);
   }
   .col a:hover { color: var(--violet-bright); }
+  /* Контактные ссылки в колонке "Связь с Владом" — золотая подсветка */
+  .col-contact-link {
+    color: var(--gold-champagne) !important;
+    font-weight: 500;
+  }
+  .col-contact-link:hover {
+    color: #FFE8A8 !important;
+    text-shadow: 0 0 12px rgba(229, 198, 120, 0.45);
+  }
 
   .hairline {
     border: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(157, 127, 255, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.2), transparent);
     margin: 0 0 36px;
   }
-
-  .disclaimer-block {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    padding: 22px 26px;
-    border: 1px solid rgba(229, 198, 120, 0.18);
-    background: rgba(229, 198, 120, 0.03);
-    border-radius: 4px;
-    margin-bottom: 32px;
-  }
-  .dsc-mark {
-    flex-shrink: 0;
-    color: var(--gold-champagne);
-    width: 28px;
-    height: 28px;
-    margin-top: 2px;
-  }
-  .dsc-mark svg { width: 100%; height: 100%; }
-  .disclaimer-block p {
-    margin: 0;
-    color: var(--text-dim);
-    font-size: 13px;
-    line-height: 1.65;
-    font-weight: 300;
-  }
-  .disclaimer-block strong { color: var(--gold-champagne); font-weight: 500; }
 
   .footer-bottom {
     display: flex;
@@ -223,4 +360,72 @@ const year = new Date().getFullYear();
     transition: color 0.3s;
   }
   .footer-bottom a:hover { color: var(--gold-champagne); }
+  .footer-bottom-links {
+    display: inline-flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .footer-dot { color: var(--text-soft); opacity: 0.5; }
+  .footer-pub-link {
+    font-size: 9px !important;
+    opacity: 0.45;
+    letter-spacing: 0.04em;
+  }
+  .footer-pub-link:hover { opacity: 0.75; }
+
+  /* SSL-бейдж — мини-плашка «соединение защищено» рядом со ссылкой на политику */
+  .ssl-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(74, 222, 128, 0.28);
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.07), rgba(229, 198, 120, 0.04));
+    color: var(--text-soft);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    transition: border-color 0.3s var(--ease-premium), color 0.3s var(--ease-premium);
+  }
+  .ssl-badge:hover {
+    border-color: rgba(74, 222, 128, 0.55);
+    color: var(--text-light);
+  }
+  .ssl-lock {
+    color: #4ADE80;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.45));
+  }
+  .ssl-text {
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+  @media (max-width: 460px) {
+    .ssl-badge { font-size: 9px; padding: 2px 7px 2px 6px; }
+    .ssl-lock { width: 10px; height: 10px; }
+  }
+
 </style>
+
+<script is:inline>
+  (function () {
+    function tick() {
+      var el = document.querySelector('[data-live-time]');
+      if (!el) return;
+      try {
+        var fmt = new Intl.DateTimeFormat('ru-RU', {
+          timeZone: 'America/Guayaquil',
+          hour: '2-digit', minute: '2-digit', hour12: false,
+        });
+        el.textContent = fmt.format(new Date());
+      } catch (e) {}
+    }
+    tick();
+    setInterval(tick, 30000);
+    // На SPA-навигацию (View Transitions) — перезапускаем
+    document.addEventListener('astro:page-load', tick);
+  })();
+</script>
